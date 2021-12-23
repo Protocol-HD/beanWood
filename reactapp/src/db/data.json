@@ -83,6 +83,16 @@
       "itemTotal": 8030,
       "itemImg": "0701.webp",
       "id": 2
+    },
+    {
+      "productId": 9,
+      "quantity": 1,
+      "price": 850,
+      "color": 1,
+      "size": "S",
+      "itemTotal": 850,
+      "itemImg": "0901.jpg",
+      "id": 3
     }
   ],
   "cartLists": [
@@ -124,12 +134,39 @@
     },
     {
       "productId": 6,
-      "quantity": 1,
+      "quantity": 2,
       "color": 3,
       "size": "S",
-      "itemTotal": 320,
+      "itemTotal": 640,
       "itemImg": "0601.jpg",
       "id": 5
+    },
+    {
+      "productId": 2,
+      "quantity": 1,
+      "color": 1,
+      "size": "S",
+      "itemTotal": null,
+      "itemImg": "0701.webp",
+      "id": 6
+    },
+    {
+      "productId": 1,
+      "quantity": 3,
+      "color": 4,
+      "size": "L",
+      "itemTotal": 1650,
+      "itemImg": "0101.png",
+      "id": 7
+    },
+    {
+      "productId": 1,
+      "quantity": 1,
+      "color": 2,
+      "size": "S",
+      "itemTotal": 550,
+      "itemImg": "0101.png",
+      "id": 8
     }
   ],
   "categories": [

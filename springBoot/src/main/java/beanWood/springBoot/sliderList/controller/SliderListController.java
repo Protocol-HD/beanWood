@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SliderListController {
-    SliderList saveSliderList(SliderList sliderList);
+	SliderList saveSliderList(SliderList sliderList);
 
-    Optional<SliderList> findByIdSliderList(Long id);
+	Optional<SliderList> findByIdSliderList(Long id);
 
-    List<SliderList> findAllSliderList();
+	List<SliderList> findAllSliderList();
 
-    void deleteByIdSliderList(Long id);
+	void deleteByIdSliderList(Long id);
 }

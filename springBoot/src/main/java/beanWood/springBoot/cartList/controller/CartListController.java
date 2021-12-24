@@ -1,12 +1,13 @@
 package beanWood.springBoot.cartList.controller;
 
+import beanWood.springBoot.cartList.dto.ICartList;
 import beanWood.springBoot.cartList.model.CartList;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CartListController {
-	CartList saveCartList(CartList cartList);
+	CartList saveCartList(ICartList iCartList);
 
 	Optional<CartList> findByIdCartList(Long id);
 

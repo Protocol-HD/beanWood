@@ -1,5 +1,7 @@
 package beanWood.springBoot.wishList.controller;
 
+import beanWood.springBoot.product.service.ProductService;
+import beanWood.springBoot.wishList.dto.IWishList;
 import beanWood.springBoot.wishList.model.WishList;
 import beanWood.springBoot.wishList.service.WishListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +15,17 @@ import java.util.Optional;
 public class WishListControllerImpl implements WishListController {
 	@Autowired
 	private WishListService wishListService;
+	@Autowired
+	private ProductService productService;
 
 	@Override
 	@PostMapping("/save")
-	public WishList saveWishList(@RequestBody WishList wishList) {
-		return wishListService.saveWishList(wishList);
+	public WishList saveWishList(@RequestBody IWishList iWishList) {
+		return wishListService.saveWishList(
+				WishList.builder()
+						.product(productService.findByIdProduct(iWishList.getProductId()).get())
+						.build()
+		);
 	}
 
 	@Override

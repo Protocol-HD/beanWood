@@ -1,5 +1,8 @@
 package beanWood.springBoot.sliderList.controller;
 
+import beanWood.springBoot.image.service.ImageService;
+import beanWood.springBoot.product.service.ProductService;
+import beanWood.springBoot.sliderList.dto.ISliderList;
 import beanWood.springBoot.sliderList.model.SliderList;
 import beanWood.springBoot.sliderList.service.SliderListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +16,22 @@ import java.util.Optional;
 public class SliderListControllerImpl implements SliderListController {
     @Autowired
     private SliderListService sliderListService;
+    @Autowired
+    private ImageService imageService;
+    @Autowired
+    private ProductService productService;
+
 
     @Override
     @PostMapping("/save")
-    public SliderList saveSliderList(@RequestBody SliderList sliderList) {
-        return sliderListService.saveSliderList(sliderList);
+    public SliderList saveSliderList(@RequestBody ISliderList isliderList) {
+        return sliderListService.saveSliderList(
+                SliderList.builder()
+                          .eventName(isliderList.getEventName())
+                          .image(imageService.findByIdImage(isliderList.getImageId()).get())
+                          .product(productService.findByIdProduct(isliderList.getProductId()).get())
+                          .build()
+        );
     }
 
     @Override

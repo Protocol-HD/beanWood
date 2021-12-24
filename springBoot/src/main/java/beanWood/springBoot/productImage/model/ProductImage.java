@@ -1,11 +1,11 @@
 package beanWood.springBoot.productImage.model;
 
+import beanWood.springBoot.image.model.Image;
+import beanWood.springBoot.product.model.Product;
+import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -14,6 +14,18 @@ public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long imageId;
-    private Long productId;
+
+    @ManyToOne
+    @JoinColumn(name = "image_id")
+    private Image image;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @Builder
+    public ProductImage(Image image, Product product) {
+        this.image = image;
+        this.product = product;
+    }
 }

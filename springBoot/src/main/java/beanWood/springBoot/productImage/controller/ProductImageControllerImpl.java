@@ -1,5 +1,8 @@
 package beanWood.springBoot.productImage.controller;
 
+import beanWood.springBoot.image.service.ImageService;
+import beanWood.springBoot.product.service.ProductService;
+import beanWood.springBoot.productImage.dto.IProductImage;
 import beanWood.springBoot.productImage.model.ProductImage;
 import beanWood.springBoot.productImage.service.ProductImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +16,20 @@ import java.util.Optional;
 public class ProductImageControllerImpl implements ProductImageController {
     @Autowired
     private ProductImageService productImageService;
+    @Autowired
+    private ImageService imageService;
+    @Autowired
+    private ProductService productService;
 
     @Override
     @PostMapping("/save")
-    public ProductImage saveProductImage(@RequestBody ProductImage productImage) {
-        return productImageService.saveProductImage(productImage);
+    public ProductImage saveProductImage(@RequestBody IProductImage iProductImage) {
+        return productImageService.saveProductImage(
+                ProductImage.builder()
+                            .image(imageService.findByIdImage(iProductImage.getImageId()).get())
+                            .product(productService.findByIdProduct(iProductImage.getProductId()).get())
+                            .build()
+        );
     }
 
     @Override

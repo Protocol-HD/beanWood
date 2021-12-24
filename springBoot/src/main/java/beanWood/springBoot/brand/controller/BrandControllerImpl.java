@@ -1,8 +1,11 @@
 package beanWood.springBoot.brand.controller;
 
+import beanWood.springBoot.brand.dto.IBrand;
 import beanWood.springBoot.brand.model.Brand;
 import beanWood.springBoot.brand.service.BrandService;
+import beanWood.springBoot.image.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,31 +13,38 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/brand")
-public class BrandControllerImpl implements BrandController {
-	@Autowired
-	private BrandService brandService;
+public class BrandControllerImpl implements BrandController{
 
-	@Override
-	@PostMapping("/save")
-	public Brand saveBrand(@RequestBody Brand brand) {
-		return brandService.saveBrand(brand);
-	}
+    @Autowired
+    private BrandService brandService;
+    @Autowired
+    private ImageService imageService;
 
-	@Override
-	@GetMapping("/find/{id}")
-	public Optional<Brand> findByIdBrand(@PathVariable Long id) {
-		return brandService.findByIdBrand(id);
-	}
+    @Override
+    @PostMapping("/save")
+    public Brand saveBrand(@RequestBody IBrand iBrand) {
+        return brandService.saveBrand(
+                Brand.builder()
+                        .image(imageService.findByIdImage(iBrand.getImageId()).get())
+                        .build()
+        );
+    }
 
-	@Override
-	@GetMapping("/findAll")
-	public List<Brand> findAllBrand() {
-		return brandService.findAllBrand();
-	}
+    @Override
+    @GetMapping("/find/{id}")
+    public Optional<Brand> findByIdBrand(@PathVariable Long id) {
+        return brandService.findByIdBrand(id);
+    }
 
-	@Override
-	@DeleteMapping("/delete/{id}")
-	public void deleteByIdProduct(@PathVariable Long id) {
-		brandService.deleteByIdBrand(id);
-	}
+    @Override
+    @GetMapping("/findAll")
+    public List<Brand> findAllBrand() {
+        return brandService.findAllBrand();
+    }
+
+    @Override
+    @DeleteMapping("/delete/{id}")
+    public void deleteByIdProduct(@PathVariable Long id) {
+        brandService.deleteByIdBrand(id);
+    }
 }

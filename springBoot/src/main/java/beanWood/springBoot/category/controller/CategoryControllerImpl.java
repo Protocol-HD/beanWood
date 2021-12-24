@@ -1,7 +1,9 @@
 package beanWood.springBoot.category.controller;
 
+import beanWood.springBoot.category.dto.ICategory;
 import beanWood.springBoot.category.model.Category;
 import beanWood.springBoot.category.service.CategoryService;
+import beanWood.springBoot.image.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,31 +12,40 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/category")
-public class CategoryControllerImpl implements CategoryController {
-	@Autowired
-	private CategoryService categoryService;
+public class CategoryControllerImpl implements CategoryController{
 
-	@Override
-	@PostMapping("/save")
-	public Category saveCategory(@RequestBody Category category) {
-		return categoryService.saveCategory(category);
-	}
+    @Autowired
+    private CategoryService categoryService;
 
-	@Override
-	@GetMapping("/find/{id}")
-	public Optional<Category> findByIdCategory(@PathVariable Long id) {
-		return categoryService.findByIdCategory(id);
-	}
+    @Autowired
+    private ImageService imageService;
 
-	@Override
-	@GetMapping("/findAll")
-	public List<Category> findAllCategory() {
-		return categoryService.findAllCategory();
-	}
+    @Override
+    @PostMapping("/save")
+    public Category saveCategory(@RequestBody ICategory iCategory) {
 
-	@Override
-	@DeleteMapping("/delete/{id}")
-	public void deleteByIdCategory(@PathVariable Long id) {
-		categoryService.deleteByIdCategory(id);
-	}
+        return categoryService.saveCategory(
+                Category.builder()
+                        .image(imageService.findByIdImage(iCategory.getImageId()).get())
+                        .build()
+        );
+    }
+
+    @Override
+    @GetMapping("/find/{id}")
+    public Optional<Category> findByIdCategory(@PathVariable Long id) {
+        return categoryService.findByIdCategory(id);
+    }
+
+    @Override
+    @GetMapping("/findAll")
+    public List<Category> findAllCategory() {
+        return categoryService.findAllCategory();
+    }
+
+    @Override
+    @DeleteMapping("/delete/{id}")
+    public void deleteByIdCategory(@PathVariable Long id) {
+        categoryService.deleteByIdCategory(id);
+    }
 }

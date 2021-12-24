@@ -9,27 +9,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BannerCardServiceImpl implements BannerCardService {
-	@Autowired
-	private BannerCardRepository bannerCardRepository;
+public class BannerCardServiceImpl implements BannerCardService{
 
-	@Override
-	public BannerCard saveBannerCard(BannerCard bannerCard) {
-		return bannerCardRepository.save(bannerCard);
-	}
+    @Autowired
+    private BannerCardRepository bannerCardRepository;
 
-	@Override
-	public Optional<BannerCard> findByIdBannerCard(Long id) {
-		return bannerCardRepository.findById(id);
-	}
+    @Override
+    public BannerCard saveBannerCard(BannerCard bannerCard) {
+        return bannerCardRepository.save(bannerCard);
+    }
 
-	@Override
-	public List<BannerCard> findBannerCard() {
-		return bannerCardRepository.findAll();
-	}
+    @Override
+    public Optional<BannerCard> findByIdBannerCard(Long id) {
+        return bannerCardRepository.findById(id);
+    }
 
-	@Override
-	public void deleteByIdBannerCard(Long id) {
-		bannerCardRepository.deleteById(id);
-	}
+    @Override
+    public List<BannerCard> findBannerCard() {
+        return bannerCardRepository.findAll();
+    }
+
+    @Override
+    public void deleteByIdBannerCard(Long id) {
+        bannerCardRepository.deleteById(id);
+    }
 }

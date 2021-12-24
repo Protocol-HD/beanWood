@@ -1,17 +1,26 @@
 package beanWood.springBoot.brand.model;
 
+import beanWood.springBoot.image.model.Image;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Brand {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String brandName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String brandName;
+    @ManyToOne
+    @JoinColumn(name = "image_id")
+    private Image image;
+
+    @Builder
+    public Brand(Image image) {
+        this.image = image;
+    }
 }

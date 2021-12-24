@@ -12,39 +12,42 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/bannerCard")
-public class BannerCardControllerImpl implements BannerCardController{
+public class BannerCardControllerImpl implements BannerCardController {
 
-    @Autowired
-    private BannerCardService bannerCardService;
-    @Autowired
-    private ImageService imageService;
+	@Autowired
+	private BannerCardService bannerCardService;
+	@Autowired
+	private ImageService imageService;
 
-    @Override
-    @PostMapping("/save")
-    public BannerCard saveBannerCard(@RequestBody IBannerCard iBannerCard) {
-        return bannerCardService.saveBannerCard(
-                BannerCard.builder()
-                        .image(imageService.findByIdImage(iBannerCard.getImageId()).get())
-                        .build()
-        );
+	@Override
+	@PostMapping("/save")
+	public BannerCard saveBannerCard(@RequestBody IBannerCard iBannerCard) {
+		return bannerCardService.saveBannerCard(
+				BannerCard.builder()
+						.image(imageService.findByIdImage(iBannerCard.getImageId()).get())
+						.tag(iBannerCard.getTag())
+						.text(iBannerCard.getText())
+						.title(iBannerCard.getTitle())
+						.build()
+		);
 
-    }
+	}
 
-    @Override
-    @GetMapping("/find/{id}")
-    public Optional<BannerCard> findByBannerCard(@PathVariable Long id) {
-        return bannerCardService.findByIdBannerCard(id);
-    }
+	@Override
+	@GetMapping("/find/{id}")
+	public Optional<BannerCard> findByBannerCard(@PathVariable Long id) {
+		return bannerCardService.findByIdBannerCard(id);
+	}
 
-    @Override
-    @GetMapping("/findAll")
-    public List<BannerCard> findAllBannerCard() {
-        return bannerCardService.findBannerCard();
-    }
+	@Override
+	@GetMapping("/findAll")
+	public List<BannerCard> findAllBannerCard() {
+		return bannerCardService.findBannerCard();
+	}
 
-    @Override
-    @DeleteMapping("/delete/{id}")
-    public void deleteByIdBannerCard(@PathVariable Long id) {
-        bannerCardService.deleteByIdBannerCard(id);
-    }
+	@Override
+	@DeleteMapping("/delete/{id}")
+	public void deleteByIdBannerCard(@PathVariable Long id) {
+		bannerCardService.deleteByIdBannerCard(id);
+	}
 }

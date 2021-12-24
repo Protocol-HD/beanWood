@@ -18,7 +18,8 @@ public class Category {
     private Image image;
 
     @Builder
-    public Category(Image image) {
+    public Category(String categoryName, Image image) {
+        this.categoryName = categoryName;
         this.image = image;
     }
 }

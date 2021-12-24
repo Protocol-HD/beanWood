@@ -1,14 +1,17 @@
 package beanWood.springBoot.product.model;
 
+import beanWood.springBoot.category.model.Category;
+import beanWood.springBoot.color.model.Color;
+import beanWood.springBoot.size.model.Size;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +21,25 @@ public class Product {
 	private boolean isNew;
 	private int sale;
 	private int star;
-	private Long categoryId;
-	private Long colorId;
-	private Long sizeId;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+	@ManyToOne
+	@JoinColumn(name = "color_id")
+	private Color color;
+	@ManyToOne
+	@JoinColumn(name = "size_id")
+	private Size size;
+
+	@Builder
+	public Product(String productName, int price, boolean isNew, int sale, int star, Category category, Color color, Size size) {
+		this.productName = productName;
+		this.price = price;
+		this.isNew = isNew;
+		this.sale = sale;
+		this.star = star;
+		this.category = category;
+		this.color = color;
+		this.size = size;
+	}
 }

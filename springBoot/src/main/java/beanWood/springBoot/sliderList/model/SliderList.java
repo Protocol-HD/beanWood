@@ -4,11 +4,13 @@ import beanWood.springBoot.image.model.Image;
 import beanWood.springBoot.product.model.Product;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class SliderList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

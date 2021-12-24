@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface CategoryController {
 
-    Category saveCategory(ICategory iCategory);
+	Category saveCategory(ICategory iCategory);
 
-    Optional<Category> findByIdCategory(Long id);
+	Optional<Category> findByIdCategory(Long id);
 
-    List<Category> findAllCategory();
+	List<Category> findAllCategory();
 
-    void deleteByIdCategory(Long id);
+	void deleteByIdCategory(Long id);
 }

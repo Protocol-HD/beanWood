@@ -12,40 +12,41 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/category")
-public class CategoryControllerImpl implements CategoryController{
+public class CategoryControllerImpl implements CategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
+	@Autowired
+	private CategoryService categoryService;
 
-    @Autowired
-    private ImageService imageService;
+	@Autowired
+	private ImageService imageService;
 
-    @Override
-    @PostMapping("/save")
-    public Category saveCategory(@RequestBody ICategory iCategory) {
+	@Override
+	@PostMapping("/save")
+	public Category saveCategory(@RequestBody ICategory iCategory) {
 
-        return categoryService.saveCategory(
-                Category.builder()
-                        .image(imageService.findByIdImage(iCategory.getImageId()).get())
-                        .build()
-        );
-    }
+		return categoryService.saveCategory(
+				Category.builder()
+						.image(imageService.findByIdImage(iCategory.getImageId()).get())
+						.categoryName(iCategory.getCategoryName())
+						.build()
+		);
+	}
 
-    @Override
-    @GetMapping("/find/{id}")
-    public Optional<Category> findByIdCategory(@PathVariable Long id) {
-        return categoryService.findByIdCategory(id);
-    }
+	@Override
+	@GetMapping("/find/{id}")
+	public Optional<Category> findByIdCategory(@PathVariable Long id) {
+		return categoryService.findByIdCategory(id);
+	}
 
-    @Override
-    @GetMapping("/findAll")
-    public List<Category> findAllCategory() {
-        return categoryService.findAllCategory();
-    }
+	@Override
+	@GetMapping("/findAll")
+	public List<Category> findAllCategory() {
+		return categoryService.findAllCategory();
+	}
 
-    @Override
-    @DeleteMapping("/delete/{id}")
-    public void deleteByIdCategory(@PathVariable Long id) {
-        categoryService.deleteByIdCategory(id);
-    }
+	@Override
+	@DeleteMapping("/delete/{id}")
+	public void deleteByIdCategory(@PathVariable Long id) {
+		categoryService.deleteByIdCategory(id);
+	}
 }

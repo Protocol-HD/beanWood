@@ -20,7 +20,8 @@ public class Brand {
     private Image image;
 
     @Builder
-    public Brand(Image image) {
+    public Brand(String brandName, Image image) {
+        this.brandName = brandName;
         this.image = image;
     }
 }

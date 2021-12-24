@@ -26,6 +26,7 @@ public class BrandControllerImpl implements BrandController{
         return brandService.saveBrand(
                 Brand.builder()
                         .image(imageService.findByIdImage(iBrand.getImageId()).get())
+                        .brandName(iBrand.getBrandName())
                         .build()
         );
     }

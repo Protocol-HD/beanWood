@@ -10,32 +10,31 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/category")
-public class CategoryControllerImpl implements CategoryController{
+public class CategoryControllerImpl implements CategoryController {
+	@Autowired
+	private CategoryService categoryService;
 
-    @Autowired
-    private CategoryService categoryService;
+	@Override
+	@PostMapping("/save")
+	public Category saveCategory(@RequestBody Category category) {
+		return categoryService.saveCategory(category);
+	}
 
-    @Override
-    @PostMapping("/save")
-    public Category saveCategory(@RequestBody Category category) {
-        return categoryService.saveCategory(category);
-    }
+	@Override
+	@GetMapping("/find/{id}")
+	public Optional<Category> findByIdCategory(@PathVariable Long id) {
+		return categoryService.findByIdCategory(id);
+	}
 
-    @Override
-    @GetMapping("/find/{id}")
-    public Optional<Category> findByIdCategory(@PathVariable Long id) {
-        return categoryService.findByIdCategory(id);
-    }
+	@Override
+	@GetMapping("/findAll")
+	public List<Category> findAllCategory() {
+		return categoryService.findAllCategory();
+	}
 
-    @Override
-    @GetMapping("/findAll")
-    public List<Category> findAllCategory() {
-        return categoryService.findAllCategory();
-    }
-
-    @Override
-    @DeleteMapping("/delete/{id}")
-    public void deleteByIdCategory(@PathVariable Long id) {
-        categoryService.deleteByIdCategory(id);
-    }
+	@Override
+	@DeleteMapping("/delete/{id}")
+	public void deleteByIdCategory(@PathVariable Long id) {
+		categoryService.deleteByIdCategory(id);
+	}
 }

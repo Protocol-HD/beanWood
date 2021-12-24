@@ -10,11 +10,11 @@ import javax.persistence.Id;
 @Entity
 @Data
 public class BannerCard {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String tag;
-    private  String title;
-    private String text;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String tag;
+	private String title;
+	private String text;
 
 }

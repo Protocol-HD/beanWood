@@ -6,12 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BannerCardController {
+	BannerCard saveBannerCard(BannerCard bannerCard);
 
-    BannerCard saveBannerCard(BannerCard bannerCard);
+	Optional<BannerCard> findByBannerCard(Long id);
 
-    Optional<BannerCard> findByBannerCard(Long id);
+	List<BannerCard> findAllBannerCard();
 
-    List<BannerCard> findAllBannerCard();
-
-    void deleteByIdBannerCard(Long id);
+	void deleteByIdBannerCard(Long id);
 }

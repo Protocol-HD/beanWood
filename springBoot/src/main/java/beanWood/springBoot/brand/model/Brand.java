@@ -10,8 +10,8 @@ import javax.persistence.Id;
 @Entity
 @Data
 public class Brand {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String brandName;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String brandName;
 }

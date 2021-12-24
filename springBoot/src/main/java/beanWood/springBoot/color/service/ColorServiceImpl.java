@@ -9,28 +9,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ColorServiceImpl implements ColorService{
+public class ColorServiceImpl implements ColorService {
+	@Autowired
+	private ColorRepository colorRepository;
 
-    @Autowired
-    private ColorRepository colorRepository;
+	@Override
+	public Color saveColor(Color color) {
+		return colorRepository.save(color);
+	}
 
-    @Override
-    public Color saveColor(Color color) {
-        return colorRepository.save(color);
-    }
+	@Override
+	public Optional<Color> findByIdColor(Long id) {
+		return colorRepository.findById(id);
+	}
 
-    @Override
-    public Optional<Color> findByIdColor(Long id) {
-        return colorRepository.findById(id);
-    }
+	@Override
+	public List<Color> findAllColor() {
+		return colorRepository.findAll();
+	}
 
-    @Override
-    public List<Color> findAllColor() {
-        return colorRepository.findAll();
-    }
-
-    @Override
-    public void deleteByIdColor(Long id) {
-        colorRepository.deleteById(id);
-    }
+	@Override
+	public void deleteByIdColor(Long id) {
+		colorRepository.deleteById(id);
+	}
 }

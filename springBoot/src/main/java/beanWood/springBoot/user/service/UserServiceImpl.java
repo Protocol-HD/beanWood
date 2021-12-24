@@ -9,28 +9,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+	@Autowired
+	private UserRepository userRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+	@Override
+	public User saveUser(User user) {
+		return userRepository.save(user);
+	}
 
-    @Override
-    public User saveUser(User user) {
-        return userRepository.save(user);
-    }
+	@Override
+	public Optional<User> findByIdUser(Long id) {
+		return userRepository.findById(id);
+	}
 
-    @Override
-    public Optional<User> findByIdUser(Long id) {
-        return userRepository.findById(id);
-    }
+	@Override
+	public List<User> findAllUser() {
+		return userRepository.findAll();
+	}
 
-    @Override
-    public List<User> findAllUser() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    public void deleteByIdUser(Long id) {
-        userRepository.deleteById(id);
-    }
+	@Override
+	public void deleteByIdUser(Long id) {
+		userRepository.deleteById(id);
+	}
 }

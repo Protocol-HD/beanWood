@@ -10,32 +10,31 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/color")
-public class ColorControllerImpl implements ColorController{
+public class ColorControllerImpl implements ColorController {
+	@Autowired
+	private ColorService colorService;
 
-    @Autowired
-    private ColorService colorService;
+	@Override
+	@PostMapping("/save")
+	public Color saveColor(@RequestBody Color color) {
+		return colorService.saveColor(color);
+	}
 
-    @Override
-    @PostMapping("/save")
-    public Color saveColor(@RequestBody Color color) {
-        return colorService.saveColor(color);
-    }
+	@Override
+	@GetMapping("/find/{id}")
+	public Optional<Color> findByIdColor(@PathVariable Long id) {
+		return colorService.findByIdColor(id);
+	}
 
-    @Override
-    @PostMapping("/find/{id}")
-    public Optional<Color> findByIdColor(@PathVariable Long id) {
-        return colorService.findByIdColor(id);
-    }
+	@Override
+	@GetMapping("/findAll")
+	public List<Color> findAllColor() {
+		return colorService.findAllColor();
+	}
 
-    @Override
-    @PostMapping("/findAll")
-    public List<Color> findAllColor() {
-        return colorService.findAllColor();
-    }
-
-    @Override
-    @PostMapping("/delete/{id}")
-    public void deleteByIdColor(Long id) {
-        colorService.deleteByIdColor(id);
-    }
+	@Override
+	@DeleteMapping("/delete/{id}")
+	public void deleteByIdColor(@PathVariable Long id) {
+		colorService.deleteByIdColor(id);
+	}
 }

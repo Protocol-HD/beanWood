@@ -9,28 +9,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BrandServiceImpl implements BrandService{
+public class BrandServiceImpl implements BrandService {
+	@Autowired
+	private BrandRepository brandRepository;
 
-    @Autowired
-    private BrandRepository brandRepository;
+	@Override
+	public Brand saveBrand(Brand brand) {
+		return brandRepository.save(brand);
+	}
 
-    @Override
-    public Brand saveBrand(Brand brand) {
-        return brandRepository.save(brand);
-    }
+	@Override
+	public List<Brand> findAllBrand() {
+		return brandRepository.findAll();
+	}
 
-    @Override
-    public List<Brand> findAllBrand() {
-        return brandRepository.findAll();
-    }
+	@Override
+	public Optional<Brand> findByIdBrand(Long id) {
+		return brandRepository.findById(id);
+	}
 
-    @Override
-    public Optional<Brand> findByIdBrand(Long id) {
-        return brandRepository.findById(id);
-    }
-
-    @Override
-    public void deleteByIdBrand(Long id) {
-        brandRepository.deleteById(id);
-    }
+	@Override
+	public void deleteByIdBrand(Long id) {
+		brandRepository.deleteById(id);
+	}
 }

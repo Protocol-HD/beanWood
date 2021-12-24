@@ -11,30 +11,30 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/image")
 public class ImageControllerImpl implements ImageController {
-    @Autowired
-    private ImageService imageService;
+	@Autowired
+	private ImageService imageService;
 
-    @Override
-    @PostMapping("/save")
-    public Image saveImage(@RequestBody Image image) {
-        return imageService.saveImage(image);
-    }
+	@Override
+	@PostMapping("/save")
+	public Image saveImage(@RequestBody Image image) {
+		return imageService.saveImage(image);
+	}
 
-    @Override
-    @GetMapping("/find/{id}")
-    public Optional<Image> findByIdImage(@PathVariable Long id) {
-        return imageService.findByIdImage(id);
-    }
+	@Override
+	@GetMapping("/find/{id}")
+	public Optional<Image> findByIdImage(@PathVariable Long id) {
+		return imageService.findByIdImage(id);
+	}
 
-    @Override
-    @GetMapping("/findAll")
-    public List<Image> findAllImage() {
-        return imageService.findAllImage();
-    }
+	@Override
+	@GetMapping("/findAll")
+	public List<Image> findAllImage() {
+		return imageService.findAllImage();
+	}
 
-    @Override
-    @DeleteMapping("/delete/{id}")
-    public void deleteByIdImage(@PathVariable Long id) {
-        imageService.deleteByIdImage(id);
-    }
+	@Override
+	@DeleteMapping("/delete/{id}")
+	public void deleteByIdImage(@PathVariable Long id) {
+		imageService.deleteByIdImage(id);
+	}
 }

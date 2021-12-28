@@ -3,19 +3,11 @@ import BannerCardItem from '../../ui/homeUi/bannerCard/BannerCardItem';
 import axios from 'axios';
 
 function BannerCard() {
-
+	const url = "http://localhost:8080/bannerCard/findAll";
     const [cardItem, setCardItem] = useState([]);
 
     useEffect(() => {
-        // fetch("http://localhost:3006/bannerCard")
-        // .then(res => {
-        //     return res.json();
-        // })
-        // .then(data => {
-        //     setCardItem(data);
-        // })
-
-        axios.get("http://localhost:3006/bannerCard")
+        axios.get(url)
         .then(Response => {
             setCardItem(Response.data);
         })

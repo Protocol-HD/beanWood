@@ -6,7 +6,7 @@ function BannerCardItem({item}) {
         <div className="col-lg-4 col-md-6 mb-20">
             <div className="banner-card-single-item banner-animate--flash">
                 <div className="image img-responsive">
-                    <img src={`./assets/images/banner/${item.url}`} alt="test"/> 
+                    <img src={`./assets/images/banner/${item.image.imageUrl}`} alt="test"/> 
                 </div>
                 <div className="content">
                     <p className="tag">{item.tag}</p>

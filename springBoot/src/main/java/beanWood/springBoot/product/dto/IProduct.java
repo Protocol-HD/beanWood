@@ -10,6 +10,7 @@ public class IProduct {
 	private boolean isNew;
 	private int sale;
 	private int star;
+	private String description;
 	private Long productImageId;
 	private Long categoryId;
 	private Long colorId;

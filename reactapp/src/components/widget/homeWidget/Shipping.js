@@ -1,41 +1,57 @@
 import React, { useEffect, useState } from 'react';
-import ShippingItem from '../../ui/homeUi/shippingItem/ShippingItem';
-import axios from 'axios';
 
 function Shipping() {
+	return (
+		<div className="shipping-section section-fluid-270 section-top-gap-100">
+			<div className="box-wrapper">
 
-    const [shippingItem, setShippingItem] = useState([]);
+				<div className="shipping-wrapper">
+					<div className="container-fluid">
+						<div className="row">
 
-    useEffect(() => {
+							<div className="row justify-content-between mb-n40">
 
-        axios.get("http://localhost:3006/shippingItems")
-        .then(Response => {
-            setShippingItem(Response.data);
-        })
-    }, []);
-        
-    return ( 
-        <div className="shipping-section section-fluid-270 section-top-gap-100">
-            <div className="box-wrapper">
+								<div className="col-xl-4 col-md-6 col-12 mb-40">
+									<div className="shipping-single-item--style-1">
+										<div className="icon">
+											<img className="img-fluid" src="assets/images/icons/shipping-icon-1.svg" width="46" height="33" loading="lazy" alt="shipping-icon-1" />
+										</div>
+										<div className="content">
+											<h4 className="title">Fast Delivary</h4>
+											<p>There are many variations of passages of Lorem Ipsum available.</p>
+										</div>
+									</div>
+								</div>
+								<div className="col-xl-4 col-md-6 col-12 mb-40">
+									<div className="shipping-single-item--style-1">
+										<div className="icon">
+											<img className="img-fluid" src="assets/images/icons/shipping-icon-2.svg" width="46" height="33" loading="lazy" alt="shipping-icon-1" />
+										</div>
+										<div className="content">
+											<h4 className="title">100% Refund</h4>
+											<p>There are many variations of passages of Lorem Ipsum available.</p>
+										</div>
+									</div>
+								</div>
+								<div className="col-xl-4 col-md-6 col-12 mb-40">
+									<div className="shipping-single-item--style-1">
+										<div className="icon">
+											<img className="img-fluid" src="assets/images/icons/shipping-icon-3.svg" width="46" height="33" loading="lazy" alt="shipping-icon-1" />
+										</div>
+										<div className="content">
+											<h4 className="title">Premium Quality</h4>
+											<p>There are many variations of passages of Lorem Ipsum available.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                <div className="shipping-wrapper">
-                    <div className="container-fluid">
-                        <div className="row">
-
-                            <div className="row justify-content-between mb-n40">
-                                {
-                                    shippingItem.map(item => (
-                                        <ShippingItem key={item.id} item={item} />
-                                    ))
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    );
+			</div>
+		</div>
+	);
 }
 
 export default Shipping;

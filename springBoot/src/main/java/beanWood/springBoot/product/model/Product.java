@@ -21,6 +21,7 @@ public class Product {
 	private boolean isNew;
 	private int sale;
 	private int star;
+	private String description;
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
@@ -32,13 +33,14 @@ public class Product {
 	private Size size;
 
 	@Builder
-	public Product(Long id, String productName, int price, boolean isNew, int sale, int star, Category category, Color color, Size size) {
+	public Product(Long id, String productName, int price, boolean isNew, int sale, int star, String description, Category category, Color color, Size size) {
 		this.id = id;
 		this.productName = productName;
 		this.price = price;
 		this.isNew = isNew;
 		this.sale = sale;
 		this.star = star;
+		this.description = description;
 		this.category = category;
 		this.color = color;
 		this.size = size;

@@ -30,12 +30,11 @@ function Slider() {
   //data.json 에 slide리스트를 추가하였습니다.
 
   useEffect(()=>{
-      const url = "http://localhost:3005/sliderList"
+      const url = "http://localhost:8080/sliderList/findAll"
 
       axios.get(url)
       .then(Response=>{
-          setSliderList(Response.data)
-          console.log(Response.data)
+          setSliderList(Response.data);
       })
   },[])
 
@@ -51,9 +50,9 @@ function Slider() {
                               sliderList.map((item,idx)=>(
                                 <SliderSingleItem
                                   key={item.id}
-                                  productId={item.productId}
+                                  productId={item.product.id}
                                   eventName={item.eventName}
-                                  img={item.img}
+                                  img={item.image.imageUrl}
                                   isActive={isActive}
                                   idx={idx}
                                 />

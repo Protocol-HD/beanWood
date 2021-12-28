@@ -41,6 +41,7 @@ public class ProductControllerImpl implements ProductController {
 						.price(iProduct.getPrice())
 						.sale(iProduct.getSale())
 						.star(iProduct.getStar())
+						.description(iProduct.getDescription())
 						.build()
 		);
 	}
@@ -59,6 +60,7 @@ public class ProductControllerImpl implements ProductController {
 						.price(iProduct.getPrice())
 						.sale(iProduct.getSale())
 						.star(iProduct.getStar())
+						.description(iProduct.getDescription())
 						.build()
 		);
 	}

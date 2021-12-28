@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Single_item_cart({ item, delCheck, setDelCheck }) {
-	const [product, setProduct] = useState([]);
+	const [product, setProduct] = useState({});
 
 	const handleDelete = () => {
 		if (window.confirm("Do you want to delete it from the cart?")) {
@@ -17,7 +17,8 @@ function Single_item_cart({ item, delCheck, setDelCheck }) {
 	useEffect(() => {
 		axios.get(`http://localhost:8080/productImage/find/${item.product.id}`)
 			.then(Response => {
-				setProduct(Response.data);
+				console.log(Response.data.image.imageUrl);
+				setProduct(Response.data.image.imageUrl);
 			})
 	}, [item.productId])
 
@@ -25,7 +26,7 @@ function Single_item_cart({ item, delCheck, setDelCheck }) {
 		<li className="single-item">
 			<div className="box">
 				<Link to={`/shop/detail/${item.product.id}`} className="image">
-					<img src={`assets/images/products/${product.image.imageUrl}`} alt={product.productName} className="offcanvas-wishlist-image" />
+					<img src={`assets/images/products/${product}`} alt={item.product.productName} className="offcanvas-wishlist-image" />
 				</Link>
 				<div className="content">
 					<Link to={`/shop/detail/${item.product.id}`} className="title">{item.product.productName}</Link>

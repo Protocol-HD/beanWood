@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react/cjs/react.development';
 import SideBarSingleList from './SideBarSingleList';
@@ -9,14 +10,14 @@ function SideBarSingleitem({title, checkLists, setCheckLists}) {
     
     useEffect(()=>{
 
-        fetch(`http://localhost:3005/${title}`)
+        axios.get(`http://localhost:8080/${title}/findAll`)
         .then(res=>{
             return res.json()
         })
         .then(data=>{
             setSideData(data)
         }) 
-    }, [title])
+    }, [])
 
     return (
         <div className="sidebar-single-widget">

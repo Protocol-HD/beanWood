@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BannerCardController {
-    BannerCard saveBannerCard(IBannerCard iBannerCard);
 
-    BannerCard updateBannerCard(IBannerCard iBannerCard);
+    BannerCard saveBannerCard(IBannerCard iBannerCard);
 
     Optional<BannerCard> findByBannerCard(Long id);
 

@@ -23,8 +23,7 @@ public class ProductImage {
 	private Product product;
 
 	@Builder
-	public ProductImage(Long id, Image image, Product product) {
-		this.id = id;
+	public ProductImage(Image image, Product product) {
 		this.image = image;
 		this.product = product;
 	}

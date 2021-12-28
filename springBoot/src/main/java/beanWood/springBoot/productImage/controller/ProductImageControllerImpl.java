@@ -3,6 +3,7 @@ package beanWood.springBoot.productImage.controller;
 import beanWood.springBoot.image.service.ImageService;
 import beanWood.springBoot.product.service.ProductService;
 import beanWood.springBoot.productImage.dto.IProductImage;
+import beanWood.springBoot.productImage.dto.OProductImage;
 import beanWood.springBoot.productImage.model.ProductImage;
 import beanWood.springBoot.productImage.service.ProductImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +23,17 @@ public class ProductImageControllerImpl implements ProductImageController {
 	@Autowired
 	private ProductService productService;
 
+	@Override
+	public ProductImage findImageProductId(Long productId) {
+
+		return null;
+	}
 
 	@Override
 	@PostMapping("/save")
 	public ProductImage saveProductImage(@RequestBody IProductImage iProductImage) {
 		return productImageService.saveProductImage(
 				ProductImage.builder()
-						.image(imageService.findByIdImage(iProductImage.getImageId()).get())
-						.product(productService.findByIdProduct(iProductImage.getProductId()).get())
-						.build()
-		);
-	}
-
-	@Override
-	@PutMapping("/update")
-	public ProductImage updateProductImage(@RequestBody IProductImage iProductImage) {
-		return productImageService.saveProductImage(
-				ProductImage.builder()
-						.id(iProductImage.getId())
 						.image(imageService.findByIdImage(iProductImage.getImageId()).get())
 						.product(productService.findByIdProduct(iProductImage.getProductId()).get())
 						.build()
@@ -65,8 +59,12 @@ public class ProductImageControllerImpl implements ProductImageController {
 	}
 
 	@Override
-	@GetMapping("/findByProductId/{productId}")
-	public List<ProductImage> findByProductId(@PathVariable Long productId) {
-		return productImageService.findByProductId(productId);
+	@GetMapping("/findProductImage/{id}")
+	public OProductImage findOProductImage(@PathVariable Long id) {
+		return OProductImage.builder()
+				.productId(findByIdProductImage(id).get().getProduct().getId())
+				.id(findByIdProductImage(id).get().getId())
+				.image(findByIdProductImage(id).get().getImage())
+				.build();
 	}
 }

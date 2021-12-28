@@ -8,8 +8,6 @@ import java.util.Optional;
 public interface ColorController {
 	Color saveColor(Color color);
 
-	Color updateColor(Color color);
-
 	Optional<Color> findByIdColor(Long id);
 
 	List<Color> findAllColor();

@@ -9,8 +9,6 @@ import java.util.Optional;
 public interface WishListController {
 	WishList saveWishList(IWishList IWishList);
 
-	WishList updateWishList(IWishList iWishList);
-
 	Optional<WishList> findByIdWishList(Long id);
 
 	List<WishList> findAllWishList();

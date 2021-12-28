@@ -46,24 +46,6 @@ public class ProductControllerImpl implements ProductController {
 	}
 
 	@Override
-	@PutMapping("/update")
-	public Product updateProduct(@RequestBody IProduct iProduct) {
-		return productService.saveProduct(
-				Product.builder()
-						.id(iProduct.getId())
-						.category(categoryService.findByIdCategory(iProduct.getCategoryId()).get())
-						.color(colorService.findByIdColor(iProduct.getColorId()).get())
-						.size(sizeService.findByIdSize(iProduct.getSizeId()).get())
-						.productName(iProduct.getProductName())
-						.isNew(iProduct.isNew())
-						.price(iProduct.getPrice())
-						.sale(iProduct.getSale())
-						.star(iProduct.getStar())
-						.build()
-		);
-	}
-
-	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Product> findByIdProduct(@PathVariable Long id) {
 		return productService.findByIdProduct(id);

@@ -8,8 +8,6 @@ import java.util.Optional;
 public interface ImageController {
     Image saveImage(Image image);
 
-    Image updateImage(Image image);
-
     Optional<Image> findByIdImage(Long id);
 
     List<Image> findAllImage();

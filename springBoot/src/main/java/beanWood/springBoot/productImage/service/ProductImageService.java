@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductImageService {
-	ProductImage saveProductImage(ProductImage productImage);
+    ProductImage saveProductImage(ProductImage productImage);
 
-	Optional<ProductImage> findByIdProductImage(Long id);
+    Optional<ProductImage> findByIdProductImage(Long id);
 
-	List<ProductImage> findAllProductImage();
+    List<ProductImage> findAllProductImage();
 
-	void deleteByIdProductImage(Long id);
-
-	List<ProductImage> findByProductId(Long productId);
+    void deleteByIdProductImage(Long id);
 }

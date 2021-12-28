@@ -22,12 +22,6 @@ public class ColorControllerImpl implements ColorController {
 	}
 
 	@Override
-	@PutMapping("/update")
-	public Color updateColor(@RequestBody Color color) {
-		return saveColor(color);
-	}
-
-	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Color> findByIdColor(@PathVariable Long id) {
 		return colorService.findByIdColor(id);

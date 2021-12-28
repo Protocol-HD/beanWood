@@ -9,8 +9,6 @@ import java.util.Optional;
 public interface CartListController {
 	CartList saveCartList(ICartList iCartList);
 
-	CartList updateCartList(ICartList iCartList);
-
 	Optional<CartList> findByIdCartList(Long id);
 
 	List<CartList> findAllCartList();

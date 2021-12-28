@@ -22,12 +22,6 @@ public class ImageControllerImpl implements ImageController {
 	}
 
 	@Override
-	@PutMapping("/update")
-	public Image updateImage(@RequestBody Image image) {
-		return saveImage(image);
-	}
-
-	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Image> findByIdImage(@PathVariable Long id) {
 		return imageService.findByIdImage(id);

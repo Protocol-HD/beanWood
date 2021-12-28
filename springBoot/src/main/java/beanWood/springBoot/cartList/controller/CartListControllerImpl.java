@@ -31,18 +31,6 @@ public class CartListControllerImpl implements CartListController {
 	}
 
 	@Override
-	@PutMapping("/update")
-	public CartList updateCartList(@RequestBody ICartList iCartList) {
-		return cartListService.saveCartList(
-				CartList.builder()
-						.id(iCartList.getId())
-						.product(productService.findByIdProduct(iCartList.getProductId()).get())
-						.quantity(iCartList.getQuantity())
-						.build()
-		);
-	}
-
-	@Override
 	@GetMapping("/find/{id}")
 	public Optional<CartList> findByIdCartList(@PathVariable Long id) {
 		return cartListService.findByIdCartList(id);

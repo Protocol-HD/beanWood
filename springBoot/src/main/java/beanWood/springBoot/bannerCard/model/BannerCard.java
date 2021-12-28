@@ -22,8 +22,7 @@ public class BannerCard {
     public Image image;
 
     @Builder
-    public BannerCard(Long id, String tag, String title, String text, Image image) {
-        this.id = id;
+    public BannerCard(String tag, String title, String text, Image image) {
         this.tag = tag;
         this.title = title;
         this.text = text;

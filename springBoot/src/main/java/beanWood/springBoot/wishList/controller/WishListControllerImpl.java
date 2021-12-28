@@ -30,17 +30,6 @@ public class WishListControllerImpl implements WishListController {
 	}
 
 	@Override
-	@PutMapping("/update")
-	public WishList updateWishList(@RequestBody IWishList iWishList) {
-		return wishListService.saveWishList(
-				WishList.builder()
-						.id(iWishList.getId())
-						.product(productService.findByIdProduct(iWishList.getProductId()).get())
-						.build()
-		);
-	}
-
-	@Override
 	@GetMapping("/find/{id}")
 	public Optional<WishList> findByIdWishList(@PathVariable Long id) {
 		return wishListService.findByIdWishList(id);

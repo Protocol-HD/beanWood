@@ -32,18 +32,6 @@ public class CategoryControllerImpl implements CategoryController {
 	}
 
 	@Override
-	@PutMapping("/update")
-	public Category updateCategory(@RequestBody ICategory iCategory) {
-		return categoryService.saveCategory(
-				Category.builder()
-						.id(iCategory.getId())
-						.image(imageService.findByIdImage(iCategory.getImageId()).get())
-						.categoryName(iCategory.getCategoryName())
-						.build()
-		);
-	}
-
-	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Category> findByIdCategory(@PathVariable Long id) {
 		return categoryService.findByIdCategory(id);

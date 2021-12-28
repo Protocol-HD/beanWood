@@ -35,20 +35,6 @@ public class BannerCardControllerImpl implements BannerCardController {
 	}
 
 	@Override
-	@PutMapping("/update")
-	public BannerCard updateBannerCard(@RequestBody IBannerCard iBannerCard) {
-		return bannerCardService.saveBannerCard(
-				BannerCard.builder()
-						.id(iBannerCard.getId())
-						.image(imageService.findByIdImage(iBannerCard.getImageId()).get())
-						.tag(iBannerCard.getTag())
-						.text(iBannerCard.getText())
-						.title(iBannerCard.getTitle())
-						.build()
-		);
-	}
-
-	@Override
 	@GetMapping("/find/{id}")
 	public Optional<BannerCard> findByBannerCard(@PathVariable Long id) {
 		return bannerCardService.findByIdBannerCard(id);

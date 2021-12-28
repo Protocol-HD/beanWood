@@ -9,7 +9,8 @@ function WishTableLine({ item, delCheck, setDelCheck }) {
 
     const handleDelete = () => {
         if(window.confirm("Do you want to delete it from the wish list?")) {
-            axios.delete(`http://localhost:3005/wishLists/${item.id}`)
+            axios.delete(`http://localhost:8080/wishList/delete/${item.id}`)
+            //(`http://localhost:3005/wishLists/${item.id}`)
             .then(Response => {
                 setDelCheck(!delCheck)
             })
@@ -19,7 +20,9 @@ function WishTableLine({ item, delCheck, setDelCheck }) {
     }
 
     const handlePost = () => {
-        axios.post("http://localhost:3005/cartLists", {
+        axios.post("http://localhost:8080/cartList/save"
+            //"http://localhost:3005/cartLists"
+            , {
             productId: item.id, 
             quantity: 1, 
             price: item.price,
@@ -34,7 +37,8 @@ function WishTableLine({ item, delCheck, setDelCheck }) {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:3006/products/${item.productId}`)
+        axios.get(`http://localhost:8080/products/find/${item.productId}`)
+        //(`http://localhost:3006/products/${item.productId}`)
         .then(Response => {
             setWishProduct(Response.data);
             setImgUrl(Response.data.productImage[0].imageUrl)

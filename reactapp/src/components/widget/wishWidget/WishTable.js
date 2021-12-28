@@ -7,7 +7,7 @@ function WishTable() {
     const [delCheck, setDelCheck] = useState(false);
 
     useEffect(() => {
-        const url = "http://localhost:3005/wishLists"
+        const url = "http://localhost:8080/wishLists/findAll"
         axios.get(url)
         .then(Response => {
             setWish(Response.data);

@@ -22,12 +22,6 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@Override
-	@PutMapping("/update")
-	public User updateUser(@RequestBody User user) {
-		return saveUser(user);
-	}
-
-	@Override
 	@GetMapping("/find/{id}")
 	public Optional<User> findByIdUser(@PathVariable Long id) {
 		return userService.findByIdUser(id);

@@ -22,12 +22,6 @@ public class SizeControllerImpl implements SizeController {
 	}
 
 	@Override
-	@PutMapping("/update")
-	public Size updateSize(@RequestBody Size size) {
-		return saveSize(size);
-	}
-
-	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Size> findByIdSize(@PathVariable Long id) {
 		return sizeService.findByIdSize(id);

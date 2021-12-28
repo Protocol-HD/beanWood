@@ -1,11 +1,11 @@
 import React from 'react';
 
-function CategoryTab({name, icon, id, handleTab}) {
-    return ( 
-        <li className="nav-item" role="presentation">
-            <button className="nav-link" data-bs-toggle="tab" data-bs-target={name} type="button" value={id} onClick={handleTab}>{name}<img src={`assets/images/icons/${icon}`} alt={name} /></button>
-        </li>
-    );
+function CategoryTab({ item, handleTab }) {
+	return (
+		<li className="nav-item" role="presentation">
+			<button className="nav-link" data-bs-toggle="tab" data-bs-target={item.categoryName} type="button" value={item.id} onClick={handleTab}>{item.categoryName}<img src={`assets/images/icons/${item.image.imageUrl}`} alt={item.categoryName} /></button>
+		</li>
+	);
 }
 
 export default CategoryTab;

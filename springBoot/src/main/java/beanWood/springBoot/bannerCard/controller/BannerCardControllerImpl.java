@@ -4,7 +4,7 @@ import beanWood.springBoot.bannerCard.dto.IBannerCard;
 import beanWood.springBoot.bannerCard.model.BannerCard;
 import beanWood.springBoot.bannerCard.service.BannerCardService;
 import beanWood.springBoot.image.service.ImageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,12 +13,10 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/bannerCard")
+@RequiredArgsConstructor
 public class BannerCardControllerImpl implements BannerCardController {
-
-	@Autowired
-	private BannerCardService bannerCardService;
-	@Autowired
-	private ImageService imageService;
+	private final BannerCardService bannerCardService;
+	private final ImageService imageService;
 
 	@Override
 	@PostMapping("/save")

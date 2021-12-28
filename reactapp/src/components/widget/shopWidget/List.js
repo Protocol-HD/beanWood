@@ -7,21 +7,19 @@ import axios from 'axios';
 
 function List() {
 
+    const url = "http://localhost:8080/product/findAll";
+
     const [productList, setProductList] = useState([]);
     const [mount, setMount] = useState(6);
 
     useEffect(() => {
-        fetch("http://localhost:3005/productList")
-        .then(res => {
-            return res.json();
+        axios.get(url)
+        .then(Response => {
+            setProductList(Response.data.filter(item => item.productIsShow === true))
         })
-        .then(data => {
-            setProductList(data.filter(item=> item.productIsShow === true));
-        })
-    }, []);
+    }, [])
 
     useEffect(() => {
-        const url = "http://localhost:3005/productList"
         axios.get(url)
         .then(Response => {
             setProductList(Response.data.filter(item=> item.productIsShow === true));

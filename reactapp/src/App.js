@@ -10,6 +10,7 @@ import TopScroll from './components/widget/TopScroll';
 import Detail from './components/page/Detail';
 
 import './css/style.css';
+import AddProduct from './components/page/AddProduct';
 
 // import './css/style.min.css';
 // import './css/vendor/bootstrap.min.css'
@@ -40,6 +41,7 @@ function App() {
 					<Route path="/wish" element={<Wish setHeaderClass={setHeaderClass} />} />
 					<Route path="/detail" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass} />} />
+					<Route path="/addproduct/" element={<AddProduct />} />
 				</Routes>
 				<Footer />
 			</div>

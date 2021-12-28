@@ -32,7 +32,7 @@ function ProductSingleItemStyle1({ item, path, checkDir }) {
 	useEffect(() => {
 		axios.get(`http://localhost:8080/productImage/findByProductId/${item.id}`)
 			.then(Response => {
-				setImgUrl(Response.data[0].image.imageUrl)
+				if (Response.data[0]) setImgUrl(Response.data[0].image.imageUrl)
 			})
 		if (checkDir) {
 			setAddPath("../.")

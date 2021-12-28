@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import SidebarWidgetTag from '../../ui/shopUi/SidebarWidgetTag';
 import SideBarSingleitem from './SideBarSingleitem';
+import SideBarSingleItemCategory from './SideBarSingleItemCategory';
+import SideBarSingleItemColor from './SideBarSingleItemColor';
+import SideBarSingleItemSize from './SideBarSingleItemSize';
 
 function Sidebar() {
 
@@ -12,23 +15,9 @@ function Sidebar() {
 
 	return (
 		<div className="siderbar-section">
-			<SideBarSingleitem
-				title="category"
-				setCheckLists={setCheckLists}
-				checkLists={checkLists}
-
-			/>
-			<SideBarSingleitem
-				title="color"
-				setCheckLists={setCheckLists}
-				checkLists={checkLists}
-			/>
-			<SideBarSingleitem
-				title="size"
-				setCheckLists={setCheckLists}
-				checkLists={checkLists}
-			/>
-			<SidebarWidgetTag />
+			<SideBarSingleItemCategory />
+			<SideBarSingleItemColor />
+			<SideBarSingleItemSize />
 		</div>
 	);
 }

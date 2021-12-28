@@ -11,7 +11,7 @@ function ExclusiveCollection({checkDir}) {
         const url = "http://localhost:8080/product/findAll"
         axios.get(url)
         .then(Response => {
-            setProductList(Response.data.filter(item=> item.exclusiveIsShow === true));
+            setProductList(Response.data);
         })
     }, [])
 
@@ -77,7 +77,7 @@ function ExclusiveCollection({checkDir}) {
                             <Slider {...settings}>
                                 {
                                     productList.map(item => (
-                                        <ProductSingleItemStyle1 key={item.id} id={item.productId} path="exclusive" checkDir={checkDir} />
+                                        <ProductSingleItemStyle1 key={item.id} item={item} path="exclusive" checkDir={checkDir} />
                                     ))
                                 }
                             </Slider>

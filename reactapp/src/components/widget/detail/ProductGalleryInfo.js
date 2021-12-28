@@ -279,4 +279,3 @@ function ProductGalleryInfo({ product }) {
 }
 
 export default ProductGalleryInfo;
-

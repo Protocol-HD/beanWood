@@ -8,7 +8,7 @@ function ExclusiveCollection({checkDir}) {
     const [mount, setMount] = useState(8);
 
     useEffect(() => {
-        const url = "http://localhost:3005/productList"
+        const url = "http://localhost:8080/product/findAll"
         axios.get(url)
         .then(Response => {
             setProductList(Response.data.filter(item=> item.exclusiveIsShow === true));

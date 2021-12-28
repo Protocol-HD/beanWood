@@ -1,5 +1,5 @@
-import React , {useState} from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Footer from './components/layout/Footer';
 import Header from "./components/layout/Header";
 import Cart from './components/page/Cart';
@@ -24,28 +24,28 @@ import './css/style.css';
 // import './css/plugins/venobox.min.css'
 
 function App() {
-  const [headerClass, setHeaderClass] = useState(true)
-  
-  return (
-    <BrowserRouter>
-      <div className="App">
-      <Header 
-        headerClass={headerClass}
-      />
-      <TopScroll/>
-      <Routes>
-        <Route path="/" element={<Home setHeaderClass={setHeaderClass}/>} />
-        <Route path="/shop" element={<Shop setHeaderClass={setHeaderClass}/>} />
-        <Route path="/cart" element={<Cart setHeaderClass={setHeaderClass}/>} />
-        <Route path="/wish" element={<Wish setHeaderClass={setHeaderClass}/>} />
-        <Route path="/detail" element={<Detail setHeaderClass={setHeaderClass}/>} />
-        <Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass}/>} />
-      </Routes>
-      <Footer />
-      </div>
-      
-    </BrowserRouter>
-  );
+	const [headerClass, setHeaderClass] = useState(true)
+
+	return (
+		<BrowserRouter>
+			<div className="App">
+				<Header
+					headerClass={headerClass}
+				/>
+				<TopScroll />
+				<Routes>
+					<Route path="/" element={<Home setHeaderClass={setHeaderClass} />} />
+					<Route path="/shop" element={<Shop setHeaderClass={setHeaderClass} />} />
+					<Route path="/cart" element={<Cart setHeaderClass={setHeaderClass} />} />
+					<Route path="/wish" element={<Wish setHeaderClass={setHeaderClass} />} />
+					<Route path="/detail" element={<Detail setHeaderClass={setHeaderClass} />} />
+					<Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass} />} />
+				</Routes>
+				<Footer />
+			</div>
+
+		</BrowserRouter>
+	);
 }
 
 export default App;

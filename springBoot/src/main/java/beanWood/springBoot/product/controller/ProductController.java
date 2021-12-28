@@ -16,4 +16,6 @@ public interface ProductController {
 	List<Product> findAllProduct();
 
 	void deleteByIdProduct(Long id);
+
+	List<Product> findByCategoryId(Long categoryId);
 }

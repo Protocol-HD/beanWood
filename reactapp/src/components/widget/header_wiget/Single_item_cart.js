@@ -17,7 +17,6 @@ function Single_item_cart({ item, delCheck, setDelCheck }) {
 	useEffect(() => {
 		axios.get(`http://localhost:8080/productImage/find/${item.product.id}`)
 			.then(Response => {
-				console.log(Response.data.image.imageUrl);
 				setProduct(Response.data.image.imageUrl);
 			})
 	}, [item.productId])

@@ -8,7 +8,7 @@ function ProductTap() {
 	const [list, setList] = useState([])
 	const [categories, setCategories] = useState([])
 
-	const url = "http://localhost:3006/products"
+	const url = "http://localhost:8080/product/findAll"
 	const categoryUrl = "http://localhost:8080/category/findAll"
 
 	useEffect(() => {
@@ -27,7 +27,7 @@ function ProductTap() {
 
 	const handleTab = (e) => {
 
-		const url = `http://localhost:3006/products?categoryId=${e.target.value}`
+		const url = `http://localhost:8080/product/findByCategoryId/${e.target.value}`
 
 		axios.get(url)
 			.then(Response => {
@@ -76,10 +76,7 @@ function ProductTap() {
 
 									}
 								</ul>
-
 								<TabContent list={list} />
-
-
 								<div className="d-flex justify-content-center">
 									<Link to="/shop" className="btn btn-md btn-default btn-section-bottom">View All Product</Link>
 								</div>

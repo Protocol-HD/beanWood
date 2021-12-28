@@ -82,4 +82,10 @@ public class ProductControllerImpl implements ProductController {
 	public void deleteByIdProduct(@PathVariable Long id) {
 		productService.deleteByIdProduct(id);
 	}
+
+	@Override
+	@GetMapping("/findByCategoryId/{categoryId}")
+	public List<Product> findByCategoryId(@PathVariable Long categoryId) {
+		return productService.findByCategoryId(categoryId);
+	}
 }

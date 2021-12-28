@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/user")
 public class UserControllerImpl implements UserController {
 	@Autowired
@@ -18,6 +19,12 @@ public class UserControllerImpl implements UserController {
 	@PostMapping("/save")
 	public User saveUser(@RequestBody User user) {
 		return userService.saveUser(user);
+	}
+
+	@Override
+	@PutMapping("/update")
+	public User updateUser(@RequestBody User user) {
+		return saveUser(user);
 	}
 
 	@Override

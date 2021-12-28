@@ -19,7 +19,8 @@ public class WishList {
 	private Product product;
 
 	@Builder
-	public WishList(Product product) {
+	public WishList(Long id, Product product) {
+		this.id = id;
 		this.product = product;
 	}
 }

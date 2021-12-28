@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/category")
 public class CategoryControllerImpl implements CategoryController {
-
 	@Autowired
 	private CategoryService categoryService;
 
@@ -23,9 +23,20 @@ public class CategoryControllerImpl implements CategoryController {
 	@Override
 	@PostMapping("/save")
 	public Category saveCategory(@RequestBody ICategory iCategory) {
-
 		return categoryService.saveCategory(
 				Category.builder()
+						.image(imageService.findByIdImage(iCategory.getImageId()).get())
+						.categoryName(iCategory.getCategoryName())
+						.build()
+		);
+	}
+
+	@Override
+	@PutMapping("/update")
+	public Category updateCategory(@RequestBody ICategory iCategory) {
+		return categoryService.saveCategory(
+				Category.builder()
+						.id(iCategory.getId())
 						.image(imageService.findByIdImage(iCategory.getImageId()).get())
 						.categoryName(iCategory.getCategoryName())
 						.build()

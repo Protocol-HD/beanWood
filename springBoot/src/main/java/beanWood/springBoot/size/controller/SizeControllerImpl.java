@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/size")
 public class SizeControllerImpl implements SizeController {
 	@Autowired
@@ -18,6 +19,12 @@ public class SizeControllerImpl implements SizeController {
 	@PostMapping("/save")
 	public Size saveSize(@RequestBody Size size) {
 		return sizeService.saveSize(size);
+	}
+
+	@Override
+	@PutMapping("/update")
+	public Size updateSize(@RequestBody Size size) {
+		return saveSize(size);
 	}
 
 	@Override

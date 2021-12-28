@@ -3,24 +3,23 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function HeaderTop({headerClass, checkDir}) {
+	const cartListUrl = "http://localhost:8080/cartList/findAll";
+	const wishListUrl = "http://localhost:8080/wishList/findAll";
     const isTrue = headerClass
-
     const [cntCart, setCntCart] = useState()
     const [cntWish, setCntWish] = useState()
     const [check, setCheck] = useState(false);
     const [addPath, setAddPath] = useState("")
 
     useEffect(() => {
-        axios.get("http://localhost:3005/cartLists")
+        axios.get(cartListUrl)
         .then(Response => {
             setCntCart(Response.data.length)
         })
-
-        axios.get("http://localhost:3005/wishLists")
+        axios.get(wishListUrl)
         .then(Response => {
             setCntWish(Response.data.length)
         })
-
         if(checkDir) {
             setAddPath("../.")
         }

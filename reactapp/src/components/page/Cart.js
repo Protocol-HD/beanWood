@@ -16,6 +16,7 @@ function Cart({setHeaderClass}) {
         <>
             <Breadcrumb />
             <div className="cart-section section-fluid-270 section-top-gap-100">
+				<p>testcheck</p>
                 <CartTable 
                     check = { check }
                     setCheck = { setCheck }                

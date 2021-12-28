@@ -11,17 +11,18 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 public class Brand {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String brandName;
-    @ManyToOne
-    @JoinColumn(name = "image_id")
-    private Image image;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String brandName;
+	@ManyToOne
+	@JoinColumn(name = "image_id")
+	private Image image;
 
-    @Builder
-    public Brand(String brandName, Image image) {
-        this.brandName = brandName;
-        this.image = image;
-    }
+	@Builder
+	public Brand(Long id, String brandName, Image image) {
+		this.id = id;
+		this.brandName = brandName;
+		this.image = image;
+	}
 }

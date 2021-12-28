@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface SliderListController {
 	SliderList saveSliderList(ISliderList isliderList);
 
+	SliderList updateSliderList(ISliderList iSliderList);
+
 	Optional<SliderList> findByIdSliderList(Long id);
 
 	List<SliderList> findAllSliderList();

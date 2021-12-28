@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/image")
 public class ImageControllerImpl implements ImageController {
 	@Autowired
@@ -18,6 +19,12 @@ public class ImageControllerImpl implements ImageController {
 	@PostMapping("/save")
 	public Image saveImage(@RequestBody Image image) {
 		return imageService.saveImage(image);
+	}
+
+	@Override
+	@PutMapping("/update")
+	public Image updateImage(@RequestBody Image image) {
+		return saveImage(image);
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/wishList")
 public class WishListControllerImpl implements WishListController {
 	@Autowired
@@ -23,6 +24,17 @@ public class WishListControllerImpl implements WishListController {
 	public WishList saveWishList(@RequestBody IWishList iWishList) {
 		return wishListService.saveWishList(
 				WishList.builder()
+						.product(productService.findByIdProduct(iWishList.getProductId()).get())
+						.build()
+		);
+	}
+
+	@Override
+	@PutMapping("/update")
+	public WishList updateWishList(@RequestBody IWishList iWishList) {
+		return wishListService.saveWishList(
+				WishList.builder()
+						.id(iWishList.getId())
 						.product(productService.findByIdProduct(iWishList.getProductId()).get())
 						.build()
 		);

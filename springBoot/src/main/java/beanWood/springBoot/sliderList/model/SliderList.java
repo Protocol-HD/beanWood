@@ -26,7 +26,8 @@ public class SliderList {
     private Product product;
 
     @Builder
-    public SliderList(String eventName, Image image, Product product) {
+    public SliderList(Long id, String eventName, Image image, Product product) {
+        this.id = id;
         this.eventName = eventName;
         this.image = image;
         this.product = product;

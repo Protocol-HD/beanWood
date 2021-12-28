@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/color")
 public class ColorControllerImpl implements ColorController {
 	@Autowired
@@ -18,6 +19,12 @@ public class ColorControllerImpl implements ColorController {
 	@PostMapping("/save")
 	public Color saveColor(@RequestBody Color color) {
 		return colorService.saveColor(color);
+	}
+
+	@Override
+	@PutMapping("/update")
+	public Color updateColor(@RequestBody Color color) {
+		return saveColor(color);
 	}
 
 	@Override

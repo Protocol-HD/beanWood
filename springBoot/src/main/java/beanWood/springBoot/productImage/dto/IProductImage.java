@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class IProductImage {
-    private Long id;
-    private Long imageId;
-    private Long productId;
+	private Long id;
+	private Long imageId;
+	private Long productId;
 }

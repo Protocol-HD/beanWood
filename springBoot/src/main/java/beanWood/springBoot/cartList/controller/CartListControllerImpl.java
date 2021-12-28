@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/cartList")
 public class CartListControllerImpl implements CartListController {
 	@Autowired
@@ -23,6 +24,18 @@ public class CartListControllerImpl implements CartListController {
 	public CartList saveCartList(@RequestBody ICartList iCartList) {
 		return cartListService.saveCartList(
 				CartList.builder()
+						.product(productService.findByIdProduct(iCartList.getProductId()).get())
+						.quantity(iCartList.getQuantity())
+						.build()
+		);
+	}
+
+	@Override
+	@PutMapping("/update")
+	public CartList updateCartList(@RequestBody ICartList iCartList) {
+		return cartListService.saveCartList(
+				CartList.builder()
+						.id(iCartList.getId())
 						.product(productService.findByIdProduct(iCartList.getProductId()).get())
 						.quantity(iCartList.getQuantity())
 						.build()

@@ -2,28 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function CartTotals({check}) {
-
-    const [total, setTotal] = useState(0)
-    const [reset, setReset] = useState()
-    const [shipping, setShipping] = useState(255.00)
+	const url = "http://localhost:8080/cartList/findAll";
+    const [total, setTotal] = useState(0);
+    const [reset, setReset] = useState();
+    const [shipping, setShipping] = useState(255.00);
     let sum = 0
 
     const getSum = (data) => {
-        for(let x in data){
-            sum+=data[x].itemTotal
+        for(let x in data){	
+            sum+=data[x].quantity * data[x].product.price;
         }
-        setTotal(sum)
+        setTotal(sum);
     }
 
     useEffect(()=>{
         console.log(check)
         setReset(check)
-        fetch("http://localhost:3005/cartLists")
+        fetch(url)
         .then(res=>{
-            return res.json()
+            return res.json();
         })
         .then(data => {
-            getSum(data)
+            getSum(data);
         })
     },[])
 

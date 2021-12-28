@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface SizeController {
 	Size saveSize(Size size);
 
+	Size updateSize(Size size);
+
 	Optional<Size> findByIdSize(Long id);
 
 	List<Size> findAllSize();

@@ -32,7 +32,8 @@ public class Product {
 	private Size size;
 
 	@Builder
-	public Product(String productName, int price, boolean isNew, int sale, int star, Category category, Color color, Size size) {
+	public Product(Long id, String productName, int price, boolean isNew, int sale, int star, Category category, Color color, Size size) {
+		this.id = id;
 		this.productName = productName;
 		this.price = price;
 		this.isNew = isNew;

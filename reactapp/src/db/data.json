@@ -106,15 +106,6 @@
       "itemImg": "0101.png"
     },
     {
-      "productId": 2,
-      "quantity": 4,
-      "id": 2,
-      "size": "M",
-      "color": 1,
-      "itemTotal": 3520,
-      "itemImg": "0201.jpg"
-    },
-    {
       "productId": 3,
       "quantity": 1,
       "color": 3,

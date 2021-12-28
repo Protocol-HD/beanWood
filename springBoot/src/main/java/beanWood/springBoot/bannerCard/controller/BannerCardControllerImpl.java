@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/bannerCard")
 public class BannerCardControllerImpl implements BannerCardController {
 
@@ -31,6 +32,20 @@ public class BannerCardControllerImpl implements BannerCardController {
 						.build()
 		);
 
+	}
+
+	@Override
+	@PutMapping("/update")
+	public BannerCard updateBannerCard(@RequestBody IBannerCard iBannerCard) {
+		return bannerCardService.saveBannerCard(
+				BannerCard.builder()
+						.id(iBannerCard.getId())
+						.image(imageService.findByIdImage(iBannerCard.getImageId()).get())
+						.tag(iBannerCard.getTag())
+						.text(iBannerCard.getText())
+						.title(iBannerCard.getTitle())
+						.build()
+		);
 	}
 
 	@Override

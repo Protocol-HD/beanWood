@@ -20,7 +20,8 @@ public class CartList {
 	private int quantity;
 
 	@Builder
-	public CartList(Product product, int quantity) {
+	public CartList(Long id, Product product, int quantity) {
+		this.id = id;
 		this.product = product;
 		this.quantity = quantity;
 	}

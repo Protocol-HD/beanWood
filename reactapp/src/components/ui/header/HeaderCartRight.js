@@ -4,11 +4,11 @@ import axios from 'axios';
 import Single_item_cart from '../../widget/header_wiget/Single_item_cart';
 
 function HeaderCartRight() {
+	const url = "http://localhost:8080/cartList/findAll"
     const [cart, setCart] = useState([]);
     const [delCheck, setDelCheck] = useState(false);
 
     useEffect(() => {
-        const url = "http://localhost:3005/cartLists"
         axios.get(url)
         .then(Response => {
             setCart(Response.data);

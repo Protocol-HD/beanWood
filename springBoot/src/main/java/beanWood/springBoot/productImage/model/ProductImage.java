@@ -12,18 +12,20 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 public class ProductImage {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne
-    @JoinColumn(name = "image_id")
-    private Image image;
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-    @Builder
-    public ProductImage(Image image, Product product) {
-        this.image = image;
-        this.product = product;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@ManyToOne
+	@JoinColumn(name = "image_id")
+	private Image image;
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
+
+	@Builder
+	public ProductImage(Long id, Image image, Product product) {
+		this.id = id;
+		this.image = image;
+		this.product = product;
+	}
 }

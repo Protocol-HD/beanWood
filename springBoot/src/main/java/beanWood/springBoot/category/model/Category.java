@@ -3,11 +3,13 @@ package beanWood.springBoot.category.model;
 import beanWood.springBoot.image.model.Image;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +20,8 @@ public class Category {
     private Image image;
 
     @Builder
-    public Category(String categoryName, Image image) {
+    public Category(Long id, String categoryName, Image image) {
+        this.id = id;
         this.categoryName = categoryName;
         this.image = image;
     }

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import ProductSingleItemStyle1 from '../../ui/homeUi/productList/ProductSingleItemStyle1';

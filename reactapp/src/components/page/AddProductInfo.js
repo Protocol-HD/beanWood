@@ -38,7 +38,7 @@ function AddProductInfo() {
 			<div className='row col-6 m-auto'>
 				<form onSubmit={addProductInfo}>
 					<div className='col-12'>
-						<label for='categoryName' className='form-label'>
+						<label htmlFor='categoryName' className='form-label'>
 							category name
 						</label>
 						<input
@@ -52,7 +52,7 @@ function AddProductInfo() {
 					</div>
 
 					<div className='col-12'>
-						<label for='size' className='form-label'>
+						<label htmlFor='size' className='form-label'>
 							size
 						</label>
 						<input
@@ -66,7 +66,7 @@ function AddProductInfo() {
 					</div>
 
 					<div className='col-12'>
-						<label for='color' className='form-label'>
+						<label htmlFor='color' className='form-label'>
 							color
 						</label>
 						<input
@@ -80,7 +80,7 @@ function AddProductInfo() {
 					</div>
 
 					<div className='text-center mt-5'>
-						<button type='submit' class='btn btn-secondary'>
+						<button type='submit' className='btn btn-secondary'>
 							submit
 						</button>
 					</div>

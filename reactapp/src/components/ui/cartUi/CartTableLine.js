@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import SideBarSingleItemCategory from './SideBarSingleItemCategory';
 import SideBarSingleItemColor from './SideBarSingleItemColor';

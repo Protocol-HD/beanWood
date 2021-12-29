@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import HeaderSlider from 'react-slick'; // slick slide for react .. https://react-slick.neostack.com/ 참조 // 

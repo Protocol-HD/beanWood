@@ -71,6 +71,17 @@ function AddProduct() {
 						<input type="text" className="form-control" id="category" placeholder="상품 분류" required="" ref={productCategory} />
 					</div>
 
+					<div className="dropdown col-12">
+						<button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+							Dropdown button
+						</button>
+						<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							<li><a className="dropdown-item" href="#">Action</a></li>
+							<li><a className="dropdown-item" href="#">Another action</a></li>
+							<li><a className="dropdown-item" href="#">Something else here</a></li>
+						</ul>
+					</div>
+
 					<div className="col-12">
 						<label for="color" className="form-label">color</label>
 						<input type="text" className="form-control" id="color" placeholder="색상" required="" ref={productColor} />
@@ -87,7 +98,7 @@ function AddProduct() {
 					</div>
 
 					<div className='text-center mt-5'>
-						<button type="submit" class="btn btn-secondary">submit</button>
+						<button type="submit" className="btn btn-secondary">submit</button>
 					</div>
 				</form>
 			</div>

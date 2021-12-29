@@ -15,4 +15,6 @@ public interface UserController {
 	List<User> findAllUser();
 
 	void deleteByIdUser(Long id);
+
+	User findByUserId(String userId);
 }

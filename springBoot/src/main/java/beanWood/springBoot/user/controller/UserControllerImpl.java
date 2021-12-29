@@ -44,4 +44,10 @@ public class UserControllerImpl implements UserController {
 	public void deleteByIdUser(@PathVariable Long id) {
 		userService.deleteByIdUser(id);
 	}
+
+	@Override
+	@GetMapping("/findByUserId/{userId}")
+	public User findByUserId(@PathVariable String userId) {
+		return userService.findByUserId(userId);
+	}
 }

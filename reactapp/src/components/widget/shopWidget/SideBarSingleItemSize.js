@@ -10,7 +10,7 @@ function SideBarSingleItemSize() {
 		axios.get(url).then(Response => {
 			setSize(Response.data);
 		})
-	})
+	}, [])
 
 	return (
 		<div className="sidebar-single-widget">
@@ -20,7 +20,7 @@ function SideBarSingleItemSize() {
 					<ul>
 						{
 							size.map(item => (
-								<SideBarSingleItemSizeItem item={item} />
+								<SideBarSingleItemSizeItem key={item.id} item={item} />
 							))
 						}
 					</ul>

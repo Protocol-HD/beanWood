@@ -11,6 +11,7 @@ import Detail from './components/page/Detail';
 import './App.css'
 import './css/style.css';
 import AddProduct from './components/page/AddProduct';
+import AddProductInfo from './components/page/AddProductInfo';
 
 // import './css/style.min.css';
 // import './css/vendor/bootstrap.min.css'
@@ -42,6 +43,7 @@ function App() {
 					<Route path="/detail" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/addproduct/" element={<AddProduct />} />
+					<Route path="/addproductinfo/" element={<AddProductInfo />} />
 				</Routes>
 				<Footer />
 			</div>

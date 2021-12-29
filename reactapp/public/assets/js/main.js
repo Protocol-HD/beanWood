@@ -210,10 +210,10 @@
     /************************************************
      * Price Range
      ***********************************************/
-    $(".js-range-slider").ionRangeSlider({
-        skin: "round",
-        hide_min_max: true,    // show/hide MIN and MAX labels
-    });
+    // $(".js-range-slider").ionRangeSlider({
+    //     skin: "round",
+    //     hide_min_max: true,    // show/hide MIN and MAX labels
+    // });
 
     /************************************************
      * Product Quantity

@@ -5,7 +5,7 @@ function SideBarSingleItemSizeItem({ item }) {
 
 	return (
 		<li key={item.id}>
-			<label className="checkbox-default" for="men">
+			<label className="checkbox-default" htmlFor="men">
 				<input onChange={() => setCheck(!check)} type="checkbox" id={item.sizeName} checked={check} />
 				<span>{item.sizeName}</span>
 			</label>

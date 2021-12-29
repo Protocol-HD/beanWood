@@ -10,7 +10,7 @@ function SideBarSingleItemColor() {
 		axios.get(url).then(Response => {
 			setColor(Response.data);
 		})
-	})
+	}, [])
 
 	return (
 		<div className="sidebar-single-widget">
@@ -20,7 +20,7 @@ function SideBarSingleItemColor() {
 					<ul>
 						{
 							color.map(item => (
-								<SideBarSingleItemColorItem item={item} />
+								<SideBarSingleItemColorItem key={item.id} item={item} />
 							))
 						}
 					</ul>

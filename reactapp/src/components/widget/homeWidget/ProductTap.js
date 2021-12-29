@@ -69,6 +69,7 @@ function ProductTap() {
 									{
 										categories.map(item => (
 											<CategoryTab
+												key={item.id}
 												item={item}
 												handleTab={handleTab}
 											/>

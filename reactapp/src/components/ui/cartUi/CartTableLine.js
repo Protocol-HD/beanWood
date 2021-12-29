@@ -39,17 +39,16 @@ function CartTableLine({ item, setCheck, check, delCheck, setDelCheck }) {
 			});
 		axios.get(`http://localhost:8080/productImage/findByProductId/${item.product.id}`)
 			.then(Response => {
-				console.log(Response.data[0].image.imageUrl);
 				setProductImg(Response.data[0].image.imageUrl);
 			});
-	}, []);
+	}, [item.product.id]);
 
 	return (
 		<tr>
 			<td className="product_remove"><Link to="/cart"><img onClick={handleDelete} src="assets/images/icons/icon-trash.svg" alt="" /></Link></td>
 			<td className="product_thumb"><Link to={`/shop/detail/${product.id}`}><img src={`assets/images/products/${productImg}`} alt={product.productName} /></Link></td>
 			<td className="product_name">
-				<Link to={`/shop/detail/${product.id}`}>{product.productName} {item.color == 1 ? "Red" : item.color == 2 ? "Green" : item.color == 3 ? "Blue" : item.color == 4 ? "Black" : ""} {item.size}</Link>
+				<Link to={`/shop/detail/${product.id}`}>{product.productName} {item.color === 1 ? "Red" : item.color === 2 ? "Green" : item.color === 3 ? "Blue" : item.color === 4 ? "Black" : ""} {item.size}</Link>
 			</td>
 			<td className="product-price">${product.price}</td>
 			<td className="product_quantity"><label>Quantity</label> <input defaultValue={item.quantity} min="1" onChange={handleQuantity} ref={qty} type="number" /></td>

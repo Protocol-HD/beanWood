@@ -7,7 +7,7 @@ function ShopInfo({mount, productList}) {
             <li className="prduct-item-filter">
                 <select name="choice" className="nice-select" tapindex="0">
                     <option value="first">New Arrival</option>
-                    <option value="second" selected>Featured</option>
+                    <option value="second" defaultValue>Featured</option>
                     <option value="third">Popular</option>
                 </select>
             </li>

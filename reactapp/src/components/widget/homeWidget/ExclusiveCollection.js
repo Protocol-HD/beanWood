@@ -4,11 +4,10 @@ import axios from 'axios';
 import Slider from 'react-slick';
 
 function ExclusiveCollection({checkDir}) {
+	const url = "http://localhost:8080/product/findAll"
     const [productList, setProductList] = useState([]);
-    const [mount, setMount] = useState(8);
 
     useEffect(() => {
-        const url = "http://localhost:8080/product/findAll"
         axios.get(url)
         .then(Response => {
             setProductList(Response.data);

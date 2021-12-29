@@ -10,7 +10,7 @@ function WishTableLine({ item, delCheck, setDelCheck }) {
 
 	useEffect(() => {
 		axios.get(productImgUrl + item.product.id).then(Response => setImgUrl(Response.data[0].image.imageUrl))
-	}, [])
+	}, [productImgUrl, item.product.id])
 
 	const handleDelete = () => {
 		if (window.confirm("Do you want to delete it from the wish list?")) {

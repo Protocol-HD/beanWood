@@ -16,7 +16,7 @@ function Header({headerClass}) {
     
     useEffect(() => {
         if(dir) setCheckDir(true)
-    }, []);
+    }, [dir]);
 
     return ( 
         <>

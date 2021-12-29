@@ -16,7 +16,7 @@ function SliderSingleItem({ productId, eventName, img, isActive, idx }) {
 				setData(Response.data);
 				setSlideText((Response.data.description).substring(0, 100));
 			})
-	}, [])
+	}, [url, productId])
 
 
 

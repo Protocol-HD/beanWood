@@ -14,7 +14,7 @@ function SideBarSingleitem({ title, checkLists, setCheckLists }) {
 			.then(Response => {
 				setSideData(Response.data);
 			})
-	}, [])
+	}, [title])
 	return (
 		<div className="sidebar-single-widget">
 			<h6 className="sidebar-title title-border">{title}</h6>

@@ -37,10 +37,10 @@ function ProductSingleItemStyle1({ item, path, checkDir }) {
 		if (checkDir) {
 			setAddPath("../.")
 		}
-	}, [])
+	}, [item.id, checkDir])
 
 	return (
-		<div className={path == "home" ? "col-sm-6 col-md-4 col-lg-3 mb-4" : path == "shop" ? "col-12" : path == "exclusive" ? "mx-3" : ""}>
+		<div className={path === "home" ? "col-sm-6 col-md-4 col-lg-3 mb-4" : path === "shop" ? "col-12" : path === "exclusive" ? "mx-3" : ""}>
 			<div className="product-single-item-style-1 swiper-slide">
 				<Link to={`/shop/detail/${item.id}`} className="image img-responsive">
 					<img className="img-fluid" src={`${addPath}./assets/images/products/${imgUrl}`} alt="product" />
@@ -48,7 +48,7 @@ function ProductSingleItemStyle1({ item, path, checkDir }) {
 				</Link>
 				<div className="content">
 					<div className="top">
-						<span className="catagory">{item.categoryId == 1 ? "Men" : item.categoryId == 2 ? "Women" : item.categoryId == 3 ? "Kid" : item.categoryId == 4 ? "Others" : ""}</span>
+						<span className="catagory">{item.categoryId === 1 ? "Men" : item.categoryId === 2 ? "Women" : item.categoryId === 3 ? "Kid" : item.categoryId === 4 ? "Others" : ""}</span>
 						<h4 className="title"><Link to={`/shop/detail/${item.id}`}>{item.productName}</Link></h4>
 						<span className="price">
 							${((100 - item.sale) * 0.01) * item.price}
@@ -61,7 +61,7 @@ function ProductSingleItemStyle1({ item, path, checkDir }) {
 						<ul className="review-star">
 							{[...Array(item.star)].map((n, index) => {
 								return (
-									<div>
+									<div key={index}>
 										<li className="fill"><span className="material-icons">star</span></li>
 									</div>
 								)
@@ -80,6 +80,7 @@ function ProductSingleItemStyle1({ item, path, checkDir }) {
 				</div>
 			</div>
 		</div>
+
 	);
 }
 

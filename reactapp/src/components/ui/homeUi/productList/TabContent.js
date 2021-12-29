@@ -9,7 +9,7 @@ function TabContent({ list }) {
 				<div className="row">
 					{
 						list.map(item => (
-							<ProductSingleItemStyle1 item={item} path="home" />
+							<ProductSingleItemStyle1 key={item.id} item={item} path="home" />
 						)).slice(0, 8)
 					}
 				</div>

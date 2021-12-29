@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function ProductGalleryInfo({ product }) {
 	const productImageUrl = "http://localhost:8080/productImage/findByProductId/";
-	const [colorId, setColorId] = useState(0)
+	const colorId = 0
 	const [proMainImg, setProMainImg] = useState("")
 	let [quantitynumber, setQuantitynumber] = useState(1);
 	const size = useRef('')
@@ -53,7 +53,7 @@ function ProductGalleryInfo({ product }) {
 		e.preventDefault();
 		const url = "http://localhost:3005/cartLists"
 
-		if (colorId == 0) {
+		if (colorId === 0) {
 			window.alert("Select color.")
 		} else {
 			axios.post(url, {
@@ -63,15 +63,9 @@ function ProductGalleryInfo({ product }) {
 				size: size.current.value,
 				itemTotal: quantitynumber * product.price,
 				itemImg: proMainImg
-			}).then(Response => {
-				goCart("/cart")
-			})
+			}).then(goCart("/cart"))
 		}
 
-	}
-
-	const getColor = (e) => {
-		setColorId(e.target.value)
 	}
 
 	const handleCount = (count) => {
@@ -82,7 +76,7 @@ function ProductGalleryInfo({ product }) {
 
 	const handlePostWish = () => {
 
-		if (colorId == 0) {
+		if (colorId === 0) {
 			window.alert("Select color.")
 
 		} else {
@@ -94,9 +88,7 @@ function ProductGalleryInfo({ product }) {
 				itemTotal: quantitynumber * product.price,
 				itemImg: proMainImg
 			})
-				.then(Response => {
-					goWish("/wish")
-				})
+				.then(goWish("/wish"))
 		}
 	}
 
@@ -115,8 +107,8 @@ function ProductGalleryInfo({ product }) {
 												<ul className="product-thumbnail-image nav">
 													{
 														proMainImg && proMainImg.map(image => (
-															<li className="nav-item">
-																<button className="nav-link active" data-bs-toggle="tab" data-bs-target={`#img-${image.id}`}type="button">
+															<li key={image.id} className="nav-item">
+																<button className="nav-link active" data-bs-toggle="tab" data-bs-target={`#img-${image.id}`} type="button">
 																	<span className="thumb">
 																		<img className="img-fluid" src={`../../assets/images/products/${image.image.imageUrl}`} alt={image.image.imageUrl} />
 																	</span>
@@ -154,7 +146,7 @@ function ProductGalleryInfo({ product }) {
 
 													{
 														proMainImg && proMainImg.map(image => (
-															<div className="tab-pane fade show active" id={`img-${image.id}`} role="tabpanel">
+															<div key={image.id} className="tab-pane fade show active" id={`img-${image.id}`} role="tabpanel">
 																<div className="image">
 																	<img className="img-fluid" src={`../../assets/images/products/${image.image.imageUrl}`} alt={image.image.imageUrl} />
 																</div>
@@ -187,14 +179,14 @@ function ProductGalleryInfo({ product }) {
 								<div className="col-xxl-4 col-lg-6">
 									<form onSubmit={addCart}>
 										<div className="product-content">
-											<span className="catagory">{product.categoryId == 1 ? "Men" : product.categoryId == 2 ? "Women" : product.categoryId == 3 ? "Kid" : product.categoryId == 4 ? "Others" : ""}</span>
+											<span className="catagory">{product.categoryId === 1 ? "Men" : product.categoryId === 2 ? "Women" : product.categoryId === 3 ? "Kid" : product.categoryId === 4 ? "Others" : ""}</span>
 											<h2 className="title">{product.productName}</h2>
 											<span className="author">Design: kakakoli Fashion</span>
 											<div className="bottom">
 												<ul className="review-star">
 													{[...Array(product.star)].map((n, index) => {
 														return (
-															<div>
+															<div key={index}>
 																<li className="fill"><span className="material-icons">star</span></li>
 															</div>
 														)
@@ -225,7 +217,7 @@ function ProductGalleryInfo({ product }) {
 																		<input type="radio" name="color" id={item.id} value={item.colorName} onChange={getColor} />
 																		<span>
 																			{
-																				item === 1 ? "Red" : item === 2 ? "Green" : item === 3 ? "Blue" : item === 4 ? "Black" : ""
+																				item ==== 1 ? "Red" : item ==== 2 ? "Green" : item ==== 3 ? "Blue" : item ==== 4 ? "Black" : ""
 																			}
 																		</span>
 																	</label>
@@ -239,7 +231,7 @@ function ProductGalleryInfo({ product }) {
 
 												<ul className="variable-items">
 													<li className="variable-single-items type-select">
-														<select className="nice-select" tabindex="0" ref={size}>
+														<select className="nice-select" tabIndex="0" ref={size}>
 															<option value="S" defaultValue>Size: S</option>
 															<option value="M">Size: M</option>
 															<option value="L">Size: L</option>
@@ -252,7 +244,7 @@ function ProductGalleryInfo({ product }) {
 														<div className="num-block skin-2">
 															<div className="num-in">
 																<span className="minus" onClick={() => { handleCount(--quantitynumber) }}></span>
-																<input type="text" className="in-num" value={quantitynumber} readonly="" />
+																<input type="text" className="in-num" value={quantitynumber} readOnly />
 																<span className="plus" onClick={() => { handleCount(++quantitynumber) }}></span>
 															</div>
 														</div>

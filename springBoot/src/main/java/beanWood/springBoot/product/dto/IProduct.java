@@ -11,7 +11,6 @@ public class IProduct {
 	private int sale;
 	private int star;
 	private String description;
-	private Long productImageId;
 	private Long categoryId;
 	private Long colorId;
 	private Long sizeId;

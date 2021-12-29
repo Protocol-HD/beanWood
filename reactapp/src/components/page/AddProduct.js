@@ -1,9 +1,10 @@
 import axios from 'axios';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function AddProduct() {
 	const productUrl = "http://localhost:8080/product/save";
 	const productImageUrl = "http://localhost:8080/productImage/save";
+	const imageUrl = "http://localhost:8080/image/save";
 	const productName = useRef();
 	const productPrice = useRef();
 	const productSale = useRef();
@@ -13,24 +14,33 @@ function AddProduct() {
 	const productSize = useRef();
 	const productImage = useRef();
 	const [productId, setProductId] = useState();
+	const [imageId, setImageId] = useState();
 
 	const addProduct = (e) => {
 		e.preventDefault();
 		axios.post(productUrl, {
 			productName: productName.current.value,
-			price: parseInt(productPrice.current.value),
-			sale: parseInt(productSale.current.value),
+			price: productPrice.current.value,
+			sale: productSale.current.value,
 			description: productDescription.current.value,
-			category: parseInt(productCategory.current.value),
-			color: parseInt(productColor.current.value),
-			size: parseInt(productSize.current.value),
+			categoryId: productCategory.current.value,
+			colorId: productColor.current.value,
+			sizeId: productSize.current.value
 		})
-		// .then(Response => setProductId(Response.data.id))
-		// .then(axios.post(productImageUrl, {
-		// 	productId: parseInt(productId),
-		// 	image: productImage.current.value,
-		// }))
+			.then(Response => setProductId(Response.data.id))
+		axios.post(imageUrl, {
+			imageUrl: productImage.current.value
+		})
+			.then(Response => setImageId(Response.data.id))
 	}
+
+	useEffect(() => {
+		if (productId && imageId)
+			axios.post(productImageUrl, {
+				productId: productId,
+				imageId: imageId
+			})
+	}, [productId, imageId])
 
 	return (
 		<div className='container' >

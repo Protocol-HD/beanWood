@@ -38,6 +38,7 @@ function CartTable({ setCheck, check }) {
 										{
 											cart.map(item => (
 												<CartTableLine
+													key={item.id}
 													item={item}
 													setCheck={setCheck}
 													check={check}

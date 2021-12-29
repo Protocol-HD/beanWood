@@ -22,7 +22,7 @@ function Detail({ setHeaderClass }) {
 			.then(data => {
 				setProduct(data)
 			})
-	}, [id, setHeaderClass]);
+	}, [id, setHeaderClass, dir]);
 
 	return (
 		<>

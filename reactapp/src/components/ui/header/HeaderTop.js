@@ -8,7 +8,6 @@ function HeaderTop({headerClass, checkDir}) {
     const isTrue = headerClass
     const [cntCart, setCntCart] = useState()
     const [cntWish, setCntWish] = useState()
-    const [check, setCheck] = useState(false);
     const [addPath, setAddPath] = useState("")
 
     useEffect(() => {
@@ -23,7 +22,7 @@ function HeaderTop({headerClass, checkDir}) {
         if(checkDir) {
             setAddPath("../.")
         }
-    }, [check, checkDir])
+    }, [checkDir])
 
     return ( 
         <header className={ isTrue ? "header-section @@pos_absolute pos-relative light-bg sticky-header d-none d-lg-block section-fluid-270" : "header-section pos_absolute pos-relative dark-bg sticky-header d-none d-lg-block section-fluid-270" }>

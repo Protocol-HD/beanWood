@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function Single_item_cart({ item, delCheck, setDelCheck }) {
+function SingleItemCart({ item, delCheck, setDelCheck }) {
 	const [product, setProduct] = useState({});
 
 	const handleDelete = () => {
@@ -19,7 +19,7 @@ function Single_item_cart({ item, delCheck, setDelCheck }) {
 			.then(Response => {
 				setProduct(Response.data.image.imageUrl);
 			})
-	}, [item.productId])
+	}, [item.product.id])
 
 	return (
 		<li className="single-item">
@@ -42,4 +42,4 @@ function Single_item_cart({ item, delCheck, setDelCheck }) {
 	);
 }
 
-export default Single_item_cart;
+export default SingleItemCart;

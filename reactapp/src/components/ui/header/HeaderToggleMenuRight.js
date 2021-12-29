@@ -7,7 +7,6 @@ function HeaderToggleMenuRight() {
 	const wishListUrl = "http://localhost:8080/wishList/findAll";
     const [cntCart, setCntCart] = useState()
     const [cntWish, setCntWish] = useState()
-    const [check, setCheck] = useState(false);
 
     useEffect(() => {
         axios.get(cartListUrl)
@@ -19,10 +18,10 @@ function HeaderToggleMenuRight() {
         .then(Response => {
             setCntWish(Response.data.length)
         })
-    }, [check])
+    }, [])
 
     return ( 
-        <div className="offcanvas offcanvas-start" tabindex="-1" id="toggleMenu">
+        <div className="offcanvas offcanvas-start" tabIndex="-1" id="toggleMenu">
             <div className="offcanvas-header">
                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>

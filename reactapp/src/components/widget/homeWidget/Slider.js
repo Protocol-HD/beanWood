@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
 import HeaderSlider from 'react-slick'; // slick slide for react .. https://react-slick.neostack.com/ 참조 // 
 
 import SliderSingleItem from '../../ui/homeUi/slider/SliderSingleItem';

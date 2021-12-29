@@ -10,7 +10,7 @@ function SideBarSingleItemCategory() {
 		axios.get(url).then(Response => {
 			setCategory(Response.data);
 		})
-	})
+	}, [])
 
 	return (
 		<div className="sidebar-single-widget">
@@ -20,7 +20,7 @@ function SideBarSingleItemCategory() {
 					<ul>
 						{
 							category.map(item => (
-								<SideBarSingleItemCategoryItem item={item} />
+								<SideBarSingleItemCategoryItem key={item.id} item={item} />
 							))
 						}
 					</ul>

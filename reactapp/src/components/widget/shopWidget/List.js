@@ -8,7 +8,7 @@ import axios from 'axios';
 function List() {
 	const url = "http://localhost:8080/product/findAll";
 	const [productList, setProductList] = useState([]);
-	const [mount, setMount] = useState(6);
+	const mount = 6;
 
 	useEffect(() => {
 		axios.get(url)
@@ -17,15 +17,14 @@ function List() {
 			})
 	}, []);
 
-	const list = productList.map(item => (
-		<div className="col-md-6 col-12 mb-25">
-			<ProductSingleItemStyle1
-				key={item.id}
-				item={item}
-				path="shop"
-			/>
-		</div>
-	)).slice(0, mount)
+	// const list = productList.map(item => (
+	// 	<div className="col-md-6 col-12 mb-25">
+	// 		<ProductSingleItemStyle1
+	// 			item={item}
+	// 			path="shop"
+	// 		/>
+	// 	</div>
+	// ))
 
 
 	return (
@@ -42,7 +41,16 @@ function List() {
 
 								<div className="product-shop-list-items">
 									<div className="row mb-n25">
-										{list}
+										{
+											productList.map(item => (
+												<div key={item.id} className="col-md-6 col-12 mb-25">
+													<ProductSingleItemStyle1
+														item={item}
+														path="shop"
+													/>
+												</div>
+											)).slice(0, mount)
+										}
 									</div>
 								</div>
 

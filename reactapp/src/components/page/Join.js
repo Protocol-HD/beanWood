@@ -25,31 +25,31 @@ function Join() {
 		<form className="row g-3">
 			<form onSubmit={addUser}>
 
-				<div className="col-md-4">
+				<div className="col-md-4" style={{width: '50%', margin: 'auto'}}>
 					<label for="inputId" className="form-label">ID</label>
 					<input type="text" className="form-control" id="inputAddress2" placeholder="사용하실 아이디를 입력해주세요." ref={userId} />
 				</div>
 
 				<tr />
 
-				<div className="col-md-6">
+				<div className="col-md-6" style={{width: '50%', margin: 'auto'}}>
 					<label for="inputPassword4" className="form-label">Password</label>
 					<input type="password" className="form-control" id="inputPassword4" placeholder="사용하실 비밀번호를 입력하세요." ref={userPassword} />
 				</div>
 
 				<tr />
 
-				<div className="col-md-6">
+				<div className="col-md-6" style={{width: '50%', margin: 'auto'}}>
 					<label for="inputPassword4" className="form-label">Password Confirm</label>
 					<input type="password" className="form-control" id="inputPassword4" placeholder="비밀번호를 한 번 더 입력해주세요." />
 				</div>
 
-				<div className="col-12">
+				<div className="col-12" style={{width: '50%', margin: 'auto'}}>
 					<label for="inputAddress" className="form-label">Address</label>
 					<input type="text" className="form-control" id="inputAddress" placeholder="주소를 입력해주세요." ref={userAddress} />
 				</div>
 
-				<div className="col-12">
+				<div className="col-12" style={{width: '50%', margin: '30px 45%'}}>
 					<button type="submit" className="btn btn-primary">Sign in</button>
 				</div>
 

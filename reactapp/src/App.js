@@ -11,6 +11,9 @@ import Detail from './components/page/Detail';
 
 import './css/style.css';
 import AddProduct from './components/page/AddProduct';
+import SignUp from './components/page/Join';
+import Join from './components/page/Join';
+import Login from './components/page/Login';
 
 // import './css/style.min.css';
 // import './css/vendor/bootstrap.min.css'
@@ -36,6 +39,8 @@ function App() {
 				<TopScroll />
 				<Routes>
 					<Route path="/" element={<Home setHeaderClass={setHeaderClass} />} />
+					<Route path="/signup" element={<Join />} />
+					<Route path="/login" element={<Login />} />
 					<Route path="/shop" element={<Shop setHeaderClass={setHeaderClass} />} />
 					<Route path="/cart" element={<Cart setHeaderClass={setHeaderClass} />} />
 					<Route path="/wish" element={<Wish setHeaderClass={setHeaderClass} />} />

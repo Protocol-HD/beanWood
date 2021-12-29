@@ -8,7 +8,7 @@ import Wish from './components/page/Wish';
 import Shop from './components/page/Shop';
 import TopScroll from './components/widget/TopScroll';
 import Detail from './components/page/Detail';
-
+import './App.css'
 import './css/style.css';
 import AddProduct from './components/page/AddProduct';
 

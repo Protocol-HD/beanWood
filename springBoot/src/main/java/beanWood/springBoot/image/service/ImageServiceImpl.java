@@ -2,16 +2,16 @@ package beanWood.springBoot.image.service;
 
 import beanWood.springBoot.image.model.Image;
 import beanWood.springBoot.image.repository.ImageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
-    @Autowired
-    private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
     @Override
     public Image saveImage(Image image) {

@@ -4,6 +4,7 @@ import beanWood.springBoot.category.dto.ICategory;
 import beanWood.springBoot.category.model.Category;
 import beanWood.springBoot.category.service.CategoryService;
 import beanWood.springBoot.image.service.ImageService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +14,9 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/category")
+@RequiredArgsConstructor
 public class CategoryControllerImpl implements CategoryController {
-	@Autowired
-	private CategoryService categoryService;
+	private final CategoryService categoryService;
 
 	@Autowired
 	private ImageService imageService;
@@ -23,24 +24,13 @@ public class CategoryControllerImpl implements CategoryController {
 	@Override
 	@PostMapping("/save")
 	public Category saveCategory(@RequestBody ICategory iCategory) {
-		return categoryService.saveCategory(
-				Category.builder()
-						.image(imageService.findByIdImage(iCategory.getImageId()).get())
-						.categoryName(iCategory.getCategoryName())
-						.build()
-		);
+		return categoryService.saveCategory(iCategory);
 	}
 
 	@Override
 	@PutMapping("/update")
 	public Category updateCategory(@RequestBody ICategory iCategory) {
-		return categoryService.saveCategory(
-				Category.builder()
-						.id(iCategory.getId())
-						.image(imageService.findByIdImage(iCategory.getImageId()).get())
-						.categoryName(iCategory.getCategoryName())
-						.build()
-		);
+		return categoryService.saveCategory(iCategory);
 	}
 
 	@Override

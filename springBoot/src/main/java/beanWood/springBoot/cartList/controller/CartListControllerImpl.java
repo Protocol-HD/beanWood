@@ -4,7 +4,7 @@ import beanWood.springBoot.cartList.dto.ICartList;
 import beanWood.springBoot.cartList.model.CartList;
 import beanWood.springBoot.cartList.service.CartListService;
 import beanWood.springBoot.product.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,33 +13,21 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/cartList")
+@RequiredArgsConstructor
 public class CartListControllerImpl implements CartListController {
-	@Autowired
-	private CartListService cartListService;
-	@Autowired
-	private ProductService productService;
+	private final CartListService cartListService;
+	private final ProductService productService;
 
 	@Override
 	@PostMapping("/save")
 	public CartList saveCartList(@RequestBody ICartList iCartList) {
-		return cartListService.saveCartList(
-				CartList.builder()
-						.product(productService.findByIdProduct(iCartList.getProductId()).get())
-						.quantity(iCartList.getQuantity())
-						.build()
-		);
+		return cartListService.saveCartList(iCartList);
 	}
 
 	@Override
 	@PutMapping("/update")
 	public CartList updateCartList(@RequestBody ICartList iCartList) {
-		return cartListService.saveCartList(
-				CartList.builder()
-						.id(iCartList.getId())
-						.product(productService.findByIdProduct(iCartList.getProductId()).get())
-						.quantity(iCartList.getQuantity())
-						.build()
-		);
+		return cartListService.saveCartList(iCartList);
 	}
 
 	@Override

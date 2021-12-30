@@ -2,7 +2,7 @@ package beanWood.springBoot.color.controller;
 
 import beanWood.springBoot.color.model.Color;
 import beanWood.springBoot.color.service.ColorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/color")
+@RequiredArgsConstructor
 public class ColorControllerImpl implements ColorController {
-	@Autowired
-	private ColorService colorService;
+	private final ColorService colorService;
 
 	@Override
 	@PostMapping("/save")

@@ -3,8 +3,7 @@ package beanWood.springBoot.brand.controller;
 import beanWood.springBoot.brand.dto.IBrand;
 import beanWood.springBoot.brand.model.Brand;
 import beanWood.springBoot.brand.service.BrandService;
-import beanWood.springBoot.image.service.ImageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,34 +12,20 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/brand")
+@RequiredArgsConstructor
 public class BrandControllerImpl implements BrandController {
-
-	@Autowired
-	private BrandService brandService;
-	@Autowired
-	private ImageService imageService;
+	private final BrandService brandService;
 
 	@Override
 	@PostMapping("/save")
 	public Brand saveBrand(@RequestBody IBrand iBrand) {
-		return brandService.saveBrand(
-				Brand.builder()
-						.image(imageService.findByIdImage(iBrand.getImageId()).get())
-						.brandName(iBrand.getBrandName())
-						.build()
-		);
+		return brandService.saveBrand(iBrand);
 	}
 
 	@Override
 	@PutMapping("/update")
 	public Brand updateBrand(@RequestBody IBrand iBrand) {
-		return brandService.saveBrand(
-				Brand.builder()
-						.id(iBrand.getId())
-						.image(imageService.findByIdImage(iBrand.getImageId()).get())
-						.brandName(iBrand.getBrandName())
-						.build()
-		);
+		return brandService.saveBrand(iBrand);
 	}
 
 	@Override

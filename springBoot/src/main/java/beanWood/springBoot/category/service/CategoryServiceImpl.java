@@ -1,21 +1,30 @@
 package beanWood.springBoot.category.service;
 
+import beanWood.springBoot.category.dto.ICategory;
 import beanWood.springBoot.category.model.Category;
 import beanWood.springBoot.category.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import beanWood.springBoot.image.service.ImageService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService{
-    @Autowired
-    CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+    private final ImageService imageService;
 
     @Override
-    public Category saveCategory(Category category) {
-        return categoryRepository.save(category);
+    public Category saveCategory(ICategory iCategory) {
+        return categoryRepository.save(
+                Category.builder()
+                        .id(iCategory.getId())
+                        .categoryName(iCategory.getCategoryName())
+                        .image(imageService.findByIdImage(iCategory.getImageId()).get())
+                        .build()
+        );
     }
 
     @Override

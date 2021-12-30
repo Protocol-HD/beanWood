@@ -2,7 +2,7 @@ package beanWood.springBoot.image.controller;
 
 import beanWood.springBoot.image.model.Image;
 import beanWood.springBoot.image.service.ImageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/image")
+@RequiredArgsConstructor
 public class ImageControllerImpl implements ImageController {
-	@Autowired
-	private ImageService imageService;
+	private final ImageService imageService;
 
 	@Override
 	@PostMapping("/save")

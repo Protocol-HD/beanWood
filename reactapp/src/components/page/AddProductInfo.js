@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 function AddProductInfo() {
 	const sizeUrl = 'http://localhost:8080/size/save';

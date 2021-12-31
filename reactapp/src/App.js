@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Footer from './components/layout/Footer';
-import Header from "./components/layout/Header";
+import Header from './components/layout/Header';
 import Cart from './components/page/Cart';
-import Home from "./components/page/Home";
+import Home from './components/page/Home';
 import Wish from './components/page/Wish';
 import Shop from './components/page/Shop';
 import TopScroll from './components/widget/TopScroll';
 import Detail from './components/page/Detail';
-import './App.css'
+
 import './css/style.css';
 import AddProduct from './components/page/AddProduct';
-import Join from './components/page/Join';
-import Login from './components/page/Login';
 import AddProductInfo from './components/page/AddProductInfo';
+import AddProductEdit from './components/page/AddProductEdit';
 
 // import './css/style.min.css';
 // import './css/vendor/bootstrap.min.css'
@@ -28,32 +27,43 @@ import AddProductInfo from './components/page/AddProductInfo';
 // import './css/plugins/venobox.min.css'
 
 function App() {
-	const [headerClass, setHeaderClass] = useState(true)
+  const [headerClass, setHeaderClass] = useState(true);
 
-	return (
-		<BrowserRouter>
-			<div className="App">
-				<Header
-					headerClass={headerClass}
-				/>
-				<TopScroll />
-				<Routes>
-					<Route path="/" element={<Home setHeaderClass={setHeaderClass} />} />
-					<Route path="/signup" element={<Join />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/shop" element={<Shop setHeaderClass={setHeaderClass} />} />
-					<Route path="/cart" element={<Cart setHeaderClass={setHeaderClass} />} />
-					<Route path="/wish" element={<Wish setHeaderClass={setHeaderClass} />} />
-					<Route path="/detail" element={<Detail setHeaderClass={setHeaderClass} />} />
-					<Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass} />} />
-					<Route path="/addproduct/" element={<AddProduct />} />
-					<Route path="/addproductinfo/" element={<AddProductInfo />} />
-				</Routes>
-				<Footer />
-			</div>
-
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <div className='App'>
+        <Header headerClass={headerClass} />
+        <TopScroll />
+        <Routes>
+          <Route path='/' element={<Home setHeaderClass={setHeaderClass} />} />
+          <Route
+            path='/shop'
+            element={<Shop setHeaderClass={setHeaderClass} />}
+          />
+          <Route
+            path='/cart'
+            element={<Cart setHeaderClass={setHeaderClass} />}
+          />
+          <Route
+            path='/wish'
+            element={<Wish setHeaderClass={setHeaderClass} />}
+          />
+          <Route
+            path='/detail'
+            element={<Detail setHeaderClass={setHeaderClass} />}
+          />
+          <Route
+            path='/shop/detail/:id'
+            element={<Detail setHeaderClass={setHeaderClass} />}
+          />
+          <Route path='/addproduct/' element={<AddProduct />} />
+          <Route path='/addproductinfo' element={<AddProductInfo />} />
+          <Route path='/addproductEdit/:id' element={<AddProductEdit />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;

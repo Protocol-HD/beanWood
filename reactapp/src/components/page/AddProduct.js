@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -8,19 +9,20 @@ function AddProduct() {
 	const categoryUrl = "http://localhost:8080/category/findAll";
 	const colorUrl = "http://localhost:8080/color/findAll";
 	const sizeUrl = "http://localhost:8080/size/findAll";
+	const productColorUrl = "http://localhost:8080/productColor/save";
+	const productSizeUrl = "http://localhost:8080/productSize/save";
 	const productName = useRef();
 	const productPrice = useRef();
 	const productSale = useRef();
 	const productDescription = useRef();
-	const productColor = useRef();
-	const productSize = useRef();
 	const productImage = useRef();
-	const [productCategory, setProductCategory] = useState();
-	const [productId, setProductId] = useState();
-	const [imageId, setImageId] = useState();
 	const [category, setCategory] = useState([]);
+	const [productCategory, setProductCategory] = useState();
 	const [color, setColor] = useState([]);
+	const [productColor, setProductColor] = useState([]);
 	const [size, setSize] = useState([]);
+	const [productSize, setProductSize] = useState([]);
+	const [productImages, setProductImages] = useState([]);
 
 	const addProduct = (e) => {
 		e.preventDefault();
@@ -30,26 +32,38 @@ function AddProduct() {
 			sale: productSale.current.value,
 			description: productDescription.current.value,
 			categoryId: productCategory,
-			colorId: productColor.current.value,
-			sizeId: productSize.current.value
+			star: 5,
+			new: true
 		})
-			.then(Response => setProductId(Response.data.id))
-		axios.post(imageUrl, {
-			imageUrl: productImage.current.value
-		})
-			.then(Response => setImageId(Response.data.id))
-	}
+			.then(Response => {
+				const productId = Response.data.id;
+				productImages.map(image => {
+					axios.post(imageUrl, {
+						imageUrl: image
+					})
+						.then(Response => {
+							axios.post(productImageUrl, {
+								productId: productId,
+								imageId: Response.data.id
+							})
+						})
+				})
 
-	useEffect(() => {
-		if (productId && imageId)
-			axios.post(productImageUrl, {
-				productId: productId,
-				imageId: imageId
-			}).then(() => {
-				setProductId("");
-				setImageId("");
-			});
-	}, [productId, imageId]);
+				productColor.map(item => {
+					axios.post(productColorUrl, {
+						colorId: item,
+						productId: productId
+					})
+				});
+
+				productSize.map(item => {
+					axios.post(productSizeUrl, {
+						sizeId: item,
+						productId: productId
+					})
+				});
+			})
+	}
 
 	useEffect(() => {
 		axios.get(categoryUrl).then(Response => setCategory(Response.data));
@@ -58,6 +72,43 @@ function AddProduct() {
 	}, []);
 
 	const selectCategory = (e) => setProductCategory(e.target.value)
+
+	const selectColor = (e) => {
+		if (e.target.checked) {
+			setProductColor([
+				...productColor,
+				e.target.value
+			]);
+		} else {
+			setProductColor(productColor.filter(item => item !== e.target.value));
+		}
+	}
+
+	const selectSize = (e) => {
+		if (e.target.checked) {
+			setProductSize([
+				...productSize,
+				e.target.value
+			]);
+		} else {
+			setProductSize(productSize.filter(item => item !== e.target.value));
+		}
+	}
+
+	const uploadImg = () => {
+		if (productImage.current.value.substr("C:\\fakepath\\".length) !== "" && !productImages.includes(productImage.current.value.substr("C:\\fakepath\\".length))) {
+			setProductImages([
+				...productImages,
+				productImage.current.value.substr("C:\\fakepath\\".length)
+			]);
+		}
+	}
+
+	const delImg = (item) => {
+		if (confirm("사진을 삭제하시겠습니까?")) {
+			setProductImages(productImages.filter(image => image !== item));
+		}
+	}
 
 	return (
 		<div className='container' >
@@ -98,21 +149,50 @@ function AddProduct() {
 
 					<div className="col-12">
 						<label htmlFor="color" className="form-label">color</label>
-						<input type="text" className="form-control" id="color" placeholder="색상" required="" ref={productColor} />
+						<div>
+							{
+								color.map(item => (
+									<div className="form-check form-check-inline" key={item.id}>
+										<input className="form-check-input" type="checkbox" name='colors' id={item.id} value={item.id} onChange={selectColor} />
+										<label className="form-check-label" htmlFor={item.id}>{item.colorName}</label>
+									</div>
+								))
+							}
+						</div>
 					</div>
 
 					<div className="col-12">
 						<label htmlFor="size" className="form-label">size</label>
-						<input type="text" className="form-control" id="size" placeholder="상품 사이즈" required="" ref={productSize} />
+						<div>
+							{
+								size.map(item => (
+									<div className="form-check form-check-inline" key={item.id}>
+										<input className="form-check-input" type="checkbox" name='sizes' id={item.id} value={item.id} onChange={selectSize} />
+										<label className="form-check-label" htmlFor={item.id}>{item.sizeName}</label>
+									</div>
+								))
+							}
+						</div>
 					</div>
 
 					<div className="col-12">
 						<label htmlFor="image" className="form-label">image</label>
-						<input type="text" className="form-control" id="image" placeholder="상품 사진" required="" ref={productImage} />
+						<div className="container">
+							<div className="row">
+								{
+									productImages.map(item => (
+										<img key={item} className="col-6 col-md-4 img-fluid singlePostImg" src={`assets/images/products/${item}`} onClick={() => delImg(item)} />
+									))
+								}
+							</div>
+						</div>
+						<div className='d-flex'>
+							<input className="form-control" type="file" id="image" ref={productImage} />
+							<button type="button" className="btn btn-secondary" onClick={uploadImg} >upload</button>
+						</div>
 					</div>
-
 					<div className='text-center mt-5'>
-						<button type="submit" className="btn btn-secondary">submit</button>
+						<button type="submit" className="btn btn-primary">상품 등록</button>
 					</div>
 				</form>
 			</div>

@@ -2,7 +2,7 @@ package beanWood.springBoot.size.controller;
 
 import beanWood.springBoot.size.model.Size;
 import beanWood.springBoot.size.service.SizeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/size")
+@RequiredArgsConstructor
 public class SizeControllerImpl implements SizeController {
-	@Autowired
-	private SizeService sizeService;
+	private final SizeService sizeService;
 
 	@Override
 	@PostMapping("/save")

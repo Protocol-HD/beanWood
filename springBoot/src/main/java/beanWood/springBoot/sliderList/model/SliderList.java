@@ -16,11 +16,9 @@ public class SliderList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String eventName;
-
     @ManyToOne
     @JoinColumn(name = "image_id")
     private Image image;
-
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

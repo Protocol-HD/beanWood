@@ -2,16 +2,16 @@ package beanWood.springBoot.user.service;
 
 import beanWood.springBoot.user.model.User;
 import beanWood.springBoot.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
 
 	@Override
 	public User saveUser(User user) {

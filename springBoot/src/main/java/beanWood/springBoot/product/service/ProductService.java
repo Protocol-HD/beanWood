@@ -1,12 +1,13 @@
 package beanWood.springBoot.product.service;
 
+import beanWood.springBoot.product.dto.IProduct;
 import beanWood.springBoot.product.model.Product;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-	Product saveProduct(Product product);
+	Product saveProduct(IProduct iProduct);
 
 	Optional<Product> findByIdProduct(Long id);
 

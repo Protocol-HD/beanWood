@@ -18,4 +18,6 @@ public interface ProductImageController {
 	void deleteByIdProductImage(Long id);
 
 	List<ProductImage> findByProductId(Long productId);
+
+	void deleteAllByProductId(Long productId);
 }

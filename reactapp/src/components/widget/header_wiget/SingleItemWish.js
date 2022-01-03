@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function SingleItemWish({ item, delCheck, setDelCheck }) {
 	const wishListDelUrl = "http://localhost:8080/wishList/delete/";
-	const productImageUrl = "http://localhost:8080/productImage/find/";
+	const productImageUrl = "http://localhost:8080/productImage/findByProductId/";
 	const [imageUrl, setImageUrl] = useState("");
 
 	const handleDelete = () => {
@@ -17,7 +17,9 @@ function SingleItemWish({ item, delCheck, setDelCheck }) {
 	}
 
 	useEffect(() => {
-		axios.get(productImageUrl + item.id).then(Response => setImageUrl(Response.data.image.imageUrl));
+		axios.get(productImageUrl + item.product.id).then(Response => {
+			setImageUrl(Response.data[0].image.imageUrl);
+		});
 	})
 
 	return (

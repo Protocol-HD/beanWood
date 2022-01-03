@@ -2,7 +2,7 @@ package beanWood.springBoot.user.controller;
 
 import beanWood.springBoot.user.model.User;
 import beanWood.springBoot.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserControllerImpl implements UserController {
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
 
 	@Override
 	@PostMapping("/save")

@@ -1,11 +1,9 @@
 package beanWood.springBoot.productImage.controller;
 
-import beanWood.springBoot.image.service.ImageService;
-import beanWood.springBoot.product.service.ProductService;
 import beanWood.springBoot.productImage.dto.IProductImage;
 import beanWood.springBoot.productImage.model.ProductImage;
 import beanWood.springBoot.productImage.service.ProductImageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,36 +12,21 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/productImage")
+@RequiredArgsConstructor
 public class ProductImageControllerImpl implements ProductImageController {
-	@Autowired
-	private ProductImageService productImageService;
-	@Autowired
-	private ImageService imageService;
-	@Autowired
-	private ProductService productService;
+	private final ProductImageService productImageService;
 
 
 	@Override
 	@PostMapping("/save")
 	public ProductImage saveProductImage(@RequestBody IProductImage iProductImage) {
-		return productImageService.saveProductImage(
-				ProductImage.builder()
-						.image(imageService.findByIdImage(iProductImage.getImageId()).get())
-						.product(productService.findByIdProduct(iProductImage.getProductId()).get())
-						.build()
-		);
+		return productImageService.saveProductImage(iProductImage);
 	}
 
 	@Override
 	@PutMapping("/update")
 	public ProductImage updateProductImage(@RequestBody IProductImage iProductImage) {
-		return productImageService.saveProductImage(
-				ProductImage.builder()
-						.id(iProductImage.getId())
-						.image(imageService.findByIdImage(iProductImage.getImageId()).get())
-						.product(productService.findByIdProduct(iProductImage.getProductId()).get())
-						.build()
-		);
+		return productImageService.saveProductImage(iProductImage);
 	}
 
 	@Override
@@ -68,5 +51,11 @@ public class ProductImageControllerImpl implements ProductImageController {
 	@GetMapping("/findByProductId/{productId}")
 	public List<ProductImage> findByProductId(@PathVariable Long productId) {
 		return productImageService.findByProductId(productId);
+	}
+
+	@Override
+	@DeleteMapping("/deleteByProductId/{productId}")
+	public void deleteAllByProductId(@PathVariable Long productId) {
+		productImageService.deleteAllByProductId(productId);
 	}
 }

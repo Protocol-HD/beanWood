@@ -12,6 +12,4 @@ public class IProduct {
 	private int star;
 	private String description;
 	private Long categoryId;
-	private Long colorId;
-	private Long sizeId;
 }

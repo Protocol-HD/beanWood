@@ -14,6 +14,7 @@ import AddProduct from './components/page/AddProduct';
 import Join from './components/page/Join';
 import Login from './components/page/Login';
 import AddProductInfo from './components/page/AddProductInfo';
+import EditProduct from './components/page/EditProduct';
 
 // import './css/style.min.css';
 // import './css/vendor/bootstrap.min.css'
@@ -48,6 +49,7 @@ function App() {
 					<Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/addproduct/" element={<AddProduct />} />
 					<Route path="/addproductinfo/" element={<AddProductInfo />} />
+					<Route path="/editproduct/:id" element={<EditProduct />} />
 				</Routes>
 				<Footer />
 			</div>

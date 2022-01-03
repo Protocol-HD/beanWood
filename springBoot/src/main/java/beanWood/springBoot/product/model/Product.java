@@ -1,8 +1,6 @@
 package beanWood.springBoot.product.model;
 
 import beanWood.springBoot.category.model.Category;
-import beanWood.springBoot.color.model.Color;
-import beanWood.springBoot.size.model.Size;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,15 +23,9 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
-	@ManyToOne
-	@JoinColumn(name = "color_id")
-	private Color color;
-	@ManyToOne
-	@JoinColumn(name = "size_id")
-	private Size size;
 
 	@Builder
-	public Product(Long id, String productName, int price, boolean isNew, int sale, int star, String description, Category category, Color color, Size size) {
+	public Product(Long id, String productName, int price, boolean isNew, int sale, int star, String description, Category category) {
 		this.id = id;
 		this.productName = productName;
 		this.price = price;
@@ -42,7 +34,5 @@ public class Product {
 		this.star = star;
 		this.description = description;
 		this.category = category;
-		this.color = color;
-		this.size = size;
 	}
 }

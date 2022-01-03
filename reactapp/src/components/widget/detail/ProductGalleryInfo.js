@@ -6,51 +6,23 @@ import axios from 'axios';
 
 function ProductGalleryInfo({ product }) {
 	const productImageUrl = "http://localhost:8080/productImage/findByProductId/";
-	const colorId = 0
-	const [proMainImg, setProMainImg] = useState("")
+	const colorId = 0;
+	const [proMainImg, setProMainImg] = useState("");
+	const [mainImgUrl, setMainImgUrl] = useState("");
+	const size = useRef('');
 	let [quantitynumber, setQuantitynumber] = useState(1);
-	const size = useRef('')
 	let goCart = useNavigate();
 	let goWish = useNavigate();
 
 	useEffect(() => {
-		// fetch(`http://localhost:3006/products/${id}`)
-		// .then(res => {
-		//     return res.json()
-		// })
-		// .then(data => {
-		//     setProduct(data)
-		//     setProMainImg1(data.productImage[0].imageUrl)
-		//     console.log(data.productImage[0].imageUrl)
-		//     setProMainImg2(data.productImage[1].imageUrl)
-		//     setProMainImg3(data.productImage[2].imageUrl)
-		//     setColorIds(data.colorId)
-		//     console.log(data.colorId)
-		// })
-
 		axios.get(productImageUrl + product.id)
 			.then(Response => {
 				setProMainImg(Response.data)
+				setMainImgUrl(Response.data[0].image.imageUrl)
 			})
 	}, [product.id]);
 
 	const addCart = (e) => {
-		// fetch("http://localhost:3005/cartLists", {
-		//     method: "POST",
-		//     headers: {
-		//         "content-Type": "application/json",
-		//     },
-		//     body: JSON.stringify({
-		//         productId: id,
-		//         quantity: 1
-		//         color : e.target.value,
-		//         size : size.current.value
-		//     })
-		// })
-		// .then(res => {
-		//     if(res.ok) console.log("success")
-		// });
-
 		e.preventDefault();
 		const url = "http://localhost:3005/cartLists"
 
@@ -58,9 +30,9 @@ function ProductGalleryInfo({ product }) {
 			window.alert("Select color.")
 		} else {
 			axios.post(url, {
-				productId: parseInt(product.id),
+				productId: product.id,
 				quantity: quantitynumber,
-				color: parseInt(colorId),
+				color: colorId,
 				size: size.current.value,
 				itemTotal: quantitynumber * product.price,
 				itemImg: proMainImg
@@ -93,6 +65,10 @@ function ProductGalleryInfo({ product }) {
 		}
 	}
 
+	const changeMainImage = (e) => {
+		setMainImgUrl(e.target.alt);
+	}
+
 	return (
 		<>
 			<div className="product-gallery-info-section section-fluid-270 section-top-gap-100">
@@ -101,7 +77,6 @@ function ProductGalleryInfo({ product }) {
 						<div className="container-fluid">
 							<div className="row">
 								<div className="col-xxl-8 col-lg-6">
-
 									<div className="product-gallery product-gallery--style-tab">
 										<div className="row flex-md-row flex-column-reverse">
 											<div className="col-md-3">
@@ -109,7 +84,7 @@ function ProductGalleryInfo({ product }) {
 													{
 														proMainImg && proMainImg.map(image => (
 															<li key={image.id} className="nav-item">
-																<button className="nav-link active" data-bs-toggle="tab" data-bs-target={`#img-${image.id}`} type="button">
+																<button className="nav-link active" data-bs-toggle="tab" type="button" onClick={changeMainImage}>
 																	<span className="thumb">
 																		<img className="img-fluid" src={`../../assets/images/products/${image.image.imageUrl}`} alt={image.image.imageUrl} />
 																	</span>
@@ -117,58 +92,15 @@ function ProductGalleryInfo({ product }) {
 															</li>
 														))
 													}
-													{/* <li className="nav-item">
-														<button className="nav-link active" data-bs-toggle="tab" data-bs-target="#img-1" type="button">
-															<span className="thumb">
-																<img className="img-fluid" src={`../../assets/images/products/${proMainImg1}`} alt={proMainImg1} />
-															</span>
-														</button>
-													</li>
-													<li className="nav-item" role="presentation">
-														<button className="nav-link" data-bs-toggle="tab" data-bs-target="#img-2" type="button">
-															<span className="thumb">
-																<img className="img-fluid" src={`../../assets/images/products/${proMainImg2}`} alt={proMainImg2} />
-															</span>
-														</button>
-													</li>
-
-													<li className="nav-item" role="presentation">
-														<button className="nav-link" data-bs-toggle="tab" data-bs-target="#img-3" type="button">
-															<span className="thumb">
-																<img className="img-fluid" src={`../../assets/images/products/${proMainImg3}`} alt={proMainImg3} />
-															</span>
-														</button>
-													</li> */}
 												</ul>
-
 											</div>
 											<div className="col-md-9">
 												<div className="product-large-image tab-content">
-
-													{
-														proMainImg && proMainImg.map(image => (
-															<div key={image.id} className="tab-pane fade show active" id={`img-${image.id}`} role="tabpanel">
-																<div className="image">
-																	<img className="img-fluid" src={`../../assets/images/products/${image.image.imageUrl}`} alt={image.image.imageUrl} />
-																</div>
-															</div>
-														))
-													}
-													{/* <div className="tab-pane fade show active" id="img-1" role="tabpanel">
+													<div className="tab-pane fade show active" role="tabpanel">
 														<div className="image">
-															<img className="img-fluid" src={`../../assets/images/products/${proMainImg1}`} alt={proMainImg1} />
+															<img className="img-fluid" src={`../../assets/images/products/${mainImgUrl}`} alt={mainImgUrl} />
 														</div>
 													</div>
-													<div className="tab-pane fade" id="img-2" role="tabpanel">
-														<div className="image">
-															<img className="img-fluid" src={`../../assets/images/products/${proMainImg2}`} alt={proMainImg2} />
-														</div>
-													</div>
-													<div className="tab-pane fade" id="img-3" role="tabpanel">
-														<div className="image">
-															<img className="img-fluid" src={`../../assets/images/products/${proMainImg3}`} alt={proMainImg3} />
-														</div>
-													</div> */}
 												</div>
 											</div>
 										</div>

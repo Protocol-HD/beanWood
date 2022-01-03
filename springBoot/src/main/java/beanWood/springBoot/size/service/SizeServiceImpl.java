@@ -2,16 +2,16 @@ package beanWood.springBoot.size.service;
 
 import beanWood.springBoot.size.model.Size;
 import beanWood.springBoot.size.repository.SizeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class SizeServiceImpl implements SizeService {
-	@Autowired
-	private SizeRepository sizeRepository;
+	private final SizeRepository sizeRepository;
 
 	@Override
 	public Size saveSize(Size size) {

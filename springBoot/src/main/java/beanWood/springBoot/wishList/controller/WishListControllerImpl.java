@@ -1,10 +1,9 @@
 package beanWood.springBoot.wishList.controller;
 
-import beanWood.springBoot.product.service.ProductService;
 import beanWood.springBoot.wishList.dto.IWishList;
 import beanWood.springBoot.wishList.model.WishList;
 import beanWood.springBoot.wishList.service.WishListService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,31 +12,20 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/wishList")
+@RequiredArgsConstructor
 public class WishListControllerImpl implements WishListController {
-	@Autowired
-	private WishListService wishListService;
-	@Autowired
-	private ProductService productService;
+	private final WishListService wishListService;
 
 	@Override
 	@PostMapping("/save")
 	public WishList saveWishList(@RequestBody IWishList iWishList) {
-		return wishListService.saveWishList(
-				WishList.builder()
-						.product(productService.findByIdProduct(iWishList.getProductId()).get())
-						.build()
-		);
+		return wishListService.saveWishList(iWishList);
 	}
 
 	@Override
 	@PutMapping("/update")
 	public WishList updateWishList(@RequestBody IWishList iWishList) {
-		return wishListService.saveWishList(
-				WishList.builder()
-						.id(iWishList.getId())
-						.product(productService.findByIdProduct(iWishList.getProductId()).get())
-						.build()
-		);
+		return wishListService.saveWishList(iWishList);
 	}
 
 	@Override

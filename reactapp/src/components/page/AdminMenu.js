@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AddProduct from './AddProduct';
+import EditProduct from './EditProduct';
 import EditProductList from './EditProductList';
 
 function AdminMenu() {
+	const [editId, setEditId] = useState(null);
+
 	return (
 		<div className="account-dashboard section-fluid-270 section-top-gap-100">
 			<div className="container-fluid">
@@ -23,6 +26,7 @@ function AdminMenu() {
 						<div className="tab-content dashboard_content">
 							<AddProduct />
 							<EditProductList />
+							<EditProduct editId={editId} />
 							<div className="tab-pane fade" id="downloads">
 								<h4>Downloads</h4>
 								<div className="table_page table-responsive">

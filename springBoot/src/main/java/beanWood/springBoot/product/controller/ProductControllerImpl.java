@@ -12,10 +12,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@CrossOrigin(
-		origins = "*"
-//		methods = { RequestMethod.PUT , RequestMethod.DELETE, RequestMethod.POST, RequestMethod.GET }
-)
+@CrossOrigin
 @RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductControllerImpl implements ProductController {

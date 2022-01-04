@@ -1,9 +1,9 @@
 /* eslint-disable */
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
 
-function EditProduct() {
+function EditProduct({ editId }) {
 	const productUrl = "http://localhost:8080/product/save";
 	const productImageUrl = "http://localhost:8080/productImage/save";
 	const imageUrl = "http://localhost:8080/image/save";
@@ -31,14 +31,12 @@ function EditProduct() {
 	const [size, setSize] = useState([]);
 	const [productSize, setProductSize] = useState([]);
 	const [productImages, setProductImages] = useState([]);
-	const params = useParams();
+	// const params = useParams();
 
 	const editProduct = (e) => {
 		e.preventDefault();
-		// axios.defaults.headers.put['Content-Type'] ='application/json;charset=utf-8';
- 		// axios.defaults.headers.put['Access-Control-Allow-Origin'] = '*';	
 		axios.put(productUrl, {
-			id: params.id,
+			id: editId,
 			productName: productName.current.value,
 			price: productPrice.current.value,
 			sale: productSale.current.value,
@@ -88,16 +86,16 @@ function EditProduct() {
 		axios.get(categoryUrl).then(Response => setCategory(Response.data));
 		axios.get(colorUrl).then(Response => setColor(Response.data));
 		axios.get(sizeUrl).then(Response => setSize(Response.data));
-		axios.get(findProductUrl + params.id).then(Response => {
+		axios.get(findProductUrl + editId).then(Response => {
 			productName.current.value = Response.data.productName;
 			productPrice.current.value = Response.data.price;
 			productSale.current.value = Response.data.sale;
 			productDescription.current.value = Response.data.description;
-			if(Response.data.category.id) {
+			if (Response.data.category.id) {
 				document.getElementById(`category${Response.data.category.id}`).checked = true;
 			}
 		});
-		axios.get(findProductColorUrl + params.id).then(Response => {
+		axios.get(findProductColorUrl + editId).then(Response => {
 			Response.data.map(color => {
 				setProductColor([
 					...productColor,
@@ -106,7 +104,7 @@ function EditProduct() {
 				document.getElementById(`color${color.color.id}`).checked = true;
 			})
 		})
-		axios.get(findProductSizeUrl + params.id).then(Response => {
+		axios.get(findProductSizeUrl + editId).then(Response => {
 			Response.data.map(size => {
 				setProductSize([
 					...productSize,
@@ -115,7 +113,7 @@ function EditProduct() {
 				document.getElementById(`size${size.size.id}`).checked = true;
 			})
 		})
-		axios.get(findProductImageUrl + params.id).then(Response => {
+		axios.get(findProductImageUrl + editId).then(Response => {
 			let images = [];
 			Response.data.map(image => {
 				images.push(image.image.imageUrl);

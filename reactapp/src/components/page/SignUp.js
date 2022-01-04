@@ -7,7 +7,7 @@ import { useState } from "react/cjs/react.development";
 
 function SignUp() {
 	const userUrl = "http://localhost:8080/user/save";
-	const userIdCheckUrl = "http://localhost:8080/user/checkUserId/{id}/exists";
+	// const userIdCheckUrl = `http://localhost:8080/user/findByUserId`;
 
 	const userId = useRef();
 	const userAddress = useRef();
@@ -36,12 +36,29 @@ function SignUp() {
 	}
 	//회원가입end
 
+
+	
 	//아이디 중복 체크
 	const checkUserId = (e) => {
 		e.preventDefault();
-
+		fetch(`http://localhost:8080/user/findByUserId/${userId}`, {
+			method: "POST",
+			headers: {
+				"Content-Type" : "application/json"
+			},
+			body: JSON.stringify({userId: this.state.userId})
+		})
+		.then(Response => {if(Response.status === 200){
+			alert("사용 가능한 ID 입니다.");
+			this.setState({usableId: true})
+		}else {
+			alert("이미 사용중인 ID 입니다.")
+		}
+	})
 	}
 	//아이디 중복 체크 end
+
+
 
 	const onChangePassword = (e) => {
 		setPassword(e.target.value);

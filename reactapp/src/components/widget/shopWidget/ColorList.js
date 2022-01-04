@@ -22,11 +22,11 @@ function ColorList({ item, check, setCheck }) {
             const editUrl = 'http://localhost:8080/color/update';
             if (
                 window.confirm(
-                    'color : "' +
+                    'Color : "' +
                         item.colorName +
-                        '"을 "' +
+                        '" ==> "' +
                         editColorName.current.value +
-                        '"로 수정하시겠습니까?'
+                        '" 수정하시겠습니까?'
                 )
             ) {
                 axios

@@ -22,11 +22,11 @@ function SizeList({ item, check, setCheck }) {
             const editUrl = 'http://localhost:8080/size/update';
             if (
                 window.confirm(
-                    'size : "' +
+                    'Size : "' +
                         item.sizeName +
-                        '"을 "' +
+                        '" ==> "' +
                         editSizeName.current.value +
-                        '"로 수정하시겠습니까?'
+                        '" 수정하시겠습니까?'
                 )
             ) {
                 axios

@@ -46,11 +46,6 @@ function SizeList({ item, check, setCheck }) {
     return (
         <tr key={item.id}>
             <td className='size_name'>{item.sizeName}</td>
-            <td className='size_delete'>
-                <button onClick={deleteSize} className='btn btn-secondary'>
-                    DEL
-                </button>
-            </td>
             <td className='size_edit'>
                 <input
                     type='text'
@@ -64,6 +59,11 @@ function SizeList({ item, check, setCheck }) {
             <td className='size_edit'>
                 <button onClick={editSize} className='btn btn-secondary'>
                     Edit
+                </button>
+            </td>
+            <td className='size_delete'>
+                <button onClick={deleteSize} className='btn btn-secondary'>
+                    DEL
                 </button>
             </td>
         </tr>

@@ -80,14 +80,14 @@ function AddProductInfo({ showMenu }) {
                                             <th className='size_name'>
                                                 size name
                                             </th>
-                                            <th className='size_delete'>
-                                                Delete
-                                            </th>
                                             <th
                                                 colSpan={2}
                                                 className='size_edit'
                                             >
                                                 Edit
+                                            </th>
+                                            <th className='size_delete'>
+                                                Delete
                                             </th>
                                         </tr>
                                     </thead>
@@ -131,14 +131,14 @@ function AddProductInfo({ showMenu }) {
                                             <th className='color_name'>
                                                 color name
                                             </th>
-                                            <th className='color_delete'>
-                                                Delete
-                                            </th>
                                             <th
                                                 colSpan={2}
                                                 className='color_edit'
                                             >
                                                 Edit
+                                            </th>
+                                            <th className='color_delete'>
+                                                Delete
                                             </th>
                                         </tr>
                                     </thead>

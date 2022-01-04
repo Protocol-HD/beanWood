@@ -10,10 +10,10 @@ import TopScroll from './components/widget/TopScroll';
 import Detail from './components/page/Detail';
 import './App.css'
 import './css/style.css';
-import Join from './components/page/Join';
 import Login from './components/page/Login';
 import AddProductInfo from './components/page/AddProductInfo';
 import AdminMenu from './components/page/AdminMenu';
+import SignUp from './components/page/SignUp';
 
 function App() {
 	const [headerClass, setHeaderClass] = useState(true)
@@ -27,7 +27,7 @@ function App() {
 				<TopScroll />
 				<Routes>
 					<Route path="/" element={<Home setHeaderClass={setHeaderClass} />} />
-					<Route path="/signup" element={<Join />} />
+					<Route path="/signup" element={<SignUp />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/shop" element={<Shop setHeaderClass={setHeaderClass} />} />
 					<Route path="/cart" element={<Cart setHeaderClass={setHeaderClass} />} />

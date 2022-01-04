@@ -69,7 +69,6 @@ function AddProductInfo({ showMenu }) {
             id='addProductInfo'
         >
             <h4>Add ProductInfo</h4>
-            <h5>size&color list</h5>
             <div className='container-fluid'>
                 <div className='row'>
                     <div className='col-12'>
@@ -78,7 +77,6 @@ function AddProductInfo({ showMenu }) {
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th className='size_no'>size no</th>
                                             <th className='size_name'>
                                                 size name
                                             </th>
@@ -103,9 +101,6 @@ function AddProductInfo({ showMenu }) {
                                             />
                                         ))}
                                         <tr>
-                                            <td className='size_new'>
-                                                {getSize.length + 1}
-                                            </td>
                                             <td
                                                 colSpan={2}
                                                 className='size_new'
@@ -133,9 +128,6 @@ function AddProductInfo({ showMenu }) {
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th className='color_no'>
-                                                color no
-                                            </th>
                                             <th className='color_name'>
                                                 color name
                                             </th>
@@ -160,9 +152,6 @@ function AddProductInfo({ showMenu }) {
                                             />
                                         ))}
                                         <tr>
-                                            <td className='color_new'>
-                                                {getColor.length + 1}
-                                            </td>
                                             <td
                                                 colSpan={2}
                                                 className='color_new'

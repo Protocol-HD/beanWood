@@ -45,7 +45,6 @@ function SizeList({ item, check, setCheck }) {
 
     return (
         <tr key={item.id}>
-            <td className='size_no'>{item.id}</td>
             <td className='size_name'>{item.sizeName}</td>
             <td className='size_delete'>
                 <button onClick={deleteSize} className='btn btn-secondary'>

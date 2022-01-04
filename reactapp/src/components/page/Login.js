@@ -28,7 +28,7 @@ function Login() {
 					<div className="col-lg-8 offset-lg-2">
 						<div className="basic-login">
 							<div className="text-center">
-								<i class="fas fa-door-open iconSize3"></i>
+								<i class="fas fa-door-open iconSize3 iconColor"></i>
 							</div>
 							<h3 className="text-center mb-60">Login From Here</h3>
 							<form onSubmit={addSignup}>

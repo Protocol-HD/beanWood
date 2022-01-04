@@ -199,7 +199,7 @@ function HeaderTop({ headerClass, checkDir }) {
 						<div className="col-auto" style={{ display: "block" }}>
 							<div className="header-action">
 								<button className="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#wishlistOffcanvas">
-									<i class="fas fa-key iconSize15"></i>
+									<i class="fas fa-key iconSize15 iconColor"></i>
 									<span className="ms-1">Login</span>
 								</button>
 							</div>

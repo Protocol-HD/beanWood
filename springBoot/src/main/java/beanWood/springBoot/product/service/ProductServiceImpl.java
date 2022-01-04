@@ -20,7 +20,16 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product saveProduct(IProduct iProduct) {
-		log.info("{}", iProduct);
+
+		log.info("Save Product Successfully:" +
+				"id : {}", iProduct.getId() +
+				"description: {}", iProduct.getDescription() +
+				"sale: {}", iProduct.getSale() +
+				"product name: {}", iProduct.getProductName() +
+				"star: {}", iProduct.getStar() +
+				"price: {}", iProduct.getPrice() +
+				"category: {}", iProduct.getCategoryId()
+		);
 		return productRepository.save(
 				Product.builder()
 						.id(iProduct.getId())
@@ -37,21 +46,25 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Optional<Product> findByIdProduct(Long id) {
+		log.info("find by id Product: {}", id);
 		return productRepository.findById(id);
 	}
 
 	@Override
 	public List<Product> findAllProduct() {
+		log.info("find all Product");
 		return productRepository.findAll();
 	}
 
 	@Override
 	public void deleteByIdProduct(Long id) {
+		log.info("delete by id Product: {}", id);
 		productRepository.deleteById(id);
 	}
 
 	@Override
 	public List<Product> findByCategoryId(Long categoryId) {
+		log.info("find by category id Product: {}", categoryId);
 		return productRepository.findByCategoryId(categoryId);
 	}
 }

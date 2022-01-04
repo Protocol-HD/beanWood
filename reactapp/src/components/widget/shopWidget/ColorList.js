@@ -45,7 +45,6 @@ function ColorList({ item, check, setCheck }) {
 
     return (
         <tr key={item.id}>
-            <td className='color_no'>{item.id}</td>
             <td className='color_name'>{item.colorName}</td>
             <td className='color_delete'>
                 <button onClick={deleteColor} className='btn btn-secondary'>

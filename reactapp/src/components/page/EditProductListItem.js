@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-function EditProductListItem({ product, setShowMenu, setEditId }) {
+function EditProductListItem({ product, setShowMenu, setEditId, refresh, setRefresh }) {
 	const findProductImageUrl = "http://localhost:8080/productImage/findByProductId/";
 	const delProductColorUrl = "http://localhost:8080/productColor/deleteByProductId/";
 	const delProductSizeUrl = "http://localhost:8080/productSize/deleteByProductId/";
@@ -17,14 +17,16 @@ function EditProductListItem({ product, setShowMenu, setEditId }) {
 				setImageUrl("No Image");
 			}
 		});
-	}, [])
+	}, [refresh])
 
 	const deleteProduct = () => {
 		if (window.confirm("삭제하시겠습니까?")) {
 			axios.delete(delProductColorUrl + product.id).then(() =>
 				axios.delete(delProductSizeUrl + product.id).then(() =>
 					axios.delete(delProductImageUrl + product.id).then(() =>
-						axios.delete(delProductUrl + product.id)
+						axios.delete(delProductUrl + product.id).then(() =>
+							setRefresh(!refresh)
+						)
 					)
 				)
 			)

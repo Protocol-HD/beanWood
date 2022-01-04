@@ -7,6 +7,7 @@ import EditProductList from './EditProductList';
 function AdminMenu() {
 	const [editId, setEditId] = useState();
 	const [showMenu, setShowMenu] = useState(0);
+	const [refresh, setRefresh] = useState(false);
 
 	return (
 		<div className="account-dashboard section-fluid-270 section-top-gap-100">
@@ -43,8 +44,8 @@ function AdminMenu() {
 					</div>
 					<div className="col-sm-12 col-md-9 col-lg-9">
 						<div className="tab-content dashboard_content">
-							<AddProduct showMenu={showMenu} />
-							<EditProductList showMenu={showMenu} setShowMenu={setShowMenu} setEditId={setEditId} />
+							<AddProduct showMenu={showMenu} refresh={refresh} setRefresh={setRefresh} />
+							<EditProductList showMenu={showMenu} setShowMenu={setShowMenu} setEditId={setEditId} refresh={refresh} setRefresh={setRefresh} />
 							<EditProduct showMenu={showMenu} editId={editId} />
 							<AddProductInfo showMenu={showMenu} />
 						</div>

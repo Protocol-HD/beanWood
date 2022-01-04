@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 
-function AddProduct({ showMenu }) {
+function AddProduct({ showMenu, refresh, setRefresh }) {
 	const productUrl = "http://localhost:8080/product/save";
 	const productImageUrl = "http://localhost:8080/productImage/save";
 	const imageUrl = "http://localhost:8080/image/save";
@@ -65,10 +65,21 @@ function AddProduct({ showMenu }) {
 					});
 				})
 				.then(() => {
+					setRefresh(!refresh);
 					productName.current.value = "";
 					productPrice.current.value = "";
 					productSale.current.value = "";
 					productDescription.current.value = "";
+					productImage.current.value = "";
+					category.map(item =>
+						document.getElementById(`radioCategory${item.id}`).checked = false
+					)
+					color.map(item =>
+						document.getElementById(`checkColor${item.id}`).checked = false
+					)
+					size.map(item =>
+						document.getElementById(`checkSize${item.id}`).checked = false
+					)
 				})
 		}
 	}
@@ -147,7 +158,7 @@ function AddProduct({ showMenu }) {
 						{
 							category.map(item => (
 								<div className="form-check form-check-inline" key={item.id}>
-									<input className="form-check-input" type="radio" name="categories" id={`category${item.id}`} value={item.id} onChange={selectCategory} />
+									<input className="form-check-input" type="radio" name="categories" id={`radioCategory${item.id}`} value={item.id} onChange={selectCategory} />
 									<label className="form-check-label" htmlFor={item.id}>{item.categoryName}</label>
 								</div>
 							))
@@ -161,7 +172,7 @@ function AddProduct({ showMenu }) {
 						{
 							color.map(item => (
 								<div className="form-check form-check-inline" key={item.id}>
-									<input className="form-check-input" type="checkbox" name='colors' id={`color${item.id}`} value={item.id} onChange={selectColor} />
+									<input className="form-check-input" type="checkbox" name='colors' id={`checkColor${item.id}`} value={item.id} onChange={selectColor} />
 									<label className="form-check-label" htmlFor={item.id}>{item.colorName}</label>
 								</div>
 							))
@@ -175,7 +186,7 @@ function AddProduct({ showMenu }) {
 						{
 							size.map(item => (
 								<div className="form-check form-check-inline" key={item.id}>
-									<input className="form-check-input" type="checkbox" name='sizes' id={`size${item.id}`} value={item.id} onChange={selectSize} />
+									<input className="form-check-input" type="checkbox" name='sizes' id={`checkSize${item.id}`} value={item.id} onChange={selectSize} />
 									<label className="form-check-label" htmlFor={item.id}>{item.sizeName}</label>
 								</div>
 							))

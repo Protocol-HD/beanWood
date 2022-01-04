@@ -181,7 +181,7 @@ function EditProduct({ editId, showMenu }) {
 	}
 
 	const delImg = (item) => {
-		if (confirm("사진을 삭제하시겠습니까?")) {
+		if (window.confirm("사진을 삭제하시겠습니까?")) {
 			setProductImages(productImages.filter(image => image !== item));
 		}
 	}

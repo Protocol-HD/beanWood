@@ -46,11 +46,6 @@ function ColorList({ item, check, setCheck }) {
     return (
         <tr key={item.id}>
             <td className='color_name'>{item.colorName}</td>
-            <td className='color_delete'>
-                <button onClick={deleteColor} className='btn btn-secondary'>
-                    DEL
-                </button>
-            </td>
             <td className='color_edit'>
                 <input
                     type='text'
@@ -64,6 +59,11 @@ function ColorList({ item, check, setCheck }) {
             <td className='color_edit'>
                 <button onClick={editColor} className='btn btn-secondary'>
                     Edit
+                </button>
+            </td>
+            <td className='color_delete'>
+                <button onClick={deleteColor} className='btn btn-secondary'>
+                    DEL
                 </button>
             </td>
         </tr>

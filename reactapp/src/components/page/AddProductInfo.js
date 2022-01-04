@@ -1,11 +1,23 @@
 import axios from 'axios';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import ColorList from '../widget/shopWidget/ColorList';
+import SizeList from '../widget/shopWidget/SizeList';
 
 function AddProductInfo() {
 	const sizeUrl = 'http://localhost:8080/size/save';
 	const colorUrl = 'http://localhost:8080/color/save';
+	const getsizeUrl = 'http://localhost:8080/size/findAll'
+	const getcolorUrl = 'http://localhost:8080/color/findAll';
 	const size = useRef();
 	const color = useRef();
+	const [getSize, setGetSize] = useState([]);
+	const [getColor, setGetColor] = useState([]);
+	const [check, setCheck] = useState();
+
+	useEffect(()=>{
+		axios.get(getsizeUrl).then(Response => setGetSize(Response.data));
+		axios.get(getcolorUrl).then(Response => setGetColor(Response.data));
+	},[])
 
 	const addProductInfo = (e) => {
 		e.preventDefault();
@@ -23,6 +35,53 @@ function AddProductInfo() {
 	return (
 		<div className="tab-pane fade" id="addProductInfo">
 			<h4>Add ProductInfo</h4>
+			<h5>size list</h5>
+				<div className="container-fluid">
+					<div className="row">
+						<div className="col-6">
+							<div className="table_desc">
+								<div className="table_page table-responsive">
+									<table>
+										<thead>
+											<tr>
+												<th className="size_no">size no</th>
+												<th className="size_name">size name</th>
+											</tr>
+										</thead>
+										<tbody>
+											{
+												getSize.map(item =>(
+													<SizeList
+													key = {item.id}
+													check = {check} 
+													item = {item}/>
+												))
+											}
+										</tbody>
+									</table>
+									<table>
+										<thead>
+											<tr>
+												<th className="color_no">color no</th>
+												<th className="color_name">color name</th>
+											</tr>
+										</thead>
+										<tbody>
+											{
+												getColor.map(item =>(
+													<ColorList
+													key = {item.id}
+													check = {check} 
+													item = {item}/>
+												))
+											}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 					<form onSubmit={addProductInfo}>
 						<div className='col-12'>
 							<label htmlFor='size' className='form-label'>

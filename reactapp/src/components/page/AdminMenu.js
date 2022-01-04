@@ -29,7 +29,7 @@ function AdminMenu() {
 							<AddProduct />
 							<AddProductInfo />
 							<EditProductList />
-							<EditProduct editId={editId} />
+							{/* <EditProduct editId={editId} /> */}
 							<div className="tab-pane fade" id="downloads">
 								<h4>Downloads</h4>
 								<div className="table_page table-responsive">

@@ -59,7 +59,7 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 								})
 						}))
 				axios.delete(delProductColorUrl + productId)
-					.then(
+					.then(() =>
 						productColor.map(item => {
 							axios.post(productColorUrl, {
 								colorId: item,
@@ -69,7 +69,7 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 					)
 
 				axios.delete(delProductSizeUrl + productId)
-					.then(
+					.then(() =>
 						productSize.map(item => {
 							axios.post(productSizeUrl, {
 								sizeId: item,
@@ -91,61 +91,55 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 				setProductImages(images);
 			})
 			axios.get(categoryUrl)
-				.then(Response => { setCategory(Response.data) });
+				.then(Response => { setCategory(Response.data) })
+				.then(() => {
+					axios.get(findProductUrl + editId)
+						.then(Response => {
+							console.log(Response.data.category.id)
+							productName.current.value = Response.data.productName;
+							productPrice.current.value = Response.data.price;
+							productSale.current.value = Response.data.sale;
+							productDescription.current.value = Response.data.description;
+							document.getElementById(`editRadioCategory${Response.data.category.id}`).checked = true;
+						});
+				});
 			axios.get(colorUrl)
 				.then(Response => {
 					setColor(Response.data);
 					Response.data.map(data => {
-						document.getElementById(`checkColor${data.id}`).checked = false;
-					}
-					)
-				});
+						document.getElementById(`editCheckColor${data.id}`).checked = false;
+					})
+				})
+				.then(() =>
+					axios.get(findProductColorUrl + editId).then(Response => {
+						Response.data.map(color => {
+							setProductColor([
+								...productColor,
+								String(color.color.id)
+							])
+							document.getElementById(`editCheckColor${color.color.id}`).checked = true;
+						})
+					})
+				);
 			axios.get(sizeUrl).then(Response => {
 				setSize(Response.data);
 				Response.data.map(data => {
-					document.getElementById(`checkSize${data.id}`).checked = false;
-				}
-				)
-			});
+					document.getElementById(`editCheckSize${data.id}`).checked = false;
+				})
+			})
+				.then(() =>
+					axios.get(findProductSizeUrl + editId).then(Response => {
+						Response.data.map(size => {
+							setProductSize([
+								...productSize,
+								String(size.size.id)
+							])
+							document.getElementById(`editCheckSize${size.size.id}`).checked = true;
+						})
+					})
+				);
 		}
 	}, [editId]);
-
-	useEffect(() => {
-		axios.get(findProductUrl + editId)
-			.then(Response => {
-				productName.current.value = Response.data.productName;
-				productPrice.current.value = Response.data.price;
-				productSale.current.value = Response.data.sale;
-				productDescription.current.value = Response.data.description;
-				if (Response.data.category.id) {
-					document.getElementById(`radioCategory${Response.data.category.id}`).checked = true;
-				}
-			});
-	}, [category]);
-
-	useEffect(() => {
-		axios.get(findProductColorUrl + editId).then(Response => {
-			Response.data.map(color => {
-				setProductColor([
-					...productColor,
-					String(color.color.id)
-				])
-				document.getElementById(`checkColor${color.color.id}`).checked = true;
-			})
-		})
-	}, [color])
-
-	useEffect(() => {
-		axios.get(findProductSizeUrl + editId).then(Response => {
-			Response.data.map(size => {
-				setProductSize([
-					...productSize,
-					String(size.size.id)
-				])
-				document.getElementById(`checkSize${size.size.id}`).checked = true;
-			})
-		})
-	}, [size])
 
 	const selectCategory = (e) => setProductCategory(e.target.value)
 
@@ -216,7 +210,7 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 						{
 							category.map(item => (
 								<div className="form-check form-check-inline" key={item.id}>
-									<input className="form-check-input" type="radio" name="categories" id={`radioCategory${item.id}`} value={item.id} onChange={selectCategory} />
+									<input className="form-check-input" type="radio" name="categories" id={`editRadioCategory${item.id}`} value={item.id} onChange={selectCategory} />
 									<label className="form-check-label" htmlFor={item.id}>{item.categoryName}</label>
 								</div>
 							))
@@ -230,7 +224,7 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 						{
 							color.map(item => (
 								<div className="form-check form-check-inline" key={item.id}>
-									<input className="form-check-input" type="checkbox" name='colors' id={`checkColor${item.id}`} value={item.id} onChange={selectColor} />
+									<input className="form-check-input" type="checkbox" name='colors' id={`editCheckColor${item.id}`} value={item.id} onChange={selectColor} />
 									<label className="form-check-label" htmlFor={item.id}>{item.colorName}</label>
 								</div>
 							))
@@ -244,7 +238,7 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 						{
 							size.map(item => (
 								<div className="form-check form-check-inline" key={item.id}>
-									<input className="form-check-input" type="checkbox" name='sizes' id={`checkSize${item.id}`} value={item.id} onChange={selectSize} />
+									<input className="form-check-input" type="checkbox" name='sizes' id={`editCheckSize${item.id}`} value={item.id} onChange={selectSize} />
 									<label className="form-check-label" htmlFor={item.id}>{item.sizeName}</label>
 								</div>
 							))

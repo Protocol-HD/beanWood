@@ -16,27 +16,27 @@ function AdminMenu() {
 						<div className="dashboard_tab_button">
 							<ul role="tablist" className="nav flex-column dashboard-list">
 								<li>
-									<button
+									<a
 										onClick={() => setShowMenu(1)}
 										className={`nav-link btn btn-sm btn-default-outline ${showMenu === 1 ? "active" : ""}`}
 									>
 										Add Product
-									</button>
+									</a>
 								</li>
 								<li>
-									<button
+									<a
 										onClick={() => setShowMenu(2)}
 										className={`nav-link btn btn-sm btn-default-outline ${showMenu === 2 ? "active" : ""}`}
 									>
 										Edit Product
-									</button>
+									</a>
 								</li><li>
-									<button
+									<a
 										onClick={() => setShowMenu(4)}
 										className={`nav-link btn btn-sm btn-default-outline ${showMenu === 4 ? "active" : ""}`}
 									>
 										ProductInfo
-									</button>
+									</a>
 								</li>
 							</ul>
 						</div>

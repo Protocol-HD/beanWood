@@ -17,7 +17,7 @@ function EditProduct({ editId, showMenu }) {
 	const findProductImageUrl = "http://localhost:8080/productImage/findByProductId/";
 	const delProductColorUrl = "http://localhost:8080/productColor/deleteByProductId/";
 	const delProductSizeUrl = "http://localhost:8080/productSize/deleteByProductId/";
-	const delProductImageUrl = "http://localhost:8080";
+	const delProductImageUrl = "http://localhost:8080/productImage/deleteByProductId/";
 	const productName = useRef();
 	const productPrice = useRef();
 	const productSale = useRef();
@@ -268,7 +268,7 @@ function EditProduct({ editId, showMenu }) {
 					</div>
 				</div>
 				<div className='text-center mt-5'>
-					<button type="submit" className="btn btn-primary">상품 등록</button>
+					<button type="submit" className="btn btn-primary">Edit Product</button>
 				</div>
 			</form>
 		</div>

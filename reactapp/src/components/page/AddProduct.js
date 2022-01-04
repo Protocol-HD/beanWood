@@ -26,43 +26,51 @@ function AddProduct({ showMenu }) {
 
 	const addProduct = (e) => {
 		e.preventDefault();
-		axios.post(productUrl, {
-			productName: productName.current.value,
-			price: productPrice.current.value,
-			sale: productSale.current.value,
-			description: productDescription.current.value,
-			categoryId: productCategory,
-			star: 5,
-			new: true
-		})
-			.then(Response => {
-				const productId = Response.data.id;
-				productImages.map(image => {
-					axios.post(imageUrl, {
-						imageUrl: image
-					})
-						.then(Response => {
-							axios.post(productImageUrl, {
-								productId: productId,
-								imageId: Response.data.id
-							})
-						})
-				})
-
-				productColor.map(item => {
-					axios.post(productColorUrl, {
-						colorId: item,
-						productId: productId
-					})
-				});
-
-				productSize.map(item => {
-					axios.post(productSizeUrl, {
-						sizeId: item,
-						productId: productId
-					})
-				});
+		if (window.confirm("상품을 등록하시겠습니까?")) {
+			axios.post(productUrl, {
+				productName: productName.current.value,
+				price: productPrice.current.value,
+				sale: productSale.current.value,
+				description: productDescription.current.value,
+				categoryId: productCategory,
+				star: 5,
+				new: true
 			})
+				.then(Response => {
+					const productId = Response.data.id;
+					productImages.map(image => {
+						axios.post(imageUrl, {
+							imageUrl: image
+						})
+							.then(Response => {
+								axios.post(productImageUrl, {
+									productId: productId,
+									imageId: Response.data.id
+								})
+							})
+					})
+
+					productColor.map(item => {
+						axios.post(productColorUrl, {
+							colorId: item,
+							productId: productId
+						})
+					});
+
+					productSize.map(item => {
+						axios.post(productSizeUrl, {
+							sizeId: item,
+							productId: productId
+						})
+					});
+				})
+				.then(() => {
+					productName.current.value = "";
+					productPrice.current.value = "";
+					productSale.current.value = "";
+					productDescription.current.value = "";
+				})
+		}
 	}
 
 	useEffect(() => {
@@ -192,7 +200,7 @@ function AddProduct({ showMenu }) {
 					</div>
 				</div>
 				<div className='text-center mt-5'>
-					<button type="submit" className="btn btn-primary">상품 등록</button>
+					<button type="submit" className="btn btn-primary">Add Product</button>
 				</div>
 			</form>
 		</div>

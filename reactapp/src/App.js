@@ -13,7 +13,6 @@ import './css/style.css';
 import Join from './components/page/Join';
 import Login from './components/page/Login';
 import AddProductInfo from './components/page/AddProductInfo';
-import EditProduct from './components/page/EditProduct';
 import AdminMenu from './components/page/AdminMenu';
 
 function App() {
@@ -36,7 +35,6 @@ function App() {
 					<Route path="/detail" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/addproductinfo/" element={<AddProductInfo />} />
-					<Route path="/editproduct/:id" element={<EditProduct />} />
 					<Route path="/admin" element={<AdminMenu />} />
 				</Routes>
 				<Footer />

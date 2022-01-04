@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import EditProductListItem from './EditProductListItem';
 
-function EditProductList() {
+function EditProductList({ showMenu, setShowMenu, setEditId }) {
 	const findAllProductUrl = "http://localhost:8080/product/findAll";
 	const [products, setProducts] = useState([]);
 
@@ -11,8 +11,8 @@ function EditProductList() {
 	}, [])
 
 	return (
-		<div className="tab-pane fade" id="editProduct">
-			<h4>Edit Product</h4>
+		<div className={showMenu === 2 ? "tab-pane fade show active" : "tab-pane fade"} id="editProduct">
+			<h4>Edit Product List</h4>
 			<div className="wishlish-table-wrapper">
 				<div className="container-fluid">
 					<div className="row">
@@ -32,7 +32,7 @@ function EditProductList() {
 										<tbody>
 											{
 												products.map(product => (
-													<EditProductListItem key={product.id} product={product} />
+													<EditProductListItem key={product.id} product={product} setShowMenu={setShowMenu} setEditId={setEditId} />
 												))
 											}
 

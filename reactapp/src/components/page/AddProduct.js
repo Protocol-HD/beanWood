@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 
-function AddProduct() {
+function AddProduct({ showMenu }) {
 	const productUrl = "http://localhost:8080/product/save";
 	const productImageUrl = "http://localhost:8080/productImage/save";
 	const imageUrl = "http://localhost:8080/image/save";
@@ -111,7 +111,7 @@ function AddProduct() {
 	}
 
 	return (
-		<div className="tab-pane fade show active" id="addProduct">
+		<div className={showMenu === 1 ? "tab-pane fade show active" : "tab-pane fade"} id="addProduct">
 			<h4>Add Product</h4>
 			<form onSubmit={addProduct}>
 				<div className="col-12">

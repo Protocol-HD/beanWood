@@ -95,7 +95,6 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 				.then(() => {
 					axios.get(findProductUrl + editId)
 						.then(Response => {
-							console.log(Response.data.category.id)
 							productName.current.value = Response.data.productName;
 							productPrice.current.value = Response.data.price;
 							productSale.current.value = Response.data.sale;
@@ -166,7 +165,6 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 	}
 
 	const uploadImg = () => {
-		console.log(productImages);
 		if (productImage.current.value.substr("C:\\fakepath\\".length) !== "" && !productImages.includes(productImage.current.value.substr("C:\\fakepath\\".length))) {
 			setProductImages([
 				...productImages,

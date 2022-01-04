@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import AddProduct from './AddProduct';
 import AddProductInfo from './AddProductInfo';

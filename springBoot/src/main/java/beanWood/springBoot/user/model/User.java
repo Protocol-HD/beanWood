@@ -16,5 +16,7 @@ public class User {
 	private String userId;
 	private String userPassword;
 	private String userAddress;
+	private String userNumber;
+	private String userName;
 	private boolean isAdmin;
 }

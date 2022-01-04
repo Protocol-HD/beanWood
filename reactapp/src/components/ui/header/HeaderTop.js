@@ -199,7 +199,7 @@ function HeaderTop({ headerClass, checkDir }) {
 						<div className="col-auto" style={{ display: "block" }}>
 							<div className="header-action">
 								<Link className="header-action-item header-action-wishlist" to={"/login"}>
-									<i class="fas fa-key iconSize15 iconColor"></i>
+									<i className="fas fa-key iconSize15 iconColor"></i>
 									<span className="ms-1">Login</span>
 								</Link>
 							</div>

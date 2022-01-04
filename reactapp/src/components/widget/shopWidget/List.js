@@ -18,15 +18,6 @@ function List() {
 			})
 	}, []);
 
-	// const list = productList.map(item => (
-	// 	<div className="col-md-6 col-12 mb-25">
-	// 		<ProductSingleItemStyle1
-	// 			item={item}
-	// 			path="shop"
-	// 		/>
-	// 	</div>
-	// ))
-
 
 	return (
 		<div className="shop-list-section section-fluid-270 section-top-gap-100">

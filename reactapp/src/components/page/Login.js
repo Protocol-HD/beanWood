@@ -28,21 +28,21 @@ function Login() {
 					<div className="col-lg-8 offset-lg-2">
 						<div className="basic-login">
 							<div className="text-center">
-								<i class="fas fa-door-open iconSize3 iconColor"></i>
+								<i className="fas fa-door-open iconSize3 iconColor"></i>
 							</div>
 							<h3 className="text-center mb-60">Login From Here</h3>
 							<form onSubmit={addSignup}>
-								<label for="name">ID<span>**</span></label>
+								<label htmlFor="name">ID<span>**</span></label>
 								<input id="name" type="text" placeholder="아이디를 입력하세요." ref={userId} />
-								<label for="pass">PASSWORD <span>**</span></label>
+								<label htmlFor="pass">PASSWORD <span>**</span></label>
 								<input id="pass" type="password" placeholder="비밀번호를 입력하세요." ref={userPassword} />
 								<div className="login-action mb-20 fix">
 									<span className="log-rem f-left">
 										<input id="remember" type="checkbox" />
-										<label for="remember">Remember me!</label>
+										<label htmlFor="remember">Remember me!</label>
 									</span>
 									<span className="forgot-login f-right">
-										<a href="javascript:void(0)">Lost your password?</a>
+										<span>Lost your password?</span>
 									</span>
 								</div>
 								<button className="btn theme-btn-2 w-100">로그인 하기</button>

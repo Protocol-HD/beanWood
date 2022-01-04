@@ -6,9 +6,6 @@ import HeaderWishListRight from '../ui/header/HeaderWishListRight';
 import MobileHeader from '../ui/header/MobileHeader';
 import { useLocation } from 'react-router';
 
-// import '../../css/vendor/bootstrap.min.css'
-// import '../../css/plugins/swiper-bundle.min.css'
-
 function Header({headerClass}) {
     const isTrue = headerClass
     const dir = useLocation()

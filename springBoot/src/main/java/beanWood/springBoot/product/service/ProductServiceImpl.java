@@ -20,16 +20,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product saveProduct(IProduct iProduct) {
-
-		log.info("Save Product Successfully:" +
-				"id : {}", iProduct.getId() +
-				"description: {}", iProduct.getDescription() +
-				"sale: {}", iProduct.getSale() +
-				"product name: {}", iProduct.getProductName() +
-				"star: {}", iProduct.getStar() +
-				"price: {}", iProduct.getPrice() +
-				"category: {}", iProduct.getCategoryId()
-		);
+		log.info("Save Product Successfully");
 		return productRepository.save(
 				Product.builder()
 						.id(iProduct.getId())

@@ -1,7 +1,6 @@
 /* eslint-disable */
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-// import { useParams } from "react-router";
 
 function EditProduct({ editId, showMenu }) {
 	const productUrl = "http://localhost:8080/product/save";
@@ -31,7 +30,6 @@ function EditProduct({ editId, showMenu }) {
 	const [size, setSize] = useState([]);
 	const [productSize, setProductSize] = useState([]);
 	const [productImages, setProductImages] = useState([]);
-	// const params = useParams();
 
 	const editProduct = (e) => {
 		e.preventDefault();
@@ -84,10 +82,36 @@ function EditProduct({ editId, showMenu }) {
 
 	useEffect(() => {
 		if (editId) {
-			axios.get(categoryUrl).then(Response => setCategory(Response.data));
-			axios.get(colorUrl).then(Response => setColor(Response.data));
-			axios.get(sizeUrl).then(Response => setSize(Response.data));
-			axios.get(findProductUrl + editId).then(Response => {
+			axios.get(findProductImageUrl + editId).then(Response => {
+				let images = [];
+				Response.data.map(image => {
+					images.push(image.image.imageUrl);
+				})
+				setProductImages(images);
+			})
+			axios.get(categoryUrl)
+				.then(Response => { setCategory(Response.data) });
+			axios.get(colorUrl)
+				.then(Response => {
+					setColor(Response.data);
+					Response.data.map(data => {
+						document.getElementById(`checkColor${data.id}`).checked = false;
+					}
+					)
+				});
+			axios.get(sizeUrl).then(Response => {
+				setSize(Response.data);
+				Response.data.map(data => {
+					document.getElementById(`checkSize${data.id}`).checked = false;
+				}
+				)
+			});
+		}
+	}, [editId]);
+
+	useEffect(() => {
+		axios.get(findProductUrl + editId)
+			.then(Response => {
 				productName.current.value = Response.data.productName;
 				productPrice.current.value = Response.data.price;
 				productSale.current.value = Response.data.sale;
@@ -96,33 +120,31 @@ function EditProduct({ editId, showMenu }) {
 					document.getElementById(`radioCategory${Response.data.category.id}`).checked = true;
 				}
 			});
-			axios.get(findProductColorUrl + editId).then(Response => {
-				Response.data.map(color => {
-					setProductColor([
-						...productColor,
-						String(color.color.id)
-					])
-					document.getElementById(`checkColor${color.color.id}`).checked = true;
-				})
+	}, [category]);
+
+	useEffect(() => {
+		axios.get(findProductColorUrl + editId).then(Response => {
+			Response.data.map(color => {
+				setProductColor([
+					...productColor,
+					String(color.color.id)
+				])
+				document.getElementById(`checkColor${color.color.id}`).checked = true;
 			})
-			axios.get(findProductSizeUrl + editId).then(Response => {
-				Response.data.map(size => {
-					setProductSize([
-						...productSize,
-						String(size.size.id)
-					])
-					document.getElementById(`checkSize${size.size.id}`).checked = true;
-				})
+		})
+	}, [color])
+
+	useEffect(() => {
+		axios.get(findProductSizeUrl + editId).then(Response => {
+			Response.data.map(size => {
+				setProductSize([
+					...productSize,
+					String(size.size.id)
+				])
+				document.getElementById(`checkSize${size.size.id}`).checked = true;
 			})
-			axios.get(findProductImageUrl + editId).then(Response => {
-				let images = [];
-				Response.data.map(image => {
-					images.push(image.image.imageUrl);
-				})
-				setProductImages(images);
-			})
-		}
-	}, [editId]);
+		})
+	}, [size])
 
 	const selectCategory = (e) => setProductCategory(e.target.value)
 

@@ -21,9 +21,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<div className="App">
-				<Header
-					headerClass={headerClass}
-				/>
+				<Header headerClass={headerClass} />
 				<TopScroll />
 				<Routes>
 					<Route path="/" element={<Home setHeaderClass={setHeaderClass} />} />
@@ -39,7 +37,6 @@ function App() {
 				</Routes>
 				<Footer />
 			</div>
-
 		</BrowserRouter>
 	);
 }

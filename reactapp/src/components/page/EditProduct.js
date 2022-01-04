@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 
-function EditProduct({ editId, showMenu }) {
+function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 	const productUrl = "http://localhost:8080/product/save";
 	const productImageUrl = "http://localhost:8080/productImage/save";
 	const imageUrl = "http://localhost:8080/image/save";
@@ -46,7 +46,7 @@ function EditProduct({ editId, showMenu }) {
 			.then(Response => {
 				const productId = Response.data.id;
 				axios.delete(delProductImageUrl + productId)
-					.then(
+					.then(() =>
 						productImages.map(image => {
 							axios.post(imageUrl, {
 								imageUrl: image
@@ -78,6 +78,7 @@ function EditProduct({ editId, showMenu }) {
 						})
 					)
 			})
+			.then(() => setRefresh(!refresh));
 	}
 
 	useEffect(() => {

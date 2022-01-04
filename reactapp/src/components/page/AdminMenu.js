@@ -30,9 +30,14 @@ function AdminMenu() {
 									>
 										Edit Product
 									</button>
+								</li><li>
+									<button
+										onClick={() => setShowMenu(4)}
+										className={`nav-link btn btn-sm btn-default-outline ${showMenu === 4 ? "active" : ""}`}
+									>
+										ProductInfo
+									</button>
 								</li>
-								<li><a href="#addProductInfo" data-bs-toggle="tab" className="nav-link btn btn-sm btn-default-outline">Add ProductInfo</a></li>
-								<li><a href="#test" data-bs-toggle="tab" className="nav-link btn btn-sm btn-default-outline ">test</a></li>
 							</ul>
 						</div>
 					</div>
@@ -41,7 +46,7 @@ function AdminMenu() {
 							<AddProduct showMenu={showMenu} />
 							<EditProductList showMenu={showMenu} setShowMenu={setShowMenu} setEditId={setEditId} />
 							<EditProduct showMenu={showMenu} editId={editId} />
-							<AddProductInfo />
+							<AddProductInfo showMenu={showMenu} />
 						</div>
 					</div>
 				</div>

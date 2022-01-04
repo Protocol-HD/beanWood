@@ -21,45 +21,44 @@ function AddProductInfo() {
 	};
 
 	return (
-		<div className='container'>
-			<div className='row col-6 m-auto'>
-				<form onSubmit={addProductInfo}>
-					<div className='col-12'>
-						<label htmlFor='size' className='form-label'>
-							size
-						</label>
-						<input
-							type='text'
-							className='form-control'
-							id='size'
-							placeholder='size'
-							required=''
-							ref={size}
-						/>
-					</div>
+		<div className="tab-pane fade" id="addProductInfo">
+			<h4>Add ProductInfo</h4>
+					<form onSubmit={addProductInfo}>
+						<div className='col-12'>
+							<label htmlFor='size' className='form-label'>
+								size
+							</label>
+							<input
+								type='text'
+								className='form-control'
+								id='size'
+								placeholder='size'
+								required=''
+								ref={size}
+							/>
+						</div>
 
-					<div className='col-12'>
-						<label htmlFor='color' className='form-label'>
-							color
-						</label>
-						<input
-							type='text'
-							className='form-control'
-							id='color'
-							placeholder='color'
-							required=''
-							ref={color}
-						/>
-					</div>
+						<div className='col-12'>
+							<label htmlFor='color' className='form-label'>
+								color
+							</label>
+							<input
+								type='text'
+								className='form-control'
+								id='color'
+								placeholder='color'
+								required=''
+								ref={color}
+							/>
+						</div>
 
-					<div className='text-center mt-5'>
-						<button type='submit' className='btn btn-secondary'>
-							submit
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
+						<div className='text-center mt-5'>
+							<button type='submit' className='btn btn-secondary'>
+								상품 정보 등록
+							</button>
+						</div>
+					</form>
+				</div>
 	);
 }
 

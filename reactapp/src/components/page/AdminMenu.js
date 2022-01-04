@@ -1,5 +1,6 @@
 import React from 'react';
 import AddProduct from './AddProduct';
+import AddProductInfo from './AddProductInfo';
 import EditProductList from './EditProductList';
 
 function AdminMenu() {
@@ -10,8 +11,9 @@ function AdminMenu() {
 					<div className="col-sm-12 col-md-3 col-lg-3">
 						<div className="dashboard_tab_button">
 							<ul role="tablist" className="nav flex-column dashboard-list">
-								<li><a href="#addProduct" data-bs-toggle="tab" className="nav-link btn btn-sm btn-default-outline  active">Add Product</a></li>
-								<li> <a href="#editProduct" data-bs-toggle="tab" className="nav-link btn btn-sm btn-default-outline ">Edit Product</a></li>
+								<li><a href="#addProduct" data-bs-toggle="tab" className="nav-link btn btn-sm btn-default-outline active">Add Product</a></li>
+								<li><a href="#addProductInfo" data-bs-toggle="tab" className="nav-link btn btn-sm btn-default-outline">Add ProductInfo</a></li>
+								<li><a href="#editProduct" data-bs-toggle="tab" className="nav-link btn btn-sm btn-default-outline">Edit Product</a></li>
 								<li><a href="#downloads" data-bs-toggle="tab" className="nav-link btn btn-sm btn-default-outline ">Downloads</a></li>
 								<li><a href="#address" data-bs-toggle="tab" className="nav-link btn btn-sm btn-default-outline ">Addresses</a></li>
 								<li><a href="#account-details" data-bs-toggle="tab" className="nav-link btn btn-sm btn-default-outline ">Account details</a></li>
@@ -22,6 +24,7 @@ function AdminMenu() {
 					<div className="col-sm-12 col-md-9 col-lg-9">
 						<div className="tab-content dashboard_content">
 							<AddProduct />
+							<AddProductInfo />
 							<EditProductList />
 							<div className="tab-pane fade" id="downloads">
 								<h4>Downloads</h4>

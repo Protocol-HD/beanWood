@@ -40,10 +40,10 @@ function SignUp() {
     //회원가입end
 
     //아이디 중복 체크
-    // const checkUserId = (e) => {
-    //     e.preventDefault();
+    const checkUserId = (e) => {
+        e.preventDefault();
        
-    // }
+    }
     //아이디 중복 체크 end
 
     const onChangePassword = (e) => {

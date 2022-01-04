@@ -6,6 +6,7 @@ import beanWood.springBoot.productImage.dto.IProductImage;
 import beanWood.springBoot.productImage.model.ProductImage;
 import beanWood.springBoot.productImage.repository.ProductImageRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProductImageServiceImpl implements ProductImageService {
 	private final ProductImageRepository productImageRepository;
 	private final ProductService productService;
@@ -20,6 +22,7 @@ public class ProductImageServiceImpl implements ProductImageService {
 
 	@Override
 	public ProductImage saveProductImage(IProductImage iProductImage) {
+		log.info("save productImage by : {}", iProductImage);
 		return productImageRepository.save(
 				ProductImage.builder()
 						.id(iProductImage.getId())
@@ -31,26 +34,31 @@ public class ProductImageServiceImpl implements ProductImageService {
 
 	@Override
 	public Optional<ProductImage> findByIdProductImage(Long id) {
+		log.info("find by id productImage : {}", id);
 		return productImageRepository.findById(id);
 	}
 
 	@Override
 	public List<ProductImage> findAllProductImage() {
+		log.info("find all productImage");
 		return productImageRepository.findAll();
 	}
 
 	@Override
 	public void deleteByIdProductImage(Long id) {
+		log.info("delete by id productImage : {}", id);
 		productImageRepository.deleteById(id);
 	}
 
 	@Override
 	public List<ProductImage> findByProductId(Long productId) {
+		log.info("find by productId productImage : {}", productId);
 		return productImageRepository.findByProductId(productId);
 	}
 
 	@Override
 	public void deleteAllByProductId(Long productId) {
+		log.info("delete by productId productImage : {}", productId);
 		findByProductId(productId).forEach(productImage -> {
 			deleteByIdProductImage(productImage.getId());
 		});

@@ -10,23 +10,11 @@ import TopScroll from './components/widget/TopScroll';
 import Detail from './components/page/Detail';
 import './App.css'
 import './css/style.css';
-import AddProduct from './components/page/AddProduct';
 import Join from './components/page/Join';
 import Login from './components/page/Login';
 import AddProductInfo from './components/page/AddProductInfo';
 import EditProduct from './components/page/EditProduct';
-
-// import './css/style.min.css';
-// import './css/vendor/bootstrap.min.css'
-// import './css/vendor/jquery-ui.min.css'
-// import './css/vendor/material-icons.css'
-// import './css/vendor/vendor.min.css'
-// import './css/plugins/swiper-bundle.min.css'
-// import './css/plugins/animate.css'
-// import './css/plugins/ion.rangeSlider.min.css'
-// import './css/plugins/nice-select.css'
-// import './css/plugins/plugins.min.css'
-// import './css/plugins/venobox.min.css'
+import AdminMenu from './components/page/AdminMenu';
 
 function App() {
 	const [headerClass, setHeaderClass] = useState(true)
@@ -47,9 +35,9 @@ function App() {
 					<Route path="/wish" element={<Wish setHeaderClass={setHeaderClass} />} />
 					<Route path="/detail" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass} />} />
-					<Route path="/addproduct/" element={<AddProduct />} />
 					<Route path="/addproductinfo/" element={<AddProductInfo />} />
 					<Route path="/editproduct/:id" element={<EditProduct />} />
+					<Route path="/admin" element={<AdminMenu />} />
 				</Routes>
 				<Footer />
 			</div>

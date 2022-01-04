@@ -4,13 +4,18 @@ import beanWood.springBoot.product.dto.IProduct;
 import beanWood.springBoot.product.model.Product;
 import beanWood.springBoot.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RestController
-@CrossOrigin
+@CrossOrigin(
+		origins = "*"
+//		methods = { RequestMethod.PUT , RequestMethod.DELETE, RequestMethod.POST, RequestMethod.GET }
+)
 @RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductControllerImpl implements ProductController {

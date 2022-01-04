@@ -12,6 +12,13 @@ function EditProduct() {
 	const sizeUrl = "http://localhost:8080/size/findAll";
 	const productColorUrl = "http://localhost:8080/productColor/save";
 	const productSizeUrl = "http://localhost:8080/productSize/save";
+	const findProductUrl = "http://localhost:8080/product/find/";
+	const findProductColorUrl = "http://localhost:8080/productColor/findByProductId/";
+	const findProductSizeUrl = "http://localhost:8080/productSize/findByProductId/";
+	const findProductImageUrl = "http://localhost:8080/productImage/findByProductId/";
+	const delProductColorUrl = "http://localhost:8080/productColor/deleteByProductId/";
+	const delProductSizeUrl = "http://localhost:8080/productSize/deleteByProductId/";
+	const delProductImageUrl = "http://localhost:8080";
 	const productName = useRef();
 	const productPrice = useRef();
 	const productSale = useRef();
@@ -25,17 +32,11 @@ function EditProduct() {
 	const [productSize, setProductSize] = useState([]);
 	const [productImages, setProductImages] = useState([]);
 	const params = useParams();
-	const findProductUrl = "http://localhost:8080/product/find/";
-	const findProductColorUrl = "http://localhost:8080/productColor/findByProductId/";
-	const findProductSizeUrl = "http://localhost:8080/productSize/findByProductId/";
-	const findProductImageUrl = "http://localhost:8080/productImage/findByProductId/";
-	const delProductColorUrl = "http://localhost:8080/productColor/deleteByProductId/";
-	const delProductSizeUrl = "http://localhost:8080/productSize/deleteByProductId/";
-	const delProductImageUrl = "http://localhost:8080/productImage/deleteByProductId/";
-	let images = [];
 
 	const editProduct = (e) => {
 		e.preventDefault();
+		// axios.defaults.headers.put['Content-Type'] ='application/json;charset=utf-8';
+ 		// axios.defaults.headers.put['Access-Control-Allow-Origin'] = '*';	
 		axios.put(productUrl, {
 			id: params.id,
 			productName: productName.current.value,
@@ -92,7 +93,9 @@ function EditProduct() {
 			productPrice.current.value = Response.data.price;
 			productSale.current.value = Response.data.sale;
 			productDescription.current.value = Response.data.description;
-			document.getElementById(`category${Response.data.category.id}`).checked = true;
+			if(Response.data.category.id) {
+				document.getElementById(`category${Response.data.category.id}`).checked = true;
+			}
 		});
 		axios.get(findProductColorUrl + params.id).then(Response => {
 			Response.data.map(color => {
@@ -113,6 +116,7 @@ function EditProduct() {
 			})
 		})
 		axios.get(findProductImageUrl + params.id).then(Response => {
+			let images = [];
 			Response.data.map(image => {
 				images.push(image.image.imageUrl);
 			})
@@ -131,7 +135,6 @@ function EditProduct() {
 		} else {
 			setProductColor(productColor.filter(item => item !== e.target.value));
 		}
-		console.log(productColor)
 	}
 
 	const selectSize = (e) => {

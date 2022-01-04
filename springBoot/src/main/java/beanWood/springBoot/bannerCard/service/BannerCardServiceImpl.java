@@ -20,6 +20,7 @@ public class BannerCardServiceImpl implements BannerCardService {
 
 	@Override
 	public BannerCard saveBannerCard(IBannerCard iBannerCard) {
+		log.info("save BannerCard: {}", iBannerCard.getTitle());
 		return bannerCardRepository.save(
 				BannerCard.builder()
 						.image(imageService.findByIdImage(iBannerCard.getImageId()).get())

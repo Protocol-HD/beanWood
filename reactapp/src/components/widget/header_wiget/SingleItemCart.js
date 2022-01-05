@@ -3,21 +3,23 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function SingleItemCart({ item, delCheck, setDelCheck }) {
+	const deleteCartListUrl = "http://localhost:8080/cartList/delete/";
+	const findProductImageByProductId = "http://localhost:8080/productImage/findByProductId/";
 	const [product, setProduct] = useState({});
 
 	const handleDelete = () => {
 		if (window.confirm("Do you want to delete it from the cart?")) {
-			axios.delete(`http://localhost:8080/cartList/delete/${item.id}`)
-				.then(setDelCheck(!delCheck))
+			axios.delete(deleteCartListUrl + item.id)
+				.then(() => setDelCheck(!delCheck))
 		} else {
 			window.alert("Cancel")
 		}
 	}
 
 	useEffect(() => {
-		axios.get(`http://localhost:8080/productImage/find/${item.product.id}`)
+		axios.get(findProductImageByProductId + item.product.id)
 			.then(Response => {
-				setProduct(Response.data.image.imageUrl);
+				setProduct(Response.data[0].image.imageUrl);
 			})
 	}, [item.product.id])
 

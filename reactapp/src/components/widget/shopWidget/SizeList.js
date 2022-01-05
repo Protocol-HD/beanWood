@@ -25,14 +25,14 @@ function SizeList({ item, check, setCheck }) {
                     'Size : "' +
                         item.sizeName +
                         '" ==> "' +
-                        editSizeName.current.value +
+                        editSizeName.current.value.toUpperCase() +
                         '" 수정하시겠습니까?'
                 )
             ) {
                 axios
                     .put(editUrl, {
                         ...item,
-                        sizeName: editSizeName.current.value,
+                        sizeName: editSizeName.current.value.toUpperCase(),
                     })
                     .then(() => {
                         setCheck(!check);

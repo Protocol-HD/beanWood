@@ -23,18 +23,24 @@ function AddProductInfo({ showMenu }) {
         if (size.current.value !== '') {
             if (getSize.length === 0) {
                 axios
-                    .post(sizeUrl, { sizeName: size.current.value })
+                    .post(sizeUrl, {
+                        sizeName: size.current.value.toUpperCase(),
+                    })
                     .then(() => setCheck(!check))
                     .then(() => (size.current.value = ''));
             } else {
                 for (let i = 0; i < getSize.length; i++) {
-                    if (size.current.value === getSize[i].sizeName) {
+                    if (
+                        size.current.value.toUpperCase() === getSize[i].sizeName
+                    ) {
                         alert('이미 존재하는 사이즈입니다');
                         break;
                     }
                     if (i === getSize.length - 1) {
                         axios
-                            .post(sizeUrl, { sizeName: size.current.value })
+                            .post(sizeUrl, {
+                                sizeName: size.current.value.toUpperCase(),
+                            })
                             .then(() => setCheck(!check))
                             .then(() => (size.current.value = ''));
                     }
@@ -47,18 +53,25 @@ function AddProductInfo({ showMenu }) {
         if (color.current.value !== '') {
             if (getColor.length === 0) {
                 axios
-                    .post(colorUrl, { colorName: color.current.value })
+                    .post(colorUrl, {
+                        colorName: color.current.value.toUpperCase(),
+                    })
                     .then(() => setCheck(!check))
                     .then(() => (color.current.value = ''));
             } else {
                 for (let i = 0; i < getColor.length; i++) {
-                    if (color.current.value === getColor[i].colorName) {
+                    if (
+                        color.current.value.toUpperCase() ===
+                        getColor[i].colorName
+                    ) {
                         alert('이미 존재하는 컬러입니다');
                         break;
                     }
                     if (i === getColor.length - 1) {
                         axios
-                            .post(colorUrl, { colorName: color.current.value })
+                            .post(colorUrl, {
+                                colorName: color.current.value.toUpperCase(),
+                            })
                             .then(() => setCheck(!check))
                             .then(() => (color.current.value = ''));
                     }

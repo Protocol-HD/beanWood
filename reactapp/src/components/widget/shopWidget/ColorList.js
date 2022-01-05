@@ -25,14 +25,14 @@ function ColorList({ item, check, setCheck }) {
                     'Color : "' +
                         item.colorName +
                         '" ==> "' +
-                        editColorName.current.value +
+                        editColorName.current.value.toUpperCase() +
                         '" 수정하시겠습니까?'
                 )
             ) {
                 axios
                     .put(editUrl, {
                         ...item,
-                        colorName: editColorName.current.value,
+                        colorName: editColorName.current.value.toUpperCase(),
                     })
                     .then(() => {
                         setCheck(!check);

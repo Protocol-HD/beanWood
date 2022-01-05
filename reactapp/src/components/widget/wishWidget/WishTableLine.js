@@ -4,26 +4,26 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function WishTableLine({ item, delCheck, setDelCheck }) {
-	const productImgUrl = "http://localhost:8080/productImage/findByProductId/";
-	const wishListUrl = "http://localhost:8080/wishList/delete/";
-	const cartListUrl = "http://localhost:8080/cartList/save";
+	const findProductImageByProductId = "http://localhost:8080/productImage/findByProductId/";
+	const deleteWishListUrl = "http://localhost:8080/wishList/delete/";
+	const saveCartListUrl = "http://localhost:8080/cartList/save";
 	const [imgUrl, setImgUrl] = useState("");
 
 	useEffect(() => {
-		axios.get(productImgUrl + item.product.id).then(Response => setImgUrl(Response.data[0].image.imageUrl))
-	}, [productImgUrl, item.product.id])
+		axios.get(findProductImageByProductId + item.product.id).then(Response => setImgUrl(Response.data[0].image.imageUrl))
+	}, [findProductImageByProductId, item.product.id])
 
 	const handleDelete = () => {
 		if (window.confirm("Do you want to delete it from the wish list?")) {
-			axios.delete(wishListUrl + item.id).then(setDelCheck(!delCheck))
+			axios.delete(deleteWishListUrl + item.id).then(setDelCheck(!delCheck))
 		} else {
 			window.alert("Cancel")
 		}
 	}
 
 	const handlePost = () => {
-		axios.post(cartListUrl, {
-			productId: item.id,
+		axios.post(saveCartListUrl, {
+			productId: item.product.id,
 			quantity: 1
 		})
 			.then(Response => {

@@ -5,6 +5,10 @@ import { useState } from 'react/cjs/react.development';
 import axios from 'axios';
 
 function CartTableLine({ item, setCheck, check, delCheck, setDelCheck }) {
+	const updateCartListUrl = "http://localhost:8080/cartList/update";
+	const deleteCartListUrl = "http://localhost:8080/cartList/delete/";
+	const findProductByIdUrl = "http://localhost:8080/product/find/";
+	const findProductImageByProductId = "http://localhost:8080/productImage/findByProductId/";
 	const qty = useRef();
 	const [intQty, setIntQty] = useState(item.quantity);
 	const [product, setProduct] = useState({});
@@ -13,7 +17,7 @@ function CartTableLine({ item, setCheck, check, delCheck, setDelCheck }) {
 	const handleQuantity = () => {
 		setCheck(true)
 		setIntQty(parseInt(qty.current.value))
-		axios.put("http://localhost:8080/cartList/update", {
+		axios.put(updateCartListUrl, {
 			...item,
 			id: item.id,
 			productId: product.id,
@@ -25,8 +29,8 @@ function CartTableLine({ item, setCheck, check, delCheck, setDelCheck }) {
 
 
 		if (window.confirm("Do you want to delete from the cart?")) {
-			axios.delete(`http://localhost:8080/cartList/delete/${item.id}`)
-				.then(setDelCheck(!delCheck))
+			axios.delete(deleteCartListUrl + item.id)
+				.then(() => setDelCheck(!delCheck))
 		} else {
 			window.alert("Cacel")
 		}
@@ -34,11 +38,11 @@ function CartTableLine({ item, setCheck, check, delCheck, setDelCheck }) {
 
 
 	useEffect(() => {
-		axios.get(`http://localhost:8080/product/find/${item.product.id}`)
+		axios.get(findProductByIdUrl + item.product.id)
 			.then(Response => {
 				setProduct(Response.data);
 			});
-		axios.get(`http://localhost:8080/productImage/findByProductId/${item.product.id}`)
+		axios.get(findProductImageByProductId + item.product.id)
 			.then(Response => {
 				setProductImg(Response.data[0].image.imageUrl);
 			});

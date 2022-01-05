@@ -4,16 +4,13 @@ import CartTableLine from './CartTableLine';
 import axios from 'axios';
 
 function CartTable({ setCheck, check }) {
-	const url = "http://localhost:8080/cartList/findAll";
+	const findAllCartListUrl = "http://localhost:8080/cartList/findAll";
 	const [cart, setCart] = useState([]);
 	const [delCheck, setDelCheck] = useState(false);
 
 	useEffect(() => {
-		axios.get(url)
-			.then(Response => {
-				setCart(Response.data)
-			})
-	}, [])
+		axios.get(findAllCartListUrl).then(Response => { setCart(Response.data) });
+	}, [delCheck])
 
 	return (
 		<div className="cart-table-wrapper">

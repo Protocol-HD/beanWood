@@ -36,7 +36,7 @@ function HeaderWishListRight() {
 					}
 				</ul>
 				<div className="offcanvas-action-link">
-					<Link to="/wish" className="btn">View wishlist</Link>
+					<Link to="/wish" className="btn" type="button" data-bs-dismiss="offcanvas" aria-label="Close">View wishlist</Link>
 				</div>
 			</div>
 		</div>

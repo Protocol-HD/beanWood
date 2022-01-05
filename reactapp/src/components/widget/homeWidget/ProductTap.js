@@ -5,41 +5,25 @@ import CategoryTab from '../../ui/homeUi/productList/CategoryTab';
 import TabContent from '../../ui/homeUi/productList/TabContent';
 
 function ProductTap() {
+
+	const findAllProductUrl = "http://localhost:8080/product/findAll"
+	const findAllCategoryUrl = "http://localhost:8080/category/findAll"
+	const findProductByCategoryIdUrl = "http://localhost:8080/product/findByCategoryId/"
 	const [list, setList] = useState([])
 	const [categories, setCategories] = useState([])
 
-	const url = "http://localhost:8080/product/findAll"
-	const categoryUrl = "http://localhost:8080/category/findAll"
 
 	useEffect(() => {
-
-		axios.get(url)
-			.then(Response => {
-				setList(Response.data)
-			})
-
-		axios.get(categoryUrl)
-			.then(Response => {
-				setCategories(Response.data)
-			})
-
+		axios.get(findAllProductUrl).then(Response => { setList(Response.data) })
+		axios.get(findAllCategoryUrl).then(Response => { setCategories(Response.data) })
 	}, []);
 
 	const handleTab = (e) => {
-
-		const url = `http://localhost:8080/product/findByCategoryId/${e.target.value}`
-
-		axios.get(url)
-			.then(Response => {
-				setList(Response.data)
-			})
+		axios.get(findProductByCategoryIdUrl + e.target.value).then(Response => { setList(Response.data) })
 	}
 
 	const handleTabAll = () => {
-		axios.get(url)
-			.then(Response => {
-				setList(Response.data)
-			})
+		axios.get(findAllProductUrl).then(Response => { setList(Response.data) })
 	}
 
 	return (

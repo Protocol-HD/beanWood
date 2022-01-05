@@ -36,8 +36,8 @@ function HeaderCartRight() {
 					}
 				</ul>
 				<div className="offcanvas-action-link">
-					<Link to="/cart" className="btn">View Cart</Link>
-					<Link to="checkout.html" className="btn">Checkout</Link>
+					<Link to="/cart" className="btn" type="button" data-bs-dismiss="offcanvas" aria-label="Close">View Cart</Link>
+					<Link to="checkout.html" className="btn" type="button" data-bs-dismiss="offcanvas" aria-label="Close">Checkout</Link>
 				</div>
 			</div>
 		</div>

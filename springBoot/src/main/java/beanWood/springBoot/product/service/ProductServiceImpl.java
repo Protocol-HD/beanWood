@@ -1,5 +1,6 @@
 package beanWood.springBoot.product.service;
 
+import beanWood.springBoot.cartList.repository.CartListRepository;
 import beanWood.springBoot.category.repository.CategoryRepository;
 import beanWood.springBoot.color.repository.ColorRepository;
 import beanWood.springBoot.image.model.Image;
@@ -14,6 +15,7 @@ import beanWood.springBoot.productImage.repository.ProductImageRepository;
 import beanWood.springBoot.productSize.model.ProductSize;
 import beanWood.springBoot.productSize.repository.ProductSizeRepository;
 import beanWood.springBoot.size.repository.SizeRepository;
+import beanWood.springBoot.wishList.repository.WishListRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,8 +36,10 @@ public class ProductServiceImpl implements ProductService {
 	private final ImageRepository imageRepository;
 	private final ColorRepository colorRepository;
 	private final SizeRepository sizeRepository;
+	private final CartListRepository cartListRepository;
+	private final WishListRepository wishListRepository;
 
-	public Product saveProductBefore(IProduct iProduct) {
+	public Product saveProductBeforeSaveProduct(IProduct iProduct) {
 		try {
 			log.info("Save Product: {}", iProduct);
 			return productRepository.save(Product.builder()
@@ -49,12 +53,12 @@ public class ProductServiceImpl implements ProductService {
 					.category(categoryRepository.findById(iProduct.getCategoryId()).get())
 					.build());
 		} catch (Exception exception) {
-			log.error("Error: ", exception);
+			log.error("Error: {}", exception.getMessage());
 			return null;
 		}
 	}
 
-	public List<Long> saveProductBefore2(IProduct iProduct) {
+	public List<Long> saveImagesBeforeSaveProduct(IProduct iProduct) {
 		try {
 			List<Long> imageIds = new ArrayList<>();
 			iProduct.getImages().forEach(
@@ -68,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
 			log.info("imageIds: {}", imageIds);
 			return imageIds;
 		} catch (Exception exception) {
-			log.error("Error: ", exception);
+			log.error("Error: {}", exception.getMessage());
 			return null;
 		}
 	}
@@ -77,9 +81,9 @@ public class ProductServiceImpl implements ProductService {
 	public Product saveProduct(IProduct iProduct) {
 		try {
 			log.info("Product save start");
-			Product product = saveProductBefore(iProduct);
+			Product product = saveProductBeforeSaveProduct(iProduct);
 			log.info("Product save success, Image and ProductImage save start");
-			saveProductBefore2(iProduct).forEach(
+			saveImagesBeforeSaveProduct(iProduct).forEach(
 					imageId -> {
 						productImageRepository.save(ProductImage.builder()
 								.product(productRepository.findById(product.getId()).get())
@@ -108,7 +112,7 @@ public class ProductServiceImpl implements ProductService {
 			log.info("ProductSize save success, All save success");
 			return null;
 		} catch (Exception exception) {
-			log.error("Error: ");
+			log.error("Error: {}", exception.getMessage());
 			return null;
 		}
 	}
@@ -126,8 +130,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
-	public void deleteByIdProductBefore(Long id) {
-		log.info("delete Product options by id Product: {}", id);
+	public void deleteProductOptionBeforeDeleteProductById(Long id) {
+		log.info("delete Product options by Product id: {}", id);
 		try {
 			log.info("delete ProductImage by id: {}", id);
 			productImageRepository.deleteAll(productImageRepository.findByProductId(id));
@@ -137,27 +141,41 @@ public class ProductServiceImpl implements ProductService {
 			productSizeRepository.deleteAll(productSizeRepository.findByProductId(id));
 			log.info(("ProductSize delete success"));
 		} catch (Exception exception) {
-			log.error("Error: ", exception);
+			log.error("Error: {}", exception.getMessage());
+		}
+	}
+
+	public void deleteCartWishListBeforeDeleteProductById(Long id) {
+		log.info("delete CartList and WishList by Product id: {}", id);
+		try {
+			log.info("delete CartList start by id: {}", id);
+			cartListRepository.deleteAll(cartListRepository.findByProductId(id));
+			log.info("delete CartList success, delete WishList start by id: {}", id);
+			wishListRepository.deleteAll(wishListRepository.findByProductId(id));
+			log.info("delete WishList success");
+		} catch (Exception exception) {
+			log.error("Error: {}", exception.getMessage());
 		}
 	}
 
 	@Override
 	public void deleteByIdProduct(Long id) {
-		deleteByIdProductBefore(id);
+		deleteProductOptionBeforeDeleteProductById(id);
+		deleteCartWishListBeforeDeleteProductById(id);
 		log.info("delete Product id: {}", id);
 		productRepository.deleteById(id);
 	}
 
 	@Override
 	public List<Product> findByCategoryId(Long categoryId) {
-		log.info("find by category id Product: {}", categoryId);
+		log.info("find Product by category id: {}", categoryId);
 		return productRepository.findByCategoryId(categoryId);
 	}
 
 	@Override
 	public Product updateProduct(IProduct iProduct) {
 		log.info("update Product: {}", iProduct);
-		deleteByIdProductBefore(iProduct.getId());
+		deleteProductOptionBeforeDeleteProductById(iProduct.getId());
 		log.info("all delete success, save Product start");
 		saveProduct(iProduct);
 		return null;

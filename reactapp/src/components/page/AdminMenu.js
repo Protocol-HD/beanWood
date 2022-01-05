@@ -45,6 +45,11 @@ function AdminMenu() {
 					</div>
 					<div className="col-sm-12 col-md-9 col-lg-9">
 						<div className="tab-content dashboard_content">
+							<div className={showMenu === 0 ? "tab-pane fade show active" : "tab-pane fade"} id="addProduct">
+								<div className='text-center mt-5'>
+									<h2>Admin Page</h2>
+								</div>
+							</div>
 							<AddProduct showMenu={showMenu} refresh={refresh} setRefresh={setRefresh} />
 							<EditProductList showMenu={showMenu} setShowMenu={setShowMenu} setEditId={setEditId} refresh={refresh} setRefresh={setRefresh} />
 							<EditProduct showMenu={showMenu} setShowMenu={setShowMenu} editId={editId} refresh={refresh} setRefresh={setRefresh} />

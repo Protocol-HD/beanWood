@@ -3,12 +3,12 @@ import axios from 'axios';
 import WishTableLine from './WishTableLine';
 
 function WishTable() {
+	const findAllWishListUrl = "http://localhost:8080/wishList/findAll"
 	const [wish, setWish] = useState([]);
 	const [delCheck, setDelCheck] = useState(false);
 
 	useEffect(() => {
-		const url = "http://localhost:8080/wishList/findAll"
-		axios.get(url)
+		axios.get(findAllWishListUrl)
 			.then(Response => {
 				setWish(Response.data);
 			})

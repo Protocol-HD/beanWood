@@ -6,35 +6,29 @@ import styles from './ProductSingleItemStyle1.module.css';
 import axios from 'axios';
 
 function ProductSingleItemStyle1({ item, path, checkDir }) {
-
+	const saveCartListUrl = "http://localhost:8080/cartList/save";
+	const saveWishListUrl = "http://localhost:8080/wishList/save";
+	const findProductImageByProductIdUrl = "http://localhost:8080/productImage/findByProductId/";
 	const [addPath, setAddPath] = useState("");
 	const [imgUrl, setImgUrl] = useState("");
 
 	const handlePost = () => {
-
-		axios.post("http://localhost:8080/cartList/save", {
+		axios.post(saveCartListUrl, {
 			productId: item.id,
 			quantity: 1
-		})
-			.then(Response => {
-				if (Response.ok) alert("Success!")
-			})
+		}).then(Response => { if (Response.ok) alert("Success!") });
 	}
 
 	const handlePostWish = () => {
-		axios.post("http://localhost:8080/wishList/save", {
+		axios.post(saveWishListUrl, {
 			productId: item.id
-		})
-			.then(Response => {
-				if (Response.ok) alert("Success!")
-			})
+		}).then(Response => { if (Response.ok) alert("Success!") });
 	}
 
 	useEffect(() => {
-		axios.get(`http://localhost:8080/productImage/findByProductId/${item.id}`)
-			.then(Response => {
-				if (Response.data[0]) setImgUrl(Response.data[0].image.imageUrl)
-			})
+		axios.get(findProductImageByProductIdUrl + item.id).then(Response => {
+			if (Response.data[0]) setImgUrl(Response.data[0].image.imageUrl);
+		})
 		if (checkDir) {
 			setAddPath("../.")
 		}

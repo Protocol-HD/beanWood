@@ -9,7 +9,7 @@ function SizeList({ item, check, setCheck }) {
         if (
             window.confirm('size : "' + item.sizeName + '" 삭제하시겠습니까?')
         ) {
-            axios.delete(deleteUrl).then((res) => {
+            axios.delete(deleteUrl).then(() => {
                 setCheck(!check);
             });
         } else {
@@ -34,9 +34,10 @@ function SizeList({ item, check, setCheck }) {
                         ...item,
                         sizeName: editSizeName.current.value,
                     })
-                    .then((res) => {
+                    .then(() => {
                         setCheck(!check);
-                    });
+                    })
+                    .then(() => (editSizeName.current.value = ''));
             } else {
                 window.alert('수정되지 않았습니다');
             }

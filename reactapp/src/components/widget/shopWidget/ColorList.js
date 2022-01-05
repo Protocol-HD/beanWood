@@ -9,7 +9,7 @@ function ColorList({ item, check, setCheck }) {
         if (
             window.confirm('color : "' + item.colorName + '" 삭제하시겠습니까?')
         ) {
-            axios.delete(deleteUrl).then((res) => {
+            axios.delete(deleteUrl).then(() => {
                 setCheck(!check);
             });
         } else {
@@ -34,9 +34,10 @@ function ColorList({ item, check, setCheck }) {
                         ...item,
                         colorName: editColorName.current.value,
                     })
-                    .then((res) => {
+                    .then(() => {
                         setCheck(!check);
-                    });
+                    })
+                    .then(() => (editColorName.current.value = ''));
             } else {
                 window.alert('수정되지 않았습니다');
             }

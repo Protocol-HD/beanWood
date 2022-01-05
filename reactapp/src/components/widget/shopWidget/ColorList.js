@@ -9,7 +9,7 @@ function ColorList({ item, check, setCheck }) {
         if (
             window.confirm('color : "' + item.colorName + '" 삭제하시겠습니까?')
         ) {
-            axios.delete(deleteUrl).then((res) => {
+            axios.delete(deleteUrl).then(() => {
                 setCheck(!check);
             });
         } else {
@@ -25,18 +25,19 @@ function ColorList({ item, check, setCheck }) {
                     'Color : "' +
                         item.colorName +
                         '" ==> "' +
-                        editColorName.current.value +
+                        editColorName.current.value.toUpperCase() +
                         '" 수정하시겠습니까?'
                 )
             ) {
                 axios
                     .put(editUrl, {
                         ...item,
-                        colorName: editColorName.current.value,
+                        colorName: editColorName.current.value.toUpperCase(),
                     })
-                    .then((res) => {
+                    .then(() => {
                         setCheck(!check);
-                    });
+                    })
+                    .then(() => (editColorName.current.value = ''));
             } else {
                 window.alert('수정되지 않았습니다');
             }

@@ -1,6 +1,8 @@
 package beanWood.springBoot.image.model;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,16 @@ import javax.persistence.Id;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Image {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String imageUrl;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String imageUrl;
+
+	@Builder
+	public Image(Long id, String imageUrl) {
+		this.id = id;
+		this.imageUrl = imageUrl;
+	}
 }

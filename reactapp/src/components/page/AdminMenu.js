@@ -47,7 +47,7 @@ function AdminMenu() {
 						<div className="tab-content dashboard_content">
 							<AddProduct showMenu={showMenu} refresh={refresh} setRefresh={setRefresh} />
 							<EditProductList showMenu={showMenu} setShowMenu={setShowMenu} setEditId={setEditId} refresh={refresh} setRefresh={setRefresh} />
-							<EditProduct showMenu={showMenu} editId={editId} refresh={refresh} setRefresh={setRefresh} />
+							<EditProduct showMenu={showMenu} setShowMenu={setShowMenu} editId={editId} refresh={refresh} setRefresh={setRefresh} />
 							<AddProductInfo showMenu={showMenu} />
 						</div>
 					</div>

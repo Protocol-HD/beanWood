@@ -27,7 +27,7 @@ public class ProductControllerImpl implements ProductController {
 	@Override
 	@PutMapping("/update")
 	public Product updateProduct(@RequestBody IProduct iProduct) {
-		return productService.saveProduct(iProduct);
+		return productService.updateProduct(iProduct);
 	}
 
 	@Override

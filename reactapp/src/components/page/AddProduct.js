@@ -4,13 +4,9 @@ import React, { useEffect, useRef, useState } from 'react';
 
 function AddProduct({ showMenu, refresh, setRefresh }) {
 	const productUrl = "http://localhost:8080/product/save";
-	const productImageUrl = "http://localhost:8080/productImage/save";
-	const imageUrl = "http://localhost:8080/image/save";
 	const categoryUrl = "http://localhost:8080/category/findAll";
 	const colorUrl = "http://localhost:8080/color/findAll";
 	const sizeUrl = "http://localhost:8080/size/findAll";
-	const productColorUrl = "http://localhost:8080/productColor/save";
-	const productSizeUrl = "http://localhost:8080/productSize/save";
 	const productName = useRef();
 	const productPrice = useRef();
 	const productSale = useRef();
@@ -34,53 +30,31 @@ function AddProduct({ showMenu, refresh, setRefresh }) {
 				description: productDescription.current.value,
 				categoryId: productCategory,
 				star: 5,
-				new: true
+				new: true,
+				images: productImages,
+				colorIds: productColor,
+				sizeIds: productSize
+			}).then(() => {
+				setRefresh(!refresh);
+				productName.current.value = "";
+				productPrice.current.value = "";
+				productSale.current.value = "";
+				productDescription.current.value = "";
+				productImage.current.value = "";
+				setProductImages([]);
+				setProductCategory(null);
+				setProductColor([]);
+				setProductSize([]);
+				category.map(item =>
+					document.getElementById(`radioCategory${item.id}`).checked = false
+				)
+				color.map(item =>
+					document.getElementById(`checkColor${item.id}`).checked = false
+				)
+				size.map(item =>
+					document.getElementById(`checkSize${item.id}`).checked = false
+				)
 			})
-				.then(Response => {
-					const productId = Response.data.id;
-					productImages.map(image => {
-						axios.post(imageUrl, {
-							imageUrl: image
-						})
-							.then(Response => {
-								axios.post(productImageUrl, {
-									productId: productId,
-									imageId: Response.data.id
-								})
-							})
-					})
-
-					productColor.map(item => {
-						axios.post(productColorUrl, {
-							colorId: item,
-							productId: productId
-						})
-					});
-
-					productSize.map(item => {
-						axios.post(productSizeUrl, {
-							sizeId: item,
-							productId: productId
-						})
-					});
-				})
-				.then(() => {
-					setRefresh(!refresh);
-					productName.current.value = "";
-					productPrice.current.value = "";
-					productSale.current.value = "";
-					productDescription.current.value = "";
-					productImage.current.value = "";
-					category.map(item =>
-						document.getElementById(`radioCategory${item.id}`).checked = false
-					)
-					color.map(item =>
-						document.getElementById(`checkColor${item.id}`).checked = false
-					)
-					size.map(item =>
-						document.getElementById(`checkSize${item.id}`).checked = false
-					)
-				})
 		}
 	}
 

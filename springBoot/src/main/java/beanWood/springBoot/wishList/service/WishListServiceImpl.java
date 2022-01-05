@@ -1,6 +1,6 @@
 package beanWood.springBoot.wishList.service;
 
-import beanWood.springBoot.product.service.ProductService;
+import beanWood.springBoot.product.repository.ProductRepository;
 import beanWood.springBoot.wishList.dto.IWishList;
 import beanWood.springBoot.wishList.model.WishList;
 import beanWood.springBoot.wishList.repository.WishListRepository;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Slf4j
 public class WishListServiceImpl implements WishListService {
 	private final WishListRepository wishListRepository;
-	private final ProductService productService;
+	private final ProductRepository productRepository;
 
 	@Override
 	public WishList saveWishList(IWishList iWishList) {
@@ -24,7 +24,7 @@ public class WishListServiceImpl implements WishListService {
 		return wishListRepository.save(
 				WishList.builder()
 						.id(iWishList.getId())
-						.product(productService.findByIdProduct(iWishList.getProductId()).get())
+						.product(productRepository.findById(iWishList.getProductId()).get())
 						.build()
 		);
 	}

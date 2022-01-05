@@ -1,7 +1,7 @@
 package beanWood.springBoot.productImage.service;
 
-import beanWood.springBoot.image.service.ImageService;
-import beanWood.springBoot.product.service.ProductService;
+import beanWood.springBoot.image.repository.ImageRepository;
+import beanWood.springBoot.product.repository.ProductRepository;
 import beanWood.springBoot.productImage.dto.IProductImage;
 import beanWood.springBoot.productImage.model.ProductImage;
 import beanWood.springBoot.productImage.repository.ProductImageRepository;
@@ -17,8 +17,8 @@ import java.util.Optional;
 @Slf4j
 public class ProductImageServiceImpl implements ProductImageService {
 	private final ProductImageRepository productImageRepository;
-	private final ProductService productService;
-	private final ImageService imageService;
+	private final ProductRepository productRepository;
+	private final ImageRepository imageRepository;
 
 	@Override
 	public ProductImage saveProductImage(IProductImage iProductImage) {
@@ -26,8 +26,8 @@ public class ProductImageServiceImpl implements ProductImageService {
 		return productImageRepository.save(
 				ProductImage.builder()
 						.id(iProductImage.getId())
-						.image(imageService.findByIdImage(iProductImage.getImageId()).get())
-						.product(productService.findByIdProduct(iProductImage.getProductId()).get())
+						.image(imageRepository.findById(iProductImage.getImageId()).get())
+						.product(productRepository.findById(iProductImage.getProductId()).get())
 						.build()
 		);
 	}
@@ -59,8 +59,6 @@ public class ProductImageServiceImpl implements ProductImageService {
 	@Override
 	public void deleteAllByProductId(Long productId) {
 		log.info("delete by productId productImage : {}", productId);
-		findByProductId(productId).forEach(productImage -> {
-			deleteByIdProductImage(productImage.getId());
-		});
+		productImageRepository.deleteAll(productImageRepository.findByProductId(productId));
 	}
 }

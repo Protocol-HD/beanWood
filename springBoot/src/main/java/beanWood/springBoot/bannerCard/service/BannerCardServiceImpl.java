@@ -3,7 +3,7 @@ package beanWood.springBoot.bannerCard.service;
 import beanWood.springBoot.bannerCard.dto.IBannerCard;
 import beanWood.springBoot.bannerCard.model.BannerCard;
 import beanWood.springBoot.bannerCard.repository.BannerCardRepository;
-import beanWood.springBoot.image.service.ImageService;
+import beanWood.springBoot.image.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,14 +16,14 @@ import java.util.Optional;
 @Slf4j
 public class BannerCardServiceImpl implements BannerCardService {
 	private final BannerCardRepository bannerCardRepository;
-	private final ImageService imageService;
+	private final ImageRepository imageRepository;
 
 	@Override
 	public BannerCard saveBannerCard(IBannerCard iBannerCard) {
 		log.info("save BannerCard: {}", iBannerCard.getTitle());
 		return bannerCardRepository.save(
 				BannerCard.builder()
-						.image(imageService.findByIdImage(iBannerCard.getImageId()).get())
+						.image(imageRepository.findById(iBannerCard.getImageId()).get())
 						.text(iBannerCard.getText())
 						.id(iBannerCard.getId())
 						.tag(iBannerCard.getTag())

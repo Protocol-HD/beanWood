@@ -3,7 +3,7 @@ package beanWood.springBoot.cartList.service;
 import beanWood.springBoot.cartList.dto.ICartList;
 import beanWood.springBoot.cartList.model.CartList;
 import beanWood.springBoot.cartList.repository.CartListRepository;
-import beanWood.springBoot.product.service.ProductService;
+import beanWood.springBoot.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Slf4j
 public class CartListServiceImpl implements CartListService {
 	private final CartListRepository cartListRepository;
-	private final ProductService productService;
+	private final ProductRepository productRepository;
 
 	@Override
 	public CartList saveCartList(ICartList iCartList) {
@@ -25,7 +25,7 @@ public class CartListServiceImpl implements CartListService {
 				CartList.builder()
 						.id(iCartList.getId())
 						.quantity(iCartList.getQuantity())
-						.product(productService.findByIdProduct(iCartList.getProductId()).get())
+						.product(productRepository.findById(iCartList.getProductId()).get())
 						.build()
 		);
 	}
@@ -44,7 +44,7 @@ public class CartListServiceImpl implements CartListService {
 
 	@Override
 	public void deleteByIdCartList(Long id) {
-		log.info("delete CartList By Id", id);
+		log.info("delete CartList By Id: {}", id);
 		cartListRepository.deleteById(id);
 	}
 }

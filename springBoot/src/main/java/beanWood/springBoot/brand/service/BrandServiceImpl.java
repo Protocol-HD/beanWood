@@ -3,7 +3,7 @@ package beanWood.springBoot.brand.service;
 import beanWood.springBoot.brand.dto.IBrand;
 import beanWood.springBoot.brand.model.Brand;
 import beanWood.springBoot.brand.repository.BrandRepository;
-import beanWood.springBoot.image.service.ImageService;
+import beanWood.springBoot.image.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Slf4j
 public class BrandServiceImpl implements BrandService {
 	private final BrandRepository brandRepository;
-	private final ImageService imageService;
+	private final ImageRepository imageRepository;
 
 	@Override
 	public Brand saveBrand(IBrand iBrand) {
@@ -25,7 +25,7 @@ public class BrandServiceImpl implements BrandService {
 				Brand.builder()
 						.id(iBrand.getId())
 						.brandName(iBrand.getBrandName())
-						.image(imageService.findByIdImage(iBrand.getImageId()).get())
+						.image(imageRepository.findById(iBrand.getImageId()).get())
 						.build()
 		);
 	}

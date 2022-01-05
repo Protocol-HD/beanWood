@@ -1,7 +1,7 @@
 package beanWood.springBoot.productColor.service;
 
-import beanWood.springBoot.color.service.ColorService;
-import beanWood.springBoot.product.service.ProductService;
+import beanWood.springBoot.color.repository.ColorRepository;
+import beanWood.springBoot.product.repository.ProductRepository;
 import beanWood.springBoot.productColor.dto.IProductColor;
 import beanWood.springBoot.productColor.model.ProductColor;
 import beanWood.springBoot.productColor.repository.ProductColorRepository;
@@ -17,8 +17,8 @@ import java.util.Optional;
 @Slf4j
 public class ProductColorServiceImpl implements ProductColorService {
 	private final ProductColorRepository productColorRepository;
-	private final ProductService productService;
-	private final ColorService colorService;
+	private final ProductRepository productRepository;
+	private final ColorRepository colorRepository;
 
 	@Override
 	public ProductColor saveProductColor(IProductColor iProductColor) {
@@ -26,8 +26,8 @@ public class ProductColorServiceImpl implements ProductColorService {
 		return productColorRepository.save(
 				ProductColor.builder()
 						.id(iProductColor.getId())
-						.color(colorService.findByIdColor(iProductColor.getColorId()).get())
-						.product(productService.findByIdProduct(iProductColor.getProductId()).get())
+						.color(colorRepository.findById(iProductColor.getColorId()).get())
+						.product(productRepository.findById(iProductColor.getProductId()).get())
 						.build()
 
 		);
@@ -60,8 +60,6 @@ public class ProductColorServiceImpl implements ProductColorService {
 	@Override
 	public void deleteAllByProductId(Long productId) {
 		log.info("delete by productId productColor : {}", productId);
-		findByProductId(productId).forEach(productColor -> {
-			deleteByIdProductColor(productColor.getId());
-		});
+		productColorRepository.deleteAll(productColorRepository.findByProductId(productId));
 	}
 }

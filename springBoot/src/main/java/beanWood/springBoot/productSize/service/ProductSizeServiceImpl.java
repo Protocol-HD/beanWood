@@ -1,10 +1,10 @@
 package beanWood.springBoot.productSize.service;
 
-import beanWood.springBoot.product.service.ProductService;
+import beanWood.springBoot.product.repository.ProductRepository;
 import beanWood.springBoot.productSize.dto.IProductSize;
 import beanWood.springBoot.productSize.model.ProductSize;
 import beanWood.springBoot.productSize.repository.ProductSizeRepository;
-import beanWood.springBoot.size.service.SizeService;
+import beanWood.springBoot.size.repository.SizeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,8 @@ import java.util.Optional;
 @Slf4j
 public class ProductSizeServiceImpl implements ProductSizeService {
 	private final ProductSizeRepository productSizeRepository;
-	private final ProductService productService;
-	private final SizeService sizeService;
+	private final ProductRepository productRepository;
+	private final SizeRepository sizeRepository;
 
 	@Override
 	public ProductSize saveProductSize(IProductSize iProductSize) {
@@ -26,8 +26,8 @@ public class ProductSizeServiceImpl implements ProductSizeService {
 		return productSizeRepository.save(
 				ProductSize.builder()
 						.id(iProductSize.getId())
-						.product(productService.findByIdProduct(iProductSize.getProductId()).get())
-						.size(sizeService.findByIdSize(iProductSize.getSizeId()).get())
+						.product(productRepository.findById(iProductSize.getProductId()).get())
+						.size(sizeRepository.findById(iProductSize.getSizeId()).get())
 						.build()
 		);
 	}
@@ -59,8 +59,6 @@ public class ProductSizeServiceImpl implements ProductSizeService {
 	@Override
 	public void deleteAllByProductId(Long productId) {
 		log.info("delete by productId productSize : {}", productId);
-		findByProductId(productId).forEach(productSize -> {
-			deleteByIdProductSize(productSize.getId());
-		});
+		productSizeRepository.deleteAll(productSizeRepository.findByProductId(productId));
 	}
 }

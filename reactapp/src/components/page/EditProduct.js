@@ -2,22 +2,15 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 
-function EditProduct({ editId, showMenu, refresh, setRefresh }) {
-	const productUrl = "http://localhost:8080/product/save";
-	const productImageUrl = "http://localhost:8080/productImage/save";
-	const imageUrl = "http://localhost:8080/image/save";
+function EditProduct({ editId, showMenu, setShowMenu, refresh, setRefresh }) {
+	const productUrl = "http://localhost:8080/product/update";
 	const categoryUrl = "http://localhost:8080/category/findAll";
 	const colorUrl = "http://localhost:8080/color/findAll";
 	const sizeUrl = "http://localhost:8080/size/findAll";
-	const productColorUrl = "http://localhost:8080/productColor/save";
-	const productSizeUrl = "http://localhost:8080/productSize/save";
 	const findProductUrl = "http://localhost:8080/product/find/";
 	const findProductColorUrl = "http://localhost:8080/productColor/findByProductId/";
 	const findProductSizeUrl = "http://localhost:8080/productSize/findByProductId/";
 	const findProductImageUrl = "http://localhost:8080/productImage/findByProductId/";
-	const delProductColorUrl = "http://localhost:8080/productColor/deleteByProductId/";
-	const delProductSizeUrl = "http://localhost:8080/productSize/deleteByProductId/";
-	const delProductImageUrl = "http://localhost:8080/productImage/deleteByProductId/";
 	const productName = useRef();
 	const productPrice = useRef();
 	const productSale = useRef();
@@ -33,52 +26,42 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 
 	const editProduct = (e) => {
 		e.preventDefault();
-		axios.put(productUrl, {
-			id: editId,
-			productName: productName.current.value,
-			price: productPrice.current.value,
-			sale: productSale.current.value,
-			description: productDescription.current.value,
-			categoryId: productCategory,
-			star: 5,
-			new: true
-		})
-			.then(Response => {
-				const productId = Response.data.id;
-				axios.delete(delProductImageUrl + productId)
-					.then(() =>
-						productImages.map(image => {
-							axios.post(imageUrl, {
-								imageUrl: image
-							})
-								.then(Response => {
-									axios.post(productImageUrl, {
-										productId: productId,
-										imageId: Response.data.id
-									})
-								})
-						}))
-				axios.delete(delProductColorUrl + productId)
-					.then(() =>
-						productColor.map(item => {
-							axios.post(productColorUrl, {
-								colorId: item,
-								productId: productId
-							})
-						})
-					)
-
-				axios.delete(delProductSizeUrl + productId)
-					.then(() =>
-						productSize.map(item => {
-							axios.post(productSizeUrl, {
-								sizeId: item,
-								productId: productId
-							})
-						})
-					)
-			})
-			.then(() => setRefresh(!refresh));
+		if (window.confirm("수정하시겠습니까?")) {
+			axios.put(productUrl, {
+				id: editId,
+				productName: productName.current.value,
+				price: productPrice.current.value,
+				sale: productSale.current.value,
+				description: productDescription.current.value,
+				categoryId: productCategory,
+				star: 5,
+				new: true,
+				images: productImages,
+				colorIds: productColor,
+				sizeIds: productSize
+			}).then(() => {
+				setRefresh(!refresh);
+				productName.current.value = "";
+				productPrice.current.value = "";
+				productSale.current.value = "";
+				productDescription.current.value = "";
+				productImage.current.value = "";
+				setProductImages([]);
+				setProductCategory(null);
+				setProductColor([]);
+				setProductSize([]);
+				category.map(item =>
+					document.getElementById(`editRadioCategory${item.id}`).checked = false
+				)
+				color.map(item =>
+					document.getElementById(`editCheckColor${item.id}`).checked = false
+				)
+				size.map(item =>
+					document.getElementById(`editCheckSize${item.id}`).checked = false
+				)
+				setShowMenu(2);
+			});
+		}
 	}
 
 	useEffect(() => {
@@ -100,6 +83,7 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 							productSale.current.value = Response.data.sale;
 							productDescription.current.value = Response.data.description;
 							document.getElementById(`editRadioCategory${Response.data.category.id}`).checked = true;
+							setProductCategory(Response.data.category.id);
 						});
 				});
 			axios.get(colorUrl)
@@ -111,13 +95,12 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 				})
 				.then(() =>
 					axios.get(findProductColorUrl + editId).then(Response => {
+						let productColors = [];
 						Response.data.map(color => {
-							setProductColor([
-								...productColor,
-								String(color.color.id)
-							])
+							productColors.push(String(color.color.id));
 							document.getElementById(`editCheckColor${color.color.id}`).checked = true;
 						})
+						setProductColor(productColors);
 					})
 				);
 			axios.get(sizeUrl).then(Response => {
@@ -128,17 +111,16 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 			})
 				.then(() =>
 					axios.get(findProductSizeUrl + editId).then(Response => {
+						let productSizes = [];
 						Response.data.map(size => {
-							setProductSize([
-								...productSize,
-								String(size.size.id)
-							])
+							productSizes.push(String(size.size.id));
 							document.getElementById(`editCheckSize${size.size.id}`).checked = true;
 						})
+						setProductSize(productSizes);
 					})
 				);
 		}
-	}, [editId]);
+	}, [editId, refresh]);
 
 	const selectCategory = (e) => setProductCategory(e.target.value)
 
@@ -151,6 +133,7 @@ function EditProduct({ editId, showMenu, refresh, setRefresh }) {
 		} else {
 			setProductColor(productColor.filter(item => item !== e.target.value));
 		}
+		console.log(productColor);
 	}
 
 	const selectSize = (e) => {

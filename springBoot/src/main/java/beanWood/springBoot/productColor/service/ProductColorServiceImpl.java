@@ -24,14 +24,19 @@ public class ProductColorServiceImpl implements ProductColorService {
 	@Override
 	public ProductColor saveProductColor(IProductColor iProductColor) {
 		log.info("save productColor by : {}", iProductColor);
-		return productColorRepository.save(
-				ProductColor.builder()
-						.id(iProductColor.getId())
-						.color(colorRepository.findById(iProductColor.getColorId()).get())
-						.product(productRepository.findById(iProductColor.getProductId()).get())
-						.build()
+		try {
+			return productColorRepository.save(
+					ProductColor.builder()
+							.id(iProductColor.getId())
+							.color(colorRepository.findById(iProductColor.getColorId()).get())
+							.product(productRepository.findById(iProductColor.getProductId()).get())
+							.build()
 
-		);
+			);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
@@ -68,7 +73,12 @@ public class ProductColorServiceImpl implements ProductColorService {
 	@Override
 	public void deleteByIdProductColor(Long id) {
 		log.info("delete by id productColor : {}", id);
-		productColorRepository.deleteById(id);
+		try {
+			productColorRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
+
 	}
 
 	@Override
@@ -90,6 +100,10 @@ public class ProductColorServiceImpl implements ProductColorService {
 	@Override
 	public void deleteAllByProductId(Long productId) {
 		log.info("delete by productId productColor : {}", productId);
-		productColorRepository.deleteAll(productColorRepository.findByProductId(productId));
+		try {
+			productColorRepository.deleteAll(productColorRepository.findByProductId(productId));
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

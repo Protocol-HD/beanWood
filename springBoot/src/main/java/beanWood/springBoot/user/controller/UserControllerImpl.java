@@ -30,9 +30,15 @@ public class UserControllerImpl implements UserController {
 
 	@Override
 	@PostMapping("/save")
-	public ResponseEntity<User> saveUser(@RequestBody IUser iUser) {
-		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/save").toUriString());
-		return ResponseEntity.created(uri).body(userService.saveUser(iUser));
+	public int saveUser(@RequestBody IUser iUser) {
+		try {
+			URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/save").toUriString());
+			ResponseEntity.created(uri).body(userService.saveUser(iUser));
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
@@ -73,13 +79,7 @@ public class UserControllerImpl implements UserController {
 
 	@Override
 	@GetMapping("/findByUserName/{userName}")
-	public int findByUserName(@PathVariable String userName) {
-		try {
-			userService.findByUserName(userName);
-			return 1;
-		} catch (Exception e) {
-			log.error("Error: {}", e.getMessage());
-			return 2;
-		}
+	public User findByUserName(@PathVariable String userName) {
+		return userService.findByUserName(userName);
 	}
 }

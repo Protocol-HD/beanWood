@@ -1,20 +1,22 @@
 import axios from "axios";
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
+	const navigate = useNavigate();
 
-	const userUrl = "http://localhost:8080/user/findByUserId/";
-	const userId = useRef();
+	const userUrl = "http://localhost:8080/user/findByUserName/";
+	const userName = useRef();
 	const userPassword = useRef();
 
 
 	const addSignup = (e) => {
 		e.preventDefault();
-		axios.get(userUrl + userId.current.value).then(Response => {
-			console.log(Response.data);
-			if (Response.data.userId === userId.current.value) {
+		axios.get(userUrl + userName.current.value).then(Response => {
+			if (Response.data.userName === userName.current.value) {
 				alert("로그인 성공");
+				navigate("/");
 			} else {
 				alert("아이디를 확인해 주세요.")
 			}
@@ -33,7 +35,7 @@ function Login() {
 							<h3 className="text-center mb-60">Login From Here</h3>
 							<form onSubmit={addSignup}>
 								<label htmlFor="name">ID<span>**</span></label>
-								<input id="name" type="text" placeholder="아이디를 입력하세요." ref={userId} />
+								<input id="name" type="text" placeholder="아이디를 입력하세요." ref={userName} />
 								<label htmlFor="pass">PASSWORD <span>**</span></label>
 								<input id="pass" type="password" placeholder="비밀번호를 입력하세요." ref={userPassword} />
 								<div className="login-action mb-20 fix">

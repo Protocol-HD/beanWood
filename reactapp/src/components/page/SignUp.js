@@ -1,13 +1,15 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { useCallback, useState } from "react/cjs/react.development";
+import { useNavigate } from 'react-router-dom'
 
 
 
 function SignUp() {
+	const navigate = useNavigate();
+
 	const userUrl = "http://localhost:8080/user/save";
-	const userIdCheckUrl = `http://localhost:8080/user/findByUserId/`;
+	const userIdCheckUrl = `http://localhost:8080/user/findByUserName/`;
 
 	const userId = useRef();
 	const userAddress = useRef();
@@ -16,14 +18,14 @@ function SignUp() {
 	const userNumber = useRef();
 
 
-	
+
 	const [passwordCheck, setPasswordCheck] = useState('');
-	
+
 
 	const [name, setName] = useState('');
 	const [password, setPassword] = useState('');
 	const [phoneNumber, setPhoneNumber] = useState('');
-	
+
 	const [nameMessage, setNameMessage] = useState('');
 	const [PasswordMessage, setPasswordMessage] = useState('');
 	const [phoneNumberMessage, setPhoneNumberMessage] = useState('');
@@ -38,14 +40,26 @@ function SignUp() {
 	//회원가입 START
 	const addUser = (e) => {
 		e.preventDefault();
-		axios.post(userUrl, {
-			userId: userId.current.value,
-			userAddress: userAddress.current.value,
-			userPassword: userPassword.current.value,
-			userName: userName.current.value,
-			userNumber: userNumber.current.value,
-			userAdmin: false
-		});
+		axios.get(userIdCheckUrl + userId.current.value).then(Response => {
+			if (Response.data) {
+				alert("이미 사용중인 ID 입니다.");
+				setIsId(false)
+			} else {
+				axios.post(userUrl, {
+					userName: userId.current.value,
+					userAddress: userAddress.current.value,
+					userPassword: userPassword.current.value,
+					name: userName.current.value,
+					userNumber: userNumber.current.value
+				}).then(Response => {
+					if (Response.data === 1) {
+						alert("가입에 성공하였습니다. 로그인해주세요.");
+						navigate("/login");
+					}
+				});
+			}
+		})
+
 
 	}
 	//회원가입 END
@@ -61,7 +75,7 @@ function SignUp() {
 				alert("사용 가능한 ID 입니다.");
 				setIsId(true)
 			}
-		},[])
+		})
 	}
 	//아이디 중복 체크 END
 
@@ -71,10 +85,10 @@ function SignUp() {
 		const nameRegex = /^[가-힣a-zA-z]/
 		const nameCurrent = e.target.value
 		setName(nameCurrent)
-		if(!nameRegex.test(nameCurrent)){
+		if (!nameRegex.test(nameCurrent)) {
 			setNameMessage('특수문자와 숫자는 사용 불가 합니다.')
 			setIsName(false)
-		} else{
+		} else {
 			setNameMessage('올바른 형식 입니다.')
 			setIsName(true)
 		}
@@ -87,30 +101,30 @@ function SignUp() {
 		const phoneNumberRegex = /^(010|011|016|017|018|019)-\d{3,4}-\d{4}$/
 		const phoneNumberCurrent = e.target.value
 		setPhoneNumber(phoneNumberCurrent)
-		if(!phoneNumberRegex.test(phoneNumberCurrent)){
+		if (!phoneNumberRegex.test(phoneNumberCurrent)) {
 			setPhoneNumberMessage('하이픈(-)을 포함해서 숫자 11자리를 쓰세요.')
 			setIsPhoneNumber(false)
-		} else{
+		} else {
 			setPhoneNumberMessage('올바른 전화번호 형식 입니다.')
 			setIsPhoneNumber(true)
 		}
-	},[])
+	}, [])
 	//PHONE-NUMBER REGEX END
 
 	//Password REGEX START
-	const onChangePassword = useCallback((e)=> {
+	const onChangePassword = useCallback((e) => {
 		e.preventDefault();
 		const passwordRegex = /^[0-9].{3,25}$/
 		const passwordCurrent = e.target.value
 		setPassword(passwordCurrent)
-		if(!passwordRegex.test(passwordCurrent)){
+		if (!passwordRegex.test(passwordCurrent)) {
 			setPasswordMessage('숫자 4자리~24자리로 비밀번호를 만들어주세요.')
 			setIsPassword(false)
 		} else {
 			setPasswordMessage('올바른 비밀번호 입니다.')
 			setIsPassword(true)
 		}
-	},[])
+	}, [])
 	//Password REGEX END
 
 	//PasswordCheck  START
@@ -118,17 +132,17 @@ function SignUp() {
 		e.preventDefault();
 		const passwordCheckCurrent = e.target.value
 		setPasswordCheck(passwordCheckCurrent)
-		if(password === passwordCheckCurrent){
+		if (password === passwordCheckCurrent) {
 			setPasswordCheckMessage('일치합니다.')
 			setIsPasswordCheck(true)
-		} else{
+		} else {
 			setPasswordCheckMessage('일치하지 않습니다.')
 			setIsPasswordCheck(false)
 		}
-	},[password])
+	}, [password])
 	//PasswordCheck END
 
-	
+
 
 	return (
 		<section className="login-area pt-100 pb-100">
@@ -142,7 +156,7 @@ function SignUp() {
 							<form onSubmit={addUser} >
 								<form onSubmit={checkUserId}>
 									<label for="id">ID <span>**</span></label>
-									<input id="id" type="text"  placeholder="사용하실 아이디를 입력해주세요." ref={userId} />
+									<input id="id" type="text" placeholder="사용하실 아이디를 입력해주세요." ref={userId} />
 									<button className="btn theme-btn" onClick={checkUserId}>ID 중복 확인</button>
 								</form>
 								<label for="password">Password <span>**</span></label>

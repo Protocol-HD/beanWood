@@ -196,7 +196,7 @@ function HeaderTop({ headerClass, checkDir }) {
 								<button className="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#addcartOffcanvas"><img src={`${addPath}./assets/images/icons/icon-shopping-bag-dark.svg`} alt="" /><span className="item-count item-count--light">{cntCart} ITEMS</span></button>
 							</div>
 						</div>
-						<div className="col-auto" style={{ display: "none" }}>
+						<div className="col-auto" style={{ display: "block" }}>
 							<div className="header-action">
 								<Link className="header-action-item header-action-wishlist" to={"/login"}>
 									<i className="fas fa-key iconSize15 iconColor"></i>

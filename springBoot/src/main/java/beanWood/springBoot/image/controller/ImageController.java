@@ -14,5 +14,5 @@ public interface ImageController {
 
     List<Image> findAllImage();
 
-    void deleteByIdImage(Long id);
+    int deleteByIdImage(Long id);
 }

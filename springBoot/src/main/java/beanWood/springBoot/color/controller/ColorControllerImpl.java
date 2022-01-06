@@ -55,7 +55,13 @@ public class ColorControllerImpl implements ColorController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdColor(@PathVariable Long id) {
-		colorService.deleteByIdColor(id);
+	public int deleteByIdColor(@PathVariable Long id) {
+		try {
+			colorService.deleteByIdColor(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 }

@@ -15,5 +15,5 @@ public interface CartListController {
 
 	List<CartList> findAllCartList();
 
-	void deleteByIdCartList(Long id);
+	int deleteByIdCartList(Long id);
 }

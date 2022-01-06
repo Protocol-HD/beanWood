@@ -55,7 +55,13 @@ public class ImageControllerImpl implements ImageController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdImage(@PathVariable Long id) {
-		imageService.deleteByIdImage(id);
+	public int deleteByIdImage(@PathVariable Long id) {
+		try {
+			imageService.deleteByIdImage(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 }

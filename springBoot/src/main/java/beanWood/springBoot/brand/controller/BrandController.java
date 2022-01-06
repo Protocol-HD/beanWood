@@ -16,5 +16,5 @@ public interface BrandController {
 
     List<Brand> findAllBrand();
 
-    void deleteByIdProduct(Long id);
+    int deleteByIdProduct(Long id);
 }

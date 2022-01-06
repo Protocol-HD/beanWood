@@ -15,5 +15,5 @@ public interface CategoryController {
 
 	List<Category> findAllCategory();
 
-	void deleteByIdCategory(Long id);
+	int deleteByIdCategory(Long id);
 }

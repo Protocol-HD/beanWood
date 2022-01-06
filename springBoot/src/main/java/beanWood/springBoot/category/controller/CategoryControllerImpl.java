@@ -56,7 +56,13 @@ public class CategoryControllerImpl implements CategoryController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdCategory(@PathVariable Long id) {
-		categoryService.deleteByIdCategory(id);
+	public int deleteByIdCategory(@PathVariable Long id) {
+		try {
+			categoryService.deleteByIdCategory(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 }

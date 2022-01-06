@@ -15,5 +15,5 @@ public interface BannerCardController {
 
     List<BannerCard> findAllBannerCard();
 
-    void deleteByIdBannerCard(Long id);
+    int deleteByIdBannerCard(Long id);
 }

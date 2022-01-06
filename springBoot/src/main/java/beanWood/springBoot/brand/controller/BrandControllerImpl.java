@@ -56,7 +56,13 @@ public class BrandControllerImpl implements BrandController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdProduct(@PathVariable Long id) {
+	public int deleteByIdProduct(@PathVariable Long id) {
+		try {
 		brandService.deleteByIdBrand(id);
+		return 1;
+	} catch (Exception e) {
+		log.error("Error: {}", e.getMessage());
+		return 2;
+	}
 	}
 }

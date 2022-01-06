@@ -56,7 +56,13 @@ public class BannerCardControllerImpl implements BannerCardController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdBannerCard(@PathVariable Long id) {
-		bannerCardService.deleteByIdBannerCard(id);
+	public int deleteByIdBannerCard(@PathVariable Long id) {
+		try {
+			bannerCardService.deleteByIdBannerCard(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 }

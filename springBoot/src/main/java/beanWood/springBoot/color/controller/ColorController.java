@@ -14,5 +14,5 @@ public interface ColorController {
 
 	List<Color> findAllColor();
 
-	void deleteByIdColor(Long id);
+	int deleteByIdColor(Long id);
 }

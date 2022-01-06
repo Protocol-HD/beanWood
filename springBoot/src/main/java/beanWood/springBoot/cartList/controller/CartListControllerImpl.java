@@ -58,7 +58,13 @@ public class CartListControllerImpl implements CartListController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdCartList(@PathVariable Long id) {
-		cartListService.deleteByIdCartList(id);
+	public int deleteByIdCartList(@PathVariable Long id) {
+		try {
+			cartListService.deleteByIdCartList(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 }

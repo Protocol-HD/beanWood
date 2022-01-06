@@ -1,5 +1,6 @@
 package beanWood.springBoot.filter;
 
+import beanWood.springBoot.user.model.Login;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
+@CrossOrigin
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private final AuthenticationManager authenticationManager;
 
@@ -32,13 +35,29 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 		this.authenticationManager = authenticationManager;
 	}
 
+	//	@Override
+//	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+//		String userName = request.getParameter("userName");
+//		String password = request.getParameter("password");
+//		log.info("userName: {}, password: {}", userName, password);
+//		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userName, password);
+//		return authenticationManager.authenticate(authenticationToken);
+//	}
+
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-		String userName = request.getParameter("userName");
-		String password = request.getParameter("password");
-		log.info("userName: {}, password: {}", userName, password);
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userName, password);
-		return authenticationManager.authenticate(authenticationToken);
+		try {
+			Login login = new ObjectMapper().readValue(request.getInputStream(), Login.class);
+			String userName = login.getUserName();
+			String password = login.getPassword();
+			log.info("UserName is : {}", userName);
+			log.info("password is : {}", password);
+			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userName, password);
+			return authenticationManager.authenticate(authenticationToken);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

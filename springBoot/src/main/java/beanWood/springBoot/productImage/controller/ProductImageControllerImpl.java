@@ -4,6 +4,7 @@ import beanWood.springBoot.productImage.dto.IProductImage;
 import beanWood.springBoot.productImage.model.ProductImage;
 import beanWood.springBoot.productImage.service.ProductImageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,20 +14,33 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/productImage")
 @RequiredArgsConstructor
+@Slf4j
 public class ProductImageControllerImpl implements ProductImageController {
 	private final ProductImageService productImageService;
 
 
 	@Override
 	@PostMapping("/save")
-	public ProductImage saveProductImage(@RequestBody IProductImage iProductImage) {
-		return productImageService.saveProductImage(iProductImage);
+	public int saveProductImage(@RequestBody IProductImage iProductImage) {
+		try {
+			productImageService.saveProductImage(iProductImage);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
 	@PutMapping("/update")
-	public ProductImage updateProductImage(@RequestBody IProductImage iProductImage) {
-		return productImageService.saveProductImage(iProductImage);
+	public int updateProductImage(@RequestBody IProductImage iProductImage) {
+		try {
+			productImageService.saveProductImage(iProductImage);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
@@ -43,8 +57,14 @@ public class ProductImageControllerImpl implements ProductImageController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdProductImage(@PathVariable Long id) {
-		productImageService.deleteByIdProductImage(id);
+	public int deleteByIdProductImage(@PathVariable Long id) {
+		try {
+			productImageService.deleteByIdProductImage(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
@@ -55,7 +75,13 @@ public class ProductImageControllerImpl implements ProductImageController {
 
 	@Override
 	@DeleteMapping("/deleteByProductId/{productId}")
-	public void deleteAllByProductId(@PathVariable Long productId) {
-		productImageService.deleteAllByProductId(productId);
+	public int deleteAllByProductId(@PathVariable Long productId) {
+		try {
+			productImageService.deleteAllByProductId(productId);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 }

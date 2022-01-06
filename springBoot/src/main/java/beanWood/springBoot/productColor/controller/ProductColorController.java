@@ -7,17 +7,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductColorController {
-	ProductColor saveProductColor(IProductColor iProductColor);
+	int saveProductColor(IProductColor iProductColor);
 
-	ProductColor updateProductColor(IProductColor iProductColor);
+	int updateProductColor(IProductColor iProductColor);
 
 	List<ProductColor> findAllProductColor();
 
 	Optional<ProductColor> findByIdProductColor(Long id);
 
-	void deleteByIdProductColor(Long id);
+	int deleteByIdProductColor(Long id);
 
 	List<ProductColor> findByProductId(Long productId);
 
-	void deleteAllByProductId(Long productId);
+	int deleteAllByProductId(Long productId);
 }

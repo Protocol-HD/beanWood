@@ -7,17 +7,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductImageController {
-	ProductImage saveProductImage(IProductImage iproductImage);
+	int saveProductImage(IProductImage iproductImage);
 
-	ProductImage updateProductImage(IProductImage iProductImage);
+	int updateProductImage(IProductImage iProductImage);
 
 	Optional<ProductImage> findByIdProductImage(Long id);
 
 	List<ProductImage> findAllProductImage();
 
-	void deleteByIdProductImage(Long id);
+	int deleteByIdProductImage(Long id);
 
 	List<ProductImage> findByProductId(Long productId);
 
-	void deleteAllByProductId(Long productId);
+	int deleteAllByProductId(Long productId);
 }

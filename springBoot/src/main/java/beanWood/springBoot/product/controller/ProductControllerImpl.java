@@ -24,8 +24,8 @@ public class ProductControllerImpl implements ProductController {
 		try {
 			productService.saveProduct(iProduct);
 			return 1;
-		} catch (Exception exception) {
-			log.error("Error: {}", exception.getMessage());
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
 			return 2;
 		}
 
@@ -34,7 +34,13 @@ public class ProductControllerImpl implements ProductController {
 	@Override
 	@PutMapping("/update")
 	public int updateProduct(@RequestBody IProduct iProduct) {
-		productService.updateProduct(iProduct);
+		try {
+			productService.updateProduct(iProduct);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
@@ -51,8 +57,14 @@ public class ProductControllerImpl implements ProductController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdProduct(@PathVariable Long id) {
-		productService.deleteByIdProduct(id);
+	public int deleteByIdProduct(@PathVariable Long id) {
+		try {
+			productService.deleteByIdProduct(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override

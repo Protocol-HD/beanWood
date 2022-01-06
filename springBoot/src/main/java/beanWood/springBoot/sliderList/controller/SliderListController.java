@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SliderListController {
-	SliderList saveSliderList(ISliderList isliderList);
+	int saveSliderList(ISliderList isliderList);
 
-	SliderList updateSliderList(ISliderList iSliderList);
+	int updateSliderList(ISliderList iSliderList);
 
 	Optional<SliderList> findByIdSliderList(Long id);
 
 	List<SliderList> findAllSliderList();
 
-	void deleteByIdSliderList(Long id);
+	int deleteByIdSliderList(Long id);
 }

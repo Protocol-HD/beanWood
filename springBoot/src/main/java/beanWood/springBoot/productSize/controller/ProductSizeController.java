@@ -7,17 +7,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductSizeController {
-	ProductSize saveProductSize(IProductSize iProductSize);
+	int saveProductSize(IProductSize iProductSize);
 
-	ProductSize updateProductSize(IProductSize iProductSize);
+	int updateProductSize(IProductSize iProductSize);
 
 	List<ProductSize> findAllProductSize();
 
 	Optional<ProductSize> findByIdProductSize(Long id);
 
-	void deleteByIdProductSize(Long id);
+	int deleteByIdProductSize(Long id);
 
 	List<ProductSize> findByProductId(Long productId);
 
-	void deleteAllByProductId(Long productId);
+	int deleteAllByProductId(Long productId);
 }

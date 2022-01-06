@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserController {
-	User saveUser(User user);
+	int saveUser(User user);
 
-	User updateUser(User user);
+	int updateUser(User user);
 
 	Optional<User> findByIdUser(Long id);
 
 	List<User> findAllUser();
 
-	void deleteByIdUser(Long id);
+	int deleteByIdUser(Long id);
 
-	User findByUserId(String userId);
+	int findByUserId(String userId);
 }

@@ -52,8 +52,8 @@ public class ProductServiceImpl implements ProductService {
 					.price(iProduct.getPrice())
 					.category(categoryRepository.findById(iProduct.getCategoryId()).get())
 					.build());
-		} catch (Exception exception) {
-			log.error("Error: {}", exception.getMessage());
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
 			return null;
 		}
 	}
@@ -71,8 +71,8 @@ public class ProductServiceImpl implements ProductService {
 			);
 			log.info("imageIds: {}", imageIds);
 			return imageIds;
-		} catch (Exception exception) {
-			log.error("Error: {}", exception.getMessage());
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
 			return null;
 		}
 	}
@@ -111,8 +111,8 @@ public class ProductServiceImpl implements ProductService {
 			);
 			log.info("ProductSize save success, All save success");
 			return null;
-		} catch (Exception exception) {
-			log.error("Error: {}", exception.getMessage());
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
 			return null;
 		}
 	}
@@ -140,8 +140,8 @@ public class ProductServiceImpl implements ProductService {
 			log.info("ProductColor delete success, delete ProductSize by id: {}", id);
 			productSizeRepository.deleteAll(productSizeRepository.findByProductId(id));
 			log.info(("ProductSize delete success"));
-		} catch (Exception exception) {
-			log.error("Error: {}", exception.getMessage());
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
 		}
 	}
 
@@ -153,8 +153,8 @@ public class ProductServiceImpl implements ProductService {
 			log.info("delete CartList success, delete WishList start by id: {}", id);
 			wishListRepository.deleteAll(wishListRepository.findByProductId(id));
 			log.info("delete WishList success");
-		} catch (Exception exception) {
-			log.error("Error: {}", exception.getMessage());
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
 		}
 	}
 

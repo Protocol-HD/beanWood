@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WishListController {
-	WishList saveWishList(IWishList IWishList);
+	int saveWishList(IWishList IWishList);
 
-	WishList updateWishList(IWishList iWishList);
+	int updateWishList(IWishList iWishList);
 
 	Optional<WishList> findByIdWishList(Long id);
 
 	List<WishList> findAllWishList();
 
-	void deleteByIdWishList(Long id);
+	int deleteByIdWishList(Long id);
 }

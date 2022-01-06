@@ -3,6 +3,7 @@ package beanWood.springBoot.user.controller;
 import beanWood.springBoot.user.model.User;
 import beanWood.springBoot.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,19 +13,32 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Slf4j
 public class UserControllerImpl implements UserController {
 	private final UserService userService;
 
 	@Override
 	@PostMapping("/save")
-	public User saveUser(@RequestBody User user) {
-		return userService.saveUser(user);
+	public int saveUser(@RequestBody User user) {
+		try {
+			userService.saveUser(user);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
 	@PutMapping("/update")
-	public User updateUser(@RequestBody User user) {
-		return saveUser(user);
+	public int updateUser(@RequestBody User user) {
+		try {
+			userService.saveUser(user);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
@@ -41,13 +55,25 @@ public class UserControllerImpl implements UserController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdUser(@PathVariable Long id) {
-		userService.deleteByIdUser(id);
+	public int deleteByIdUser(@PathVariable Long id) {
+		try {
+			userService.deleteByIdUser(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
 	@GetMapping("/findByUserId/{userId}")
-	public User findByUserId(@PathVariable String userId) {
-		return userService.findByUserId(userId);
+	public int findByUserId(@PathVariable String userId) {
+		try {
+			userService.findByUserId(userId);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 }

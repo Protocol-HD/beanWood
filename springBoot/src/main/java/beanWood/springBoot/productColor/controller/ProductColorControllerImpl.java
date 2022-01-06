@@ -4,6 +4,7 @@ import beanWood.springBoot.productColor.dto.IProductColor;
 import beanWood.springBoot.productColor.model.ProductColor;
 import beanWood.springBoot.productColor.service.ProductColorService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,19 +14,32 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/productColor")
 @CrossOrigin
+@Slf4j
 public class ProductColorControllerImpl implements ProductColorController {
 	private final ProductColorService productColorService;
 
 	@Override
 	@PostMapping("/save")
-	public ProductColor saveProductColor(@RequestBody IProductColor iProductColor) {
-		return productColorService.saveProductColor(iProductColor);
+	public int saveProductColor(@RequestBody IProductColor iProductColor) {
+		try {
+			productColorService.saveProductColor(iProductColor);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
 	@PutMapping("/update")
-	public ProductColor updateProductColor(@RequestBody IProductColor iProductColor) {
-		return productColorService.saveProductColor(iProductColor);
+	public int updateProductColor(@RequestBody IProductColor iProductColor) {
+		try {
+			productColorService.saveProductColor(iProductColor);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
@@ -42,8 +56,15 @@ public class ProductColorControllerImpl implements ProductColorController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdProductColor(@PathVariable Long id) {
-		productColorService.deleteByIdProductColor(id);
+	public int deleteByIdProductColor(@PathVariable Long id) {
+		try {
+			productColorService.deleteByIdProductColor(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
+
 	}
 
 	@Override
@@ -54,7 +75,13 @@ public class ProductColorControllerImpl implements ProductColorController {
 
 	@Override
 	@DeleteMapping("/deleteByProductId/{productId}")
-	public void deleteAllByProductId(@PathVariable Long productId) {
-		productColorService.deleteAllByProductId(productId);
+	public int deleteAllByProductId(@PathVariable Long productId) {
+		try {
+			productColorService.deleteAllByProductId(productId);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 }

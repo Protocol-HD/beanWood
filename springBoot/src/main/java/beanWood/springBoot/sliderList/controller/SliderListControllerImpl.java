@@ -4,6 +4,7 @@ import beanWood.springBoot.sliderList.dto.ISliderList;
 import beanWood.springBoot.sliderList.model.SliderList;
 import beanWood.springBoot.sliderList.service.SliderListService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,19 +14,32 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/sliderList")
 @RequiredArgsConstructor
+@Slf4j
 public class SliderListControllerImpl implements SliderListController {
 	private final SliderListService sliderListService;
 
 	@Override
 	@PostMapping("/save")
-	public SliderList saveSliderList(@RequestBody ISliderList iSliderList) {
-		return sliderListService.saveSliderList(iSliderList);
+	public int saveSliderList(@RequestBody ISliderList iSliderList) {
+		try {
+			sliderListService.saveSliderList(iSliderList);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
 	@PutMapping("/update")
-	public SliderList updateSliderList(@RequestBody ISliderList iSliderList) {
-		return sliderListService.saveSliderList(iSliderList);
+	public int updateSliderList(@RequestBody ISliderList iSliderList) {
+		try {
+			sliderListService.saveSliderList(iSliderList);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
@@ -42,7 +56,13 @@ public class SliderListControllerImpl implements SliderListController {
 
 	@Override
 	@DeleteMapping("/delete/{id}")
-	public void deleteByIdSliderList(@PathVariable Long id) {
-		sliderListService.deleteByIdSliderList(id);
+	public int deleteByIdSliderList(@PathVariable Long id) {
+		try {
+			sliderListService.deleteByIdSliderList(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 }

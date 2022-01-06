@@ -3,6 +3,7 @@ package beanWood.springBoot.image.controller;
 import beanWood.springBoot.image.model.Image;
 import beanWood.springBoot.image.service.ImageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,19 +13,32 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/image")
 @RequiredArgsConstructor
+@Slf4j
 public class ImageControllerImpl implements ImageController {
 	private final ImageService imageService;
 
 	@Override
 	@PostMapping("/save")
-	public Image saveImage(@RequestBody Image image) {
-		return imageService.saveImage(image);
+	public int saveImage(@RequestBody Image image) {
+		try {
+			imageService.saveImage(image);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
 	@PutMapping("/update")
-	public Image updateImage(@RequestBody Image image) {
-		return saveImage(image);
+	public int updateImage(@RequestBody Image image) {
+		try {
+			imageService.saveImage(image);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override

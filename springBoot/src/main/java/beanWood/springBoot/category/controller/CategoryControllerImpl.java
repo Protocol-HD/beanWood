@@ -4,6 +4,7 @@ import beanWood.springBoot.category.dto.ICategory;
 import beanWood.springBoot.category.model.Category;
 import beanWood.springBoot.category.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,19 +14,32 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/category")
 @RequiredArgsConstructor
+@Slf4j
 public class CategoryControllerImpl implements CategoryController {
 	private final CategoryService categoryService;
 
 	@Override
 	@PostMapping("/save")
-	public Category saveCategory(@RequestBody ICategory iCategory) {
-		return categoryService.saveCategory(iCategory);
+	public int saveCategory(@RequestBody ICategory iCategory) {
+		try {
+			categoryService.saveCategory(iCategory);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
 	@PutMapping("/update")
-	public Category updateCategory(@RequestBody ICategory iCategory) {
-		return categoryService.saveCategory(iCategory);
+	public int updateCategory(@RequestBody ICategory iCategory) {
+		try {
+			categoryService.saveCategory(iCategory);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override

@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategoryController {
-	Category saveCategory(ICategory iCategory);
+	int saveCategory(ICategory iCategory);
 
-	Category updateCategory(ICategory iCategory);
+	int updateCategory(ICategory iCategory);
 
 	Optional<Category> findByIdCategory(Long id);
 

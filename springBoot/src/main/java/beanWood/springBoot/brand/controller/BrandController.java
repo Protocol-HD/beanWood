@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface BrandController {
 
-    Brand saveBrand(IBrand iBrand);
+    int saveBrand(IBrand iBrand);
 
-    Brand updateBrand(IBrand iBrand);
+    int updateBrand(IBrand iBrand);
 
     Optional<Brand> findByIdBrand(Long id);
 

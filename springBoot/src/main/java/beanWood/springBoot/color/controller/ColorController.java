@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ColorController {
-	Color saveColor(Color color);
+	int saveColor(Color color);
 
-	Color updateColor(Color color);
+	int updateColor(Color color);
 
 	Optional<Color> findByIdColor(Long id);
 

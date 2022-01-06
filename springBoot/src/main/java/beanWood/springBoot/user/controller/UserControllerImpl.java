@@ -1,11 +1,15 @@
 package beanWood.springBoot.user.controller;
 
+import beanWood.springBoot.user.model.IUser;
 import beanWood.springBoot.user.model.User;
 import beanWood.springBoot.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,23 +21,25 @@ import java.util.Optional;
 public class UserControllerImpl implements UserController {
 	private final UserService userService;
 
+//	@Override
+//	@PostMapping("/save")
+//	public ResponseEntity<User> saveUser(@RequestBody User user) {
+//		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/save").toUriString());
+//		return ResponseEntity.created(uri).body(userService.saveUser(user));
+//	}
+
 	@Override
 	@PostMapping("/save")
-	public int saveUser(@RequestBody User user) {
-		try {
-			userService.saveUser(user);
-			return 1;
-		} catch (Exception e) {
-			log.error("Error: {}", e.getMessage());
-			return 2;
-		}
+	public ResponseEntity<User> saveUser(@RequestBody IUser iUser) {
+		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/save").toUriString());
+		return ResponseEntity.created(uri).body(userService.saveUser(iUser));
 	}
 
 	@Override
 	@PutMapping("/update")
-	public int updateUser(@RequestBody User user) {
+	public int updateUser(@RequestBody IUser iUser) {
 		try {
-			userService.saveUser(user);
+			userService.saveUser(iUser);
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -66,10 +72,10 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@Override
-	@GetMapping("/findByUserId/{userId}")
-	public int findByUserId(@PathVariable String userId) {
+	@GetMapping("/findByUserName/{userName}")
+	public int findByUserName(@PathVariable String userName) {
 		try {
-			userService.findByUserId(userId);
+			userService.findByUserName(userName);
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());

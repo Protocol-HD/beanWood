@@ -24,13 +24,18 @@ public class ProductImageServiceImpl implements ProductImageService {
 	@Override
 	public ProductImage saveProductImage(IProductImage iProductImage) {
 		log.info("save productImage by : {}", iProductImage);
-		return productImageRepository.save(
-				ProductImage.builder()
-						.id(iProductImage.getId())
-						.image(imageRepository.findById(iProductImage.getImageId()).get())
-						.product(productRepository.findById(iProductImage.getProductId()).get())
-						.build()
-		);
+		try {
+			return productImageRepository.save(
+					ProductImage.builder()
+							.id(iProductImage.getId())
+							.image(imageRepository.findById(iProductImage.getImageId()).get())
+							.product(productRepository.findById(iProductImage.getProductId()).get())
+							.build()
+			);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
@@ -67,7 +72,11 @@ public class ProductImageServiceImpl implements ProductImageService {
 	@Override
 	public void deleteByIdProductImage(Long id) {
 		log.info("delete by id productImage : {}", id);
-		productImageRepository.deleteById(id);
+		try {
+			productImageRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 
 	@Override
@@ -89,6 +98,10 @@ public class ProductImageServiceImpl implements ProductImageService {
 	@Override
 	public void deleteAllByProductId(Long productId) {
 		log.info("delete by productId productImage : {}", productId);
-		productImageRepository.deleteAll(productImageRepository.findByProductId(productId));
+		try {
+			productImageRepository.deleteAll(productImageRepository.findByProductId(productId));
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

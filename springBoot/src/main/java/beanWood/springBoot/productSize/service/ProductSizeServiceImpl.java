@@ -24,13 +24,18 @@ public class ProductSizeServiceImpl implements ProductSizeService {
 	@Override
 	public ProductSize saveProductSize(IProductSize iProductSize) {
 		log.info("save productSize by : {}", iProductSize);
-		return productSizeRepository.save(
-				ProductSize.builder()
-						.id(iProductSize.getId())
-						.product(productRepository.findById(iProductSize.getProductId()).get())
-						.size(sizeRepository.findById(iProductSize.getSizeId()).get())
-						.build()
-		);
+		try {
+			return productSizeRepository.save(
+					ProductSize.builder()
+							.id(iProductSize.getId())
+							.product(productRepository.findById(iProductSize.getProductId()).get())
+							.size(sizeRepository.findById(iProductSize.getSizeId()).get())
+							.build()
+			);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
@@ -67,7 +72,11 @@ public class ProductSizeServiceImpl implements ProductSizeService {
 	@Override
 	public void deleteByIdProductSize(Long id) {
 		log.info("delete by id productSize : {}", id);
-		productSizeRepository.deleteById(id);
+		try {
+			productSizeRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 
 	@Override
@@ -89,6 +98,10 @@ public class ProductSizeServiceImpl implements ProductSizeService {
 	@Override
 	public void deleteAllByProductId(Long productId) {
 		log.info("delete by productId productSize : {}", productId);
-		productSizeRepository.deleteAll(productSizeRepository.findByProductId(productId));
+		try {
+			productSizeRepository.deleteAll(productSizeRepository.findByProductId(productId));
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

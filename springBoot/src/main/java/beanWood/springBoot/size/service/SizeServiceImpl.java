@@ -18,24 +18,43 @@ public class SizeServiceImpl implements SizeService {
 	@Override
 	public Size saveSize(Size size) {
 		log.info("save Size: {}", size.getSizeName());
-		return sizeRepository.save(size);
+		try {
+			return sizeRepository.save(size);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public Optional<Size> findByIdSize(Long id) {
 		log.info("find by id Size: {}", id);
-		return sizeRepository.findById(id);
+		try {
+			return sizeRepository.findById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public List<Size> findAllSize() {
 		log.info("find all Size");
-		return sizeRepository.findAll();
+		try {
+			return sizeRepository.findAll();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public void deleteByIdSize(Long id) {
 		log.info("delete by id Size");
-		sizeRepository.deleteById(id);
+		try {
+			sizeRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

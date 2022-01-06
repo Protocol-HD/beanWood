@@ -2,6 +2,7 @@ package beanWood.springBoot.productSize.service;
 
 import beanWood.springBoot.product.repository.ProductRepository;
 import beanWood.springBoot.productSize.dto.IProductSize;
+import beanWood.springBoot.productSize.dto.OProductSize;
 import beanWood.springBoot.productSize.model.ProductSize;
 import beanWood.springBoot.productSize.repository.ProductSizeRepository;
 import beanWood.springBoot.size.repository.SizeRepository;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,15 +35,24 @@ public class ProductSizeServiceImpl implements ProductSizeService {
 	}
 
 	@Override
-	public List<ProductSize> findAllProductSize() {
+	public List<OProductSize> findAllProductSize() {
 		log.info("find all productSize");
-		return productSizeRepository.findAll();
+		List<OProductSize> oProductSizes = new ArrayList<>();
+		productSizeRepository.findAll().forEach(productSize -> {
+			oProductSizes.add(OProductSize.builder()
+							.sizeId(productSize.getSize().getId())
+					.build());
+		});
+		return oProductSizes;
 	}
 
 	@Override
-	public Optional<ProductSize> findByIdProductSize(Long id) {
+	public OProductSize findByIdProductSize(Long id) {
 		log.info("find by id productSize : {}", id);
-		return productSizeRepository.findById(id);
+		ProductSize ProductSize = productSizeRepository.findById(id).get();
+		return OProductSize.builder()
+				.sizeId(ProductSize.getId())
+				.build();
 	}
 
 	@Override
@@ -51,9 +62,15 @@ public class ProductSizeServiceImpl implements ProductSizeService {
 	}
 
 	@Override
-	public List<ProductSize> findByProductId(Long productId) {
+	public List<OProductSize> findByProductId(Long productId) {
 		log.info("find by productId productSize : {}", productId);
-		return productSizeRepository.findByProductId(productId);
+		List<OProductSize> oProductSizes = new ArrayList<>();
+		productSizeRepository.findByProductId(productId).forEach(productSize -> {
+			oProductSizes.add(OProductSize.builder()
+						.sizeId(productSize.getSize().getId())
+						.build());
+		});
+		return oProductSizes;
 	}
 
 	@Override

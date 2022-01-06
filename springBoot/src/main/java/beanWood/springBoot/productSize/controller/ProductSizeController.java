@@ -1,7 +1,6 @@
 package beanWood.springBoot.productSize.controller;
 
 import beanWood.springBoot.productSize.dto.IProductSize;
-import beanWood.springBoot.productSize.dto.OProductSize;
 import beanWood.springBoot.productSize.model.ProductSize;
 
 import java.util.List;
@@ -12,13 +11,13 @@ public interface ProductSizeController {
 
 	int updateProductSize(IProductSize iProductSize);
 
-	List<OProductSize> findAllProductSize();
+	List<ProductSize> findAllProductSize();
 
-	OProductSize findByIdProductSize(Long id);
+	Optional<ProductSize> findByIdProductSize(Long id);
 
 	int deleteByIdProductSize(Long id);
 
-	List<OProductSize> findByProductId(Long productId);
+	List<ProductSize> findByProductId(Long productId);
 
 	int deleteAllByProductId(Long productId);
 }

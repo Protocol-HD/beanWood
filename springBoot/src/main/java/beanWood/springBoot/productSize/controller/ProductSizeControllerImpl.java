@@ -1,7 +1,6 @@
 package beanWood.springBoot.productSize.controller;
 
 import beanWood.springBoot.productSize.dto.IProductSize;
-import beanWood.springBoot.productSize.dto.OProductSize;
 import beanWood.springBoot.productSize.model.ProductSize;
 import beanWood.springBoot.productSize.service.ProductSizeService;
 import lombok.RequiredArgsConstructor;
@@ -45,13 +44,13 @@ public class ProductSizeControllerImpl implements ProductSizeController {
 
 	@Override
 	@GetMapping("/findAll")
-	public List<OProductSize> findAllProductSize() {
+	public List<ProductSize> findAllProductSize() {
 		return productSizeService.findAllProductSize();
 	}
 
 	@Override
 	@GetMapping("/find/{id}")
-	public OProductSize findByIdProductSize(@PathVariable Long id) {
+	public Optional<ProductSize> findByIdProductSize(@PathVariable Long id) {
 		return productSizeService.findByIdProductSize(id);
 	}
 
@@ -69,7 +68,7 @@ public class ProductSizeControllerImpl implements ProductSizeController {
 
 	@Override
 	@GetMapping("/findByProductId/{productId}")
-	public List<OProductSize> findByProductId(@PathVariable Long productId) {
+	public List<ProductSize> findByProductId(@PathVariable Long productId) {
 		return productSizeService.findByProductId(productId);
 	}
 

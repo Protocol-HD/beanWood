@@ -58,11 +58,11 @@ public class BrandControllerImpl implements BrandController {
 	@DeleteMapping("/delete/{id}")
 	public int deleteByIdProduct(@PathVariable Long id) {
 		try {
-		brandService.deleteByIdBrand(id);
-		return 1;
-	} catch (Exception e) {
-		log.error("Error: {}", e.getMessage());
-		return 2;
-	}
+			brandService.deleteByIdBrand(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 }

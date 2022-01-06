@@ -3,14 +3,15 @@ package beanWood.springBoot.productImage.service;
 import beanWood.springBoot.image.repository.ImageRepository;
 import beanWood.springBoot.product.repository.ProductRepository;
 import beanWood.springBoot.productImage.dto.IProductImage;
+import beanWood.springBoot.productImage.dto.OProductImage;
 import beanWood.springBoot.productImage.model.ProductImage;
 import beanWood.springBoot.productImage.repository.ProductImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,15 +34,24 @@ public class ProductImageServiceImpl implements ProductImageService {
 	}
 
 	@Override
-	public Optional<ProductImage> findByIdProductImage(Long id) {
+	public OProductImage findByIdProductImage(Long id) {
 		log.info("find by id productImage : {}", id);
-		return productImageRepository.findById(id);
+		ProductImage productImage = productImageRepository.findById(id).get();
+		return OProductImage.builder()
+				.imageUrl(productImage.getImage().getImageUrl())
+				.build();
 	}
 
 	@Override
-	public List<ProductImage> findAllProductImage() {
+	public List<OProductImage> findAllProductImage() {
 		log.info("find all productImage");
-		return productImageRepository.findAll();
+		List<OProductImage> oProductImages = new ArrayList<>();
+		productImageRepository.findAll().forEach(productImage -> {
+			oProductImages.add(OProductImage.builder()
+					.imageUrl(productImage.getImage().getImageUrl())
+					.build());
+		});
+		return oProductImages;
 	}
 
 	@Override
@@ -51,9 +61,15 @@ public class ProductImageServiceImpl implements ProductImageService {
 	}
 
 	@Override
-	public List<ProductImage> findByProductId(Long productId) {
+	public List<OProductImage> findByProductId(Long productId) {
 		log.info("find by productId productImage : {}", productId);
-		return productImageRepository.findByProductId(productId);
+		List<OProductImage> oProductImages = new ArrayList<>();
+		productImageRepository.findByProductId(productId).forEach(productImage -> {
+			oProductImages.add(OProductImage.builder()
+					.imageUrl(productImage.getImage().getImageUrl())
+					.build());
+		});
+		return oProductImages;
 	}
 
 	@Override

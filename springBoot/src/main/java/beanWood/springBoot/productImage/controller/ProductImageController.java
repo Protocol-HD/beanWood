@@ -1,23 +1,22 @@
 package beanWood.springBoot.productImage.controller;
 
 import beanWood.springBoot.productImage.dto.IProductImage;
-import beanWood.springBoot.productImage.model.ProductImage;
+import beanWood.springBoot.productImage.dto.OProductImage;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductImageController {
 	int saveProductImage(IProductImage iproductImage);
 
 	int updateProductImage(IProductImage iProductImage);
 
-	Optional<ProductImage> findByIdProductImage(Long id);
+	OProductImage findByIdProductImage(Long id);
 
-	List<ProductImage> findAllProductImage();
+	List<OProductImage> findAllProductImage();
 
 	int deleteByIdProductImage(Long id);
 
-	List<ProductImage> findByProductId(Long productId);
+	List<OProductImage> findByProductId(Long productId);
 
 	int deleteAllByProductId(Long productId);
 }

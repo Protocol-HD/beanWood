@@ -1,14 +1,13 @@
 package beanWood.springBoot.productImage.controller;
 
 import beanWood.springBoot.productImage.dto.IProductImage;
-import beanWood.springBoot.productImage.model.ProductImage;
+import beanWood.springBoot.productImage.dto.OProductImage;
 import beanWood.springBoot.productImage.service.ProductImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -45,13 +44,13 @@ public class ProductImageControllerImpl implements ProductImageController {
 
 	@Override
 	@GetMapping("/find/{id}")
-	public Optional<ProductImage> findByIdProductImage(@PathVariable Long id) {
+	public OProductImage findByIdProductImage(@PathVariable Long id) {
 		return productImageService.findByIdProductImage(id);
 	}
 
 	@Override
 	@GetMapping("/findAll")
-	public List<ProductImage> findAllProductImage() {
+	public List<OProductImage> findAllProductImage() {
 		return productImageService.findAllProductImage();
 	}
 
@@ -69,7 +68,7 @@ public class ProductImageControllerImpl implements ProductImageController {
 
 	@Override
 	@GetMapping("/findByProductId/{productId}")
-	public List<ProductImage> findByProductId(@PathVariable Long productId) {
+	public List<OProductImage> findByProductId(@PathVariable Long productId) {
 		return productImageService.findByProductId(productId);
 	}
 

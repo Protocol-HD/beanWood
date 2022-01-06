@@ -3,14 +3,15 @@ package beanWood.springBoot.productColor.service;
 import beanWood.springBoot.color.repository.ColorRepository;
 import beanWood.springBoot.product.repository.ProductRepository;
 import beanWood.springBoot.productColor.dto.IProductColor;
+import beanWood.springBoot.productColor.dto.OProductColor;
 import beanWood.springBoot.productColor.model.ProductColor;
 import beanWood.springBoot.productColor.repository.ProductColorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,15 +35,34 @@ public class ProductColorServiceImpl implements ProductColorService {
 	}
 
 	@Override
-	public List<ProductColor> findAllProductColor() {
+	public List<OProductColor> findAllProductColor() {
 		log.info("find all productColor");
-		return productColorRepository.findAll();
+		List<OProductColor> oProductColors = new ArrayList<>();
+		try {
+			productColorRepository.findAll().forEach(productColor -> {
+				oProductColors.add(OProductColor.builder()
+						.colorId(productColor.getColor().getId())
+						.build());
+			});
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
+		return oProductColors;
 	}
 
 	@Override
-	public Optional<ProductColor> findByIdProductColor(Long id) {
+	public OProductColor findByIdProductColor(Long id) {
 		log.info("find by id productColor : {}", id);
-		return productColorRepository.findById(id);
+		OProductColor oProductColor = new OProductColor();
+		try {
+			ProductColor productColor = productColorRepository.findById(id).get();
+			oProductColor = OProductColor.builder()
+					.colorId(productColor.getColor().getId())
+					.build();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
+		return oProductColor;
 	}
 
 	@Override
@@ -52,9 +72,19 @@ public class ProductColorServiceImpl implements ProductColorService {
 	}
 
 	@Override
-	public List<ProductColor> findByProductId(Long productId) {
+	public List<OProductColor> findByProductId(Long productId) {
 		log.info("find by productId productColor : {}", productId);
-		return productColorRepository.findByProductId(productId);
+		List<OProductColor> oProductColors = new ArrayList<>();
+		try {
+			productColorRepository.findByProductId(productId).forEach(productColor -> {
+				oProductColors.add(OProductColor.builder()
+						.colorId(productColor.getColor().getId())
+						.build());
+			});
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
+		return oProductColors;
 	}
 
 	@Override

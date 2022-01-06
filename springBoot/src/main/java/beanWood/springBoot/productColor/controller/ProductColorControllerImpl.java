@@ -1,14 +1,13 @@
 package beanWood.springBoot.productColor.controller;
 
 import beanWood.springBoot.productColor.dto.IProductColor;
-import beanWood.springBoot.productColor.model.ProductColor;
+import beanWood.springBoot.productColor.dto.OProductColor;
 import beanWood.springBoot.productColor.service.ProductColorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -44,13 +43,13 @@ public class ProductColorControllerImpl implements ProductColorController {
 
 	@Override
 	@GetMapping("/findAll")
-	public List<ProductColor> findAllProductColor() {
+	public List<OProductColor> findAllProductColor() {
 		return productColorService.findAllProductColor();
 	}
 
 	@Override
 	@GetMapping("/find/{id}")
-	public Optional<ProductColor> findByIdProductColor(@PathVariable Long id) {
+	public OProductColor findByIdProductColor(@PathVariable Long id) {
 		return productColorService.findByIdProductColor(id);
 	}
 
@@ -69,7 +68,7 @@ public class ProductColorControllerImpl implements ProductColorController {
 
 	@Override
 	@GetMapping("/findByProductId/{productId}")
-	public List<ProductColor> findByProductId(@PathVariable Long productId) {
+	public List<OProductColor> findByProductId(@PathVariable Long productId) {
 		return productColorService.findByProductId(productId);
 	}
 

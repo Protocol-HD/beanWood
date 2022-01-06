@@ -10,7 +10,7 @@ function WishTableLine({ item, delCheck, setDelCheck }) {
 	const [imgUrl, setImgUrl] = useState("");
 
 	useEffect(() => {
-		axios.get(findProductImageByProductId + item.product.id).then(Response => setImgUrl(Response.data[0].image.imageUrl))
+		axios.get(findProductImageByProductId + item.product.id).then(Response => setImgUrl(Response.data[0].imageUrl))
 	}, [findProductImageByProductId, item.product.id])
 
 	const handleDelete = () => {

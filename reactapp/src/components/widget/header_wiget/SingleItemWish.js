@@ -18,7 +18,7 @@ function SingleItemWish({ item, delCheck, setDelCheck }) {
 
 	useEffect(() => {
 		axios.get(productImageUrl + item.product.id).then(Response => {
-			setImageUrl(Response.data[0].image.imageUrl);
+			setImageUrl(Response.data[0].imageUrl);
 		});
 	})
 

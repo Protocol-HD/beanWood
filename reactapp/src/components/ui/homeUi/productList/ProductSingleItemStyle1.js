@@ -27,7 +27,7 @@ function ProductSingleItemStyle1({ item, path, checkDir }) {
 
 	useEffect(() => {
 		axios.get(findProductImageByProductIdUrl + item.id).then(Response => {
-			if (Response.data[0]) setImgUrl(Response.data[0].image.imageUrl);
+			if (Response.data[0]) setImgUrl(Response.data[0].imageUrl);
 		})
 		if (checkDir) {
 			setAddPath("../.")

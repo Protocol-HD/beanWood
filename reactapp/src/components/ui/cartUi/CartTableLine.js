@@ -44,7 +44,7 @@ function CartTableLine({ item, setCheck, check, delCheck, setDelCheck }) {
 			});
 		axios.get(findProductImageByProductId + item.product.id)
 			.then(Response => {
-				setProductImg(Response.data[0].image.imageUrl);
+				setProductImg(Response.data[0].imageUrl);
 			});
 	}, [item.product.id]);
 

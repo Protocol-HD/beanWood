@@ -18,7 +18,7 @@ function ProductGalleryInfo({ product }) {
 		axios.get(productImageUrl + product.id)
 			.then(Response => {
 				setProMainImg(Response.data)
-				setMainImgUrl(Response.data[0].image.imageUrl)
+				setMainImgUrl(Response.data[0].imageUrl)
 			})
 	}, [product.id]);
 
@@ -86,7 +86,7 @@ function ProductGalleryInfo({ product }) {
 															<li key={image.id} className="nav-item">
 																<button className="nav-link active" data-bs-toggle="tab" type="button" onClick={changeMainImage}>
 																	<span className="thumb">
-																		<img className="img-fluid" src={`../../assets/images/products/${image.image.imageUrl}`} alt={image.image.imageUrl} />
+																		<img className="img-fluid" src={`../../assets/images/products/${image.imageUrl}`} alt={image.imageUrl} />
 																	</span>
 																</button>
 															</li>

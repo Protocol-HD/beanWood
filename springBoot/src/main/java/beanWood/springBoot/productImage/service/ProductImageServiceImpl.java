@@ -36,21 +36,31 @@ public class ProductImageServiceImpl implements ProductImageService {
 	@Override
 	public OProductImage findByIdProductImage(Long id) {
 		log.info("find by id productImage : {}", id);
-		ProductImage productImage = productImageRepository.findById(id).get();
-		return OProductImage.builder()
-				.imageUrl(productImage.getImage().getImageUrl())
-				.build();
+		OProductImage oProductImage = new OProductImage();
+		try {
+			ProductImage productImage = productImageRepository.findById(id).get();
+			oProductImage = OProductImage.builder()
+					.imageUrl(productImage.getImage().getImageUrl())
+					.build();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
+		return oProductImage;
 	}
 
 	@Override
 	public List<OProductImage> findAllProductImage() {
 		log.info("find all productImage");
 		List<OProductImage> oProductImages = new ArrayList<>();
-		productImageRepository.findAll().forEach(productImage -> {
-			oProductImages.add(OProductImage.builder()
-					.imageUrl(productImage.getImage().getImageUrl())
-					.build());
-		});
+		try {
+			productImageRepository.findAll().forEach(productImage -> {
+				oProductImages.add(OProductImage.builder()
+						.imageUrl(productImage.getImage().getImageUrl())
+						.build());
+			});
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 		return oProductImages;
 	}
 
@@ -64,11 +74,15 @@ public class ProductImageServiceImpl implements ProductImageService {
 	public List<OProductImage> findByProductId(Long productId) {
 		log.info("find by productId productImage : {}", productId);
 		List<OProductImage> oProductImages = new ArrayList<>();
-		productImageRepository.findByProductId(productId).forEach(productImage -> {
-			oProductImages.add(OProductImage.builder()
-					.imageUrl(productImage.getImage().getImageUrl())
-					.build());
-		});
+		try {
+			productImageRepository.findByProductId(productId).forEach(productImage -> {
+				oProductImages.add(OProductImage.builder()
+						.imageUrl(productImage.getImage().getImageUrl())
+						.build());
+			});
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 		return oProductImages;
 	}
 

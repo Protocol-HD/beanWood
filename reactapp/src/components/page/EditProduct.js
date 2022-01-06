@@ -69,7 +69,7 @@ function EditProduct({ editId, showMenu, setShowMenu, refresh, setRefresh }) {
 			axios.get(findProductImageUrl + editId).then(Response => {
 				let images = [];
 				Response.data.map(image => {
-					images.push(image.image.imageUrl);
+					images.push(image.imageUrl);
 				})
 				setProductImages(images);
 			})
@@ -97,8 +97,8 @@ function EditProduct({ editId, showMenu, setShowMenu, refresh, setRefresh }) {
 					axios.get(findProductColorUrl + editId).then(Response => {
 						let productColors = [];
 						Response.data.map(color => {
-							productColors.push(String(color.color.id));
-							document.getElementById(`editCheckColor${color.color.id}`).checked = true;
+							productColors.push(String(color.colorId));
+							document.getElementById(`editCheckColor${color.colorId}`).checked = true;
 						})
 						setProductColor(productColors);
 					})
@@ -113,8 +113,8 @@ function EditProduct({ editId, showMenu, setShowMenu, refresh, setRefresh }) {
 					axios.get(findProductSizeUrl + editId).then(Response => {
 						let productSizes = [];
 						Response.data.map(size => {
-							productSizes.push(String(size.size.id));
-							document.getElementById(`editCheckSize${size.size.id}`).checked = true;
+							productSizes.push(String(size.sizeId));
+							document.getElementById(`editCheckSize${size.sizeId}`).checked = true;
 						})
 						setProductSize(productSizes);
 					})

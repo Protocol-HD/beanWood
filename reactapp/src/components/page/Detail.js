@@ -32,7 +32,6 @@ function Detail({ setHeaderClass }) {
 			/>
 			<ProductGalleryInfo product={product} />
 			<ExclusiveCollection checkDir={checkDir} />
-			{/* <ProductSection ctgy={product.categoryId} /> */}
 		</>
 	);
 }

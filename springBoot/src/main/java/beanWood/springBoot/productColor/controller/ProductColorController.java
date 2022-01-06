@@ -1,23 +1,22 @@
 package beanWood.springBoot.productColor.controller;
 
 import beanWood.springBoot.productColor.dto.IProductColor;
-import beanWood.springBoot.productColor.model.ProductColor;
+import beanWood.springBoot.productColor.dto.OProductColor;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductColorController {
 	int saveProductColor(IProductColor iProductColor);
 
 	int updateProductColor(IProductColor iProductColor);
 
-	List<ProductColor> findAllProductColor();
+	List<OProductColor> findAllProductColor();
 
-	Optional<ProductColor> findByIdProductColor(Long id);
+	OProductColor findByIdProductColor(Long id);
 
 	int deleteByIdProductColor(Long id);
 
-	List<ProductColor> findByProductId(Long productId);
+	List<OProductColor> findByProductId(Long productId);
 
 	int deleteAllByProductId(Long productId);
 }

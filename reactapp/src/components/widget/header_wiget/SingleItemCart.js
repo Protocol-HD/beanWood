@@ -19,7 +19,7 @@ function SingleItemCart({ item, delCheck, setDelCheck }) {
 	useEffect(() => {
 		axios.get(findProductImageByProductId + item.product.id)
 			.then(Response => {
-				setProduct(Response.data[0].image.imageUrl);
+				setProduct(Response.data[0].imageUrl);
 			})
 	}, [item.product.id])
 

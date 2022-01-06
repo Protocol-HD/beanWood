@@ -10,7 +10,7 @@ function EditProductListItem({ product, setShowMenu, setEditId, refresh, setRefr
 	useEffect(() => {
 		axios.get(findProductImageUrl + product.id).then(Response => {
 			if (Response.data[0]) {
-				setImageUrl(Response.data[0].image.imageUrl);
+				setImageUrl(Response.data[0].imageUrl);
 			} else {
 				setImageUrl("No Image");
 			}

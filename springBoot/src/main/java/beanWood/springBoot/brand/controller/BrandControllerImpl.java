@@ -4,6 +4,7 @@ import beanWood.springBoot.brand.dto.IBrand;
 import beanWood.springBoot.brand.model.Brand;
 import beanWood.springBoot.brand.service.BrandService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,19 +14,32 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/brand")
 @RequiredArgsConstructor
+@Slf4j
 public class BrandControllerImpl implements BrandController {
 	private final BrandService brandService;
 
 	@Override
 	@PostMapping("/save")
-	public Brand saveBrand(@RequestBody IBrand iBrand) {
-		return brandService.saveBrand(iBrand);
+	public int saveBrand(@RequestBody IBrand iBrand) {
+		try {
+			brandService.saveBrand(iBrand);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
 	@PutMapping("/update")
-	public Brand updateBrand(@RequestBody IBrand iBrand) {
-		return brandService.saveBrand(iBrand);
+	public int updateBrand(@RequestBody IBrand iBrand) {
+		try {
+			brandService.saveBrand(iBrand);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override

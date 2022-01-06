@@ -4,6 +4,7 @@ import beanWood.springBoot.bannerCard.dto.IBannerCard;
 import beanWood.springBoot.bannerCard.model.BannerCard;
 import beanWood.springBoot.bannerCard.service.BannerCardService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,19 +14,32 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/bannerCard")
 @RequiredArgsConstructor
+@Slf4j
 public class BannerCardControllerImpl implements BannerCardController {
 	private final BannerCardService bannerCardService;
 
 	@Override
 	@PostMapping("/save")
-	public BannerCard saveBannerCard(@RequestBody IBannerCard iBannerCard) {
-		return bannerCardService.saveBannerCard(iBannerCard);
+	public int saveBannerCard(@RequestBody IBannerCard iBannerCard) {
+		try {
+			bannerCardService.saveBannerCard(iBannerCard);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override
 	@PutMapping("/update")
-	public BannerCard updateBannerCard(@RequestBody IBannerCard iBannerCard) {
-		return bannerCardService.saveBannerCard(iBannerCard);
+	public int updateBannerCard(@RequestBody IBannerCard iBannerCard) {
+		try {
+			bannerCardService.saveBannerCard(iBannerCard);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
 	}
 
 	@Override

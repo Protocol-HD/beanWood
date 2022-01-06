@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ImageController {
-    Image saveImage(Image image);
+    int saveImage(Image image);
 
-    Image updateImage(Image image);
+    int updateImage(Image image);
 
     Optional<Image> findByIdImage(Long id);
 

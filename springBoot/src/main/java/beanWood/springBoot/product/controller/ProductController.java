@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductController {
-	Product saveProduct(IProduct iProduct);
+	int saveProduct(IProduct iProduct);
 
-	Product updateProduct(IProduct iProduct);
+	int updateProduct(IProduct iProduct);
 
 	Optional<Product> findByIdProduct(Long id);
 

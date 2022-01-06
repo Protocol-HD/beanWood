@@ -20,14 +20,21 @@ public class ProductControllerImpl implements ProductController {
 
 	@Override
 	@PostMapping("/save")
-	public Product saveProduct(@RequestBody IProduct iProduct) {
-		return productService.saveProduct(iProduct);
+	public int saveProduct(@RequestBody IProduct iProduct) {
+		try {
+			productService.saveProduct(iProduct);
+			return 1;
+		} catch (Exception exception) {
+			log.error("Error: {}", exception.getMessage());
+			return 2;
+		}
+
 	}
 
 	@Override
 	@PutMapping("/update")
-	public Product updateProduct(@RequestBody IProduct iProduct) {
-		return productService.updateProduct(iProduct);
+	public int updateProduct(@RequestBody IProduct iProduct) {
+		productService.updateProduct(iProduct);
 	}
 
 	@Override

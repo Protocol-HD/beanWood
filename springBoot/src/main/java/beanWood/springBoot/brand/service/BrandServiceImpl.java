@@ -37,7 +37,7 @@ public class BrandServiceImpl implements BrandService {
 
 	@Override
 	public List<Brand> findAllBrand() {
-		log.info("find all Brand: {}");
+		log.info("find all Brand");
 		try {
 			return brandRepository.findAll();
 		} catch (Exception e) {

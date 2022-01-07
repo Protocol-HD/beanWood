@@ -40,8 +40,8 @@ public class ProductServiceImpl implements ProductService {
 	private final WishListRepository wishListRepository;
 
 	public Product saveProductBeforeSaveProduct(IProduct iProduct) {
+		log.info("Save Product: {}", iProduct);
 		try {
-			log.info("Save Product: {}", iProduct);
 			return productRepository.save(Product.builder()
 					.id(iProduct.getId())
 					.description(iProduct.getDescription())

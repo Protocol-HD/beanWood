@@ -22,7 +22,7 @@ public class BannerCardControllerImpl implements BannerCardController {
 	@PostMapping("/save")
 	public int saveBannerCard(@RequestBody IBannerCard iBannerCard) {
 		try {
-			bannerCardService.saveBannerCard(iBannerCard);
+			if(bannerCardService.saveBannerCard(iBannerCard) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -34,7 +34,7 @@ public class BannerCardControllerImpl implements BannerCardController {
 	@PutMapping("/update")
 	public int updateBannerCard(@RequestBody IBannerCard iBannerCard) {
 		try {
-			bannerCardService.saveBannerCard(iBannerCard);
+			if(bannerCardService.saveBannerCard(iBannerCard) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -45,13 +45,25 @@ public class BannerCardControllerImpl implements BannerCardController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<BannerCard> findByBannerCard(@PathVariable Long id) {
-		return bannerCardService.findByIdBannerCard(id);
+		try {
+			if(bannerCardService.findByIdBannerCard(id).isEmpty()) return Optional.empty();
+			return bannerCardService.findByIdBannerCard(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<BannerCard> findAllBannerCard() {
-		return bannerCardService.findBannerCard();
+		try {
+			if(bannerCardService.findBannerCard() == null) return null;
+			return bannerCardService.findBannerCard();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

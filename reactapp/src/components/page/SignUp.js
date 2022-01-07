@@ -150,35 +150,35 @@ function SignUp() {
 				<div className="row">
 					<div className="col-lg-8 offset-lg-2">
 						<div className="basic-login">
-							<div className="text-center"><i class="fas fa-user-plus iconSize3 iconColor"></i>
+							<div className="text-center"><i className="fas fa-user-plus iconSize3 iconColor"></i>
 							</div>
 							<h3 className="text-center mb-60">Signup From Here</h3>
 							<form onSubmit={addUser} >
-								<form onSubmit={checkUserId}>
-									<label for="id">ID <span>**</span></label>
+								<div>
+									<label htmlFor="id">ID <span>**</span></label>
 									<input id="id" type="text" placeholder="사용하실 아이디를 입력해주세요." ref={userId} />
 									<button className="btn theme-btn" onClick={checkUserId}>ID 중복 확인</button>
-								</form>
-								<label for="password">Password <span>**</span></label>
+								</div>
+								<label htmlFor="password">Password <span>**</span></label>
 								<input id="password" type="password" onChange={onChangePassword} placeholder="사용하실 비밀번호를 입력하세요." ref={userPassword} />
-								{password.length > 0 && <span className="message ${isPassword ? 'success' : 'error'}">{PasswordMessage}</span>}
+								{password.length > 0 && <span className={`message ${isPassword ? 'success' : 'error'}`}>{PasswordMessage}</span>}
 
-								<label for="passwordconfirm">Password Confirm <span>**</span></label>
+								<label htmlFor="passwordconfirm">Password Confirm <span>**</span></label>
 								<div>
 									<input id="PasswordCheck" type="password" onChange={onChangePasswordCheck} placeholder="사용하실 비밀번호를 한 번 더 입력하세요." />
-									{passwordCheck.length > 0 && <span className="message ${isPasswordCheck ? 'success' : 'error'}">{passwordCheckMessage}</span>}
+									{passwordCheck.length > 0 && <span className={`message ${isPasswordCheck ? 'success' : 'error'}`}>{passwordCheckMessage}</span>}
 								</div>
 
-								<label for="pass">Address <span>**</span></label>
+								<label htmlFor="pass">Address <span>**</span></label>
 								<input id="pass" type="text" placeholder="사용하실 주소를 입력하세요." ref={userAddress} />
 
-								<label for="name">Name <span>**</span></label>
+								<label htmlFor="name">Name <span>**</span></label>
 								<input id="name" type="text" onChange={onChangeName} placeholder="성함을 입력하세요." ref={userName} />
-								{name.length > 0 && <span className="message ${isName ? 'success' : 'error'}">{nameMessage}</span>}
+								{name.length > 0 && <span className={`message ${isName ? 'success' : 'error'}`}>{nameMessage}</span>}
 
-								<label for="phoneNumber">PhoneNumber <span>**</span></label>
+								<label htmlFor="phoneNumber">PhoneNumber <span>**</span></label>
 								<input id="phoneNumber" type="text" onChange={onChangePhoneNumber} placeholder="전화번호를 입력하세요.('-'을 포함해서 숫자 11자리를 쓰세요.)" ref={userNumber} />
-								{phoneNumber.length > 0 && <span className="message ${isPhoneNumber ? 'success' : 'error'}">{phoneNumberMessage}</span>}
+								{phoneNumber.length > 0 && <span className={`message ${isPhoneNumber ? 'success' : 'error'}`}>{phoneNumberMessage}</span>}
 								<div className="mt-10"></div>
 								<button className="btn theme-btn-2 w-100" type="activation" disabled={!(isId && isPassword && isPasswordCheck && isName && isPhoneNumber)}>회원가입하기</button>
 								<div className="or-divide"><span>or</span></div>

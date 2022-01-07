@@ -9,8 +9,12 @@ function SizeList({ item, check, setCheck }) {
         if (
             window.confirm('size : "' + item.sizeName + '" 삭제하시겠습니까?')
         ) {
-            axios.delete(deleteUrl).then(() => {
-                setCheck(!check);
+            axios.delete(deleteUrl).then(Response => {
+				if(Response.data == 1) {
+					setCheck(!check);
+				} else {
+					window.alert('사용중인 항목입니다.');
+				}
             });
         } else {
             window.alert('삭제되지 않았습니다');

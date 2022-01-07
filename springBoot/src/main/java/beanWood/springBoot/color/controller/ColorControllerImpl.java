@@ -21,7 +21,7 @@ public class ColorControllerImpl implements ColorController {
 	@PostMapping("/save")
 	public int saveColor(@RequestBody Color color) {
 		try {
-			if(colorService.saveColor(color) == null) return 2;
+			if (colorService.saveColor(color) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -33,7 +33,7 @@ public class ColorControllerImpl implements ColorController {
 	@PutMapping("/update")
 	public int updateColor(@RequestBody Color color) {
 		try {
-			if(colorService.saveColor(color) == null) return 2;
+			if (colorService.saveColor(color) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -67,8 +67,7 @@ public class ColorControllerImpl implements ColorController {
 	@DeleteMapping("/delete/{id}")
 	public int deleteByIdColor(@PathVariable Long id) {
 		try {
-			colorService.deleteByIdColor(id);
-			return 1;
+			return colorService.deleteByIdColor(id);
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
 			return 2;

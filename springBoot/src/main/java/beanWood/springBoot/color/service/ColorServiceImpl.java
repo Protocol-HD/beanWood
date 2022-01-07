@@ -49,12 +49,14 @@ public class ColorServiceImpl implements ColorService {
 	}
 
 	@Override
-	public void deleteByIdColor(Long id) {
+	public int deleteByIdColor(Long id) {
 		log.info("delete by id Color: {}", id);
 		try {
 			colorRepository.deleteById(id);
+			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
+			return 2;
 		}
 	}
 }

@@ -7,7 +7,7 @@ function Login() {
 	const navigate = useNavigate();
 
 	const userUrl = "http://localhost:8080/user/findByUserName/";
-	const loginUrl = "http://localhost:8080/user/login";
+	// const loginUrl = "http://localhost:8080/user/login";
 	const userName = useRef();
 	const userPassword = useRef();
 

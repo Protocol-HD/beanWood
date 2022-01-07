@@ -12,5 +12,5 @@ public interface SizeService {
 
 	List<Size> findAllSize();
 
-	void deleteByIdSize(Long id);
+	int deleteByIdSize(Long id);
 }

@@ -12,5 +12,5 @@ public interface ColorService {
 
 	List<Color> findAllColor();
 
-	void deleteByIdColor(Long id);
+	int deleteByIdColor(Long id);
 }

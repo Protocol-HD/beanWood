@@ -17,8 +17,8 @@ function ProductGalleryInfo({ product }) {
 	useEffect(() => {
 		axios.get(productImageUrl + product.id)
 			.then(Response => {
-				setProMainImg(Response.data)
-				setMainImgUrl(Response.data[0].imageUrl)
+				setProMainImg(Response.data);
+				setMainImgUrl(Response.data[0].imageUrl);
 			})
 	}, [product.id]);
 
@@ -124,11 +124,6 @@ function ProductGalleryInfo({ product }) {
 															</div>
 														)
 													})}
-													{/* <li className="fill"><span className="material-icons">star</span></li>
-                                                <li className="fill"><span className="material-icons">star</span></li>
-                                                <li className="fill"><span className="material-icons">star</span></li>
-                                                <li className="fill"><span className="material-icons">star</span></li>
-                                                <li className="fill"><span className="material-icons">star_half</span></li> */}
 												</ul>
 												<button type="button" onClick={handlePostWish} className="wishlist">Add Wishlist</button>
 											</div>

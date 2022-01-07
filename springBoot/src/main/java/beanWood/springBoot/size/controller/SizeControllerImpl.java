@@ -21,7 +21,7 @@ public class SizeControllerImpl implements SizeController {
 	@PostMapping("/save")
 	public int saveSize(@RequestBody Size size) {
 		try {
-			if(sizeService.saveSize(size) == null) return 2;
+			if (sizeService.saveSize(size) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -33,7 +33,7 @@ public class SizeControllerImpl implements SizeController {
 	@PutMapping("/update")
 	public int updateSize(@RequestBody Size size) {
 		try {
-			if(sizeService.saveSize(size) == null) return 2;
+			if (sizeService.saveSize(size) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -67,8 +67,7 @@ public class SizeControllerImpl implements SizeController {
 	@DeleteMapping("/delete/{id}")
 	public int deleteByIdSize(@PathVariable Long id) {
 		try {
-			sizeService.deleteByIdSize(id);
-			return 1;
+			return sizeService.deleteByIdSize(id);
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
 			return 2;

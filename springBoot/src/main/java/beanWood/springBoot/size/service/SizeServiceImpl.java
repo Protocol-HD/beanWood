@@ -49,12 +49,14 @@ public class SizeServiceImpl implements SizeService {
 	}
 
 	@Override
-	public void deleteByIdSize(Long id) {
+	public int deleteByIdSize(Long id) {
 		log.info("delete by id Size");
 		try {
 			sizeRepository.deleteById(id);
+			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
+			return 2;
 		}
 	}
 }

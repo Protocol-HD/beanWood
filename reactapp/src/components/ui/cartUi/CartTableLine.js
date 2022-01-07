@@ -22,12 +22,10 @@ function CartTableLine({ item, setCheck, check, delCheck, setDelCheck, refresh, 
 			id: item.id,
 			productId: product.id,
 			quantity: parseInt(qty.current.value)
-		});
+		}).then(() => setRefresh(!refresh));
 	}
 
 	const handleDelete = () => {
-
-
 		if (window.confirm("Do you want to delete from the cart?")) {
 			axios.delete(deleteCartListUrl + item.id)
 				.then(() => {

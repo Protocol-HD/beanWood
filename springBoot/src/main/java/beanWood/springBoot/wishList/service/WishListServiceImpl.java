@@ -21,7 +21,7 @@ public class WishListServiceImpl implements WishListService {
 	@Override
 	public WishList saveWishList(IWishList iWishList) {
 		log.info("save WishList: {}", iWishList);
-		if (wishListRepository.findByProductId(iWishList.getProductId()).isEmpty()) {
+		if (wishListRepository.findByProductId(iWishList.getProductId()) == null) {
 			log.info("not found start add item to wishList");
 			try {
 				return wishListRepository.save(

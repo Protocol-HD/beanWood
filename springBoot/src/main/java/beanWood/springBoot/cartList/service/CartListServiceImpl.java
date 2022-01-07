@@ -35,7 +35,19 @@ public class CartListServiceImpl implements CartListService {
 				return null;
 			}
 		} else {
-
+			try {
+				CartList cartList = cartListRepository.findByProductId(iCartList.getProductId());
+				return cartListRepository.save(
+						CartList.builder()
+								.id(cartList.getId())
+								.quantity(cartList.getQuantity() + 1)
+								.product(cartList.getProduct())
+								.build()
+				);
+			} catch (Exception e) {
+				log.error("Error: {}", e.getMessage());
+				return null;
+			}
 		}
 	}
 

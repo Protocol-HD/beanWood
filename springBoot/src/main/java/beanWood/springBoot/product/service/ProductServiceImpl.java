@@ -159,9 +159,9 @@ public class ProductServiceImpl implements ProductService {
 		log.info("delete CartList and WishList by Product id: {}", id);
 		try {
 			log.info("delete CartList start by id: {}", id);
-			cartListRepository.deleteAll(cartListRepository.findByProductId(id));
+			cartListRepository.delete(cartListRepository.findByProductId(id));
 			log.info("delete CartList success, delete WishList start by id: {}", id);
-			wishListRepository.deleteAll(wishListRepository.findByProductId(id));
+			wishListRepository.delete(wishListRepository.findByProductId(id));
 			log.info("delete WishList success");
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());

@@ -27,32 +27,51 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public Purchase savePurchase(PurchaseDto purchaseDto) {
         log.info("save Purchase: {}", purchaseDto);
-        CartList cartList = cartListRepository.findById(purchaseDto.getCartListId()).get();
-        return purchaseRepository.save(
-                Purchase.builder()
-                        .id(purchaseDto.getId())
-                        .shipMemo(purchaseDto.getShipMemo())
-                        .quantity(cartList.getQuantity())
-                        .product(cartList.getProduct())
-                        .user(userRepository.findById(purchaseDto.getUserId()).get())
-                        .build());
+        try {
+            CartList cartList = cartListRepository.findById(purchaseDto.getCartListId()).get();
+            return purchaseRepository.save(
+                    Purchase.builder()
+                            .id(purchaseDto.getId())
+                            .shipMemo(purchaseDto.getShipMemo())
+                            .quantity(cartList.getQuantity())
+                            .product(cartList.getProduct())
+                            .user(userRepository.findById(purchaseDto.getUserId()).get())
+                            .build());
+        } catch (Exception e) {
+            log.error("Error: {}", e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public Optional<Purchase> findByIdPurchase(Long id) {
         log.info("find Purchase By Id: {}", id);
-        return purchaseRepository.findById(id);
+        try {
+            return purchaseRepository.findById(id);
+        } catch (Exception e) {
+            log.error("Error: {}", e.getMessage());
+            return Optional.empty();
+        }
     }
 
     @Override
     public List<Purchase> findAllPurchase() {
         log.info("find all Order");
-        return purchaseRepository.findAll();
+        try {
+            return purchaseRepository.findAll();
+        } catch (Exception e) {
+            log.error("Error: {}", e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public void deleteByIdPurchase(Long id) {
         log.info("delete Order By Id: {}", id);
-        purchaseRepository.deleteById(id);
+        try {
+            purchaseRepository.deleteById(id);
+        } catch (Exception e) {
+            log.error("Error: {}", e.getMessage());
+        }
     }
 }

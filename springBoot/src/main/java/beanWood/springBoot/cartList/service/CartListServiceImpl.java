@@ -21,30 +21,49 @@ public class CartListServiceImpl implements CartListService {
 	@Override
 	public CartList saveCartList(ICartList iCartList) {
 		log.info("save CartList: {}", iCartList.getId());
-		return cartListRepository.save(
-				CartList.builder()
-						.id(iCartList.getId())
-						.quantity(iCartList.getQuantity())
-						.product(productRepository.findById(iCartList.getProductId()).get())
-						.build()
-		);
+		try {
+			return cartListRepository.save(
+					CartList.builder()
+							.id(iCartList.getId())
+							.quantity(iCartList.getQuantity())
+							.product(productRepository.findById(iCartList.getProductId()).get())
+							.build()
+			);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public Optional<CartList> findByIdCartList(Long id) {
 		log.info("find CartList By Id: {}", id);
-		return cartListRepository.findById(id);
+		try {
+			return cartListRepository.findById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public List<CartList> findAllCartList() {
 		log.info("find all CartList");
-		return cartListRepository.findAll();
+		try {
+			return cartListRepository.findAll();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public void deleteByIdCartList(Long id) {
 		log.info("delete CartList By Id: {}", id);
-		cartListRepository.deleteById(id);
+		try {
+			cartListRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

@@ -21,30 +21,49 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category saveCategory(ICategory iCategory) {
 		log.info("save Category: {}", iCategory.getCategoryName());
-		return categoryRepository.save(
-				Category.builder()
-						.id(iCategory.getId())
-						.categoryName(iCategory.getCategoryName())
-						.image(imageRepository.findById(iCategory.getImageId()).get())
-						.build()
-		);
+		try {
+			return categoryRepository.save(
+					Category.builder()
+							.id(iCategory.getId())
+							.categoryName(iCategory.getCategoryName())
+							.image(imageRepository.findById(iCategory.getImageId()).get())
+							.build()
+			);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public Optional<Category> findByIdCategory(Long id) {
 		log.info("find Category By Id: {}", id);
-		return categoryRepository.findById(id);
+		try {
+			return categoryRepository.findById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public List<Category> findAllCategory() {
 		log.info("find all Category");
-		return categoryRepository.findAll();
+		try {
+			return categoryRepository.findAll();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public void deleteByIdCategory(Long id) {
 		log.info("delete Category By Id: {}", id);
-		categoryRepository.deleteById(id);
+		try {
+			categoryRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

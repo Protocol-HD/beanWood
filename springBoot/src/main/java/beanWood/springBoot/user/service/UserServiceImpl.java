@@ -29,21 +29,27 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		User user = userRepository.findByUserName(userName);
+		log.info("load user by username: {}", userName);
+		try {
+			User user = userRepository.findByUserName(userName);
 
-		if (user == null) {
-			log.error("user not found");
-			throw new UsernameNotFoundException("user not found");
-		} else {
-			log.info("user founded: {}", userName);
+			if (user == null) {
+				log.error("user not found");
+				throw new UsernameNotFoundException("user not found");
+			} else {
+				log.info("user founded: {}", userName);
+			}
+
+			Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+			user.getRoles().forEach(role -> {
+				authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+			});
+
+			return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getUserPassword(), authorities);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
 		}
-
-		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		user.getRoles().forEach(role -> {
-			authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-		});
-
-		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getUserPassword(), authorities);
 	}
 
 //	@Override
@@ -55,40 +61,65 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public User saveUser(IUser iUser) {
-		iUser.setUserPassword(passwordEncoder.encode(iUser.getUserPassword()));
-		List<Role> roles = new ArrayList<>();
-		roles.add(roleRepository.findById(1L).get());
-		return userRepository.save(User.builder()
-				.userAddress(iUser.getUserAddress())
-				.userName(iUser.getUserName())
-				.name(iUser.getName())
-				.userNumber(iUser.getUserNumber())
-				.userPassword(iUser.getUserPassword())
-				.roles(roles)
-				.build());
+		log.info("save user: {}", iUser);
+		try {
+			iUser.setUserPassword(passwordEncoder.encode(iUser.getUserPassword()));
+			List<Role> roles = new ArrayList<>();
+			roles.add(roleRepository.findById(1L).get());
+			return userRepository.save(User.builder()
+					.userAddress(iUser.getUserAddress())
+					.userName(iUser.getUserName())
+					.name(iUser.getName())
+					.userNumber(iUser.getUserNumber())
+					.userPassword(iUser.getUserPassword())
+					.roles(roles)
+					.build());
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public Optional<User> findByIdUser(Long id) {
 		log.info("find by id User: {}", id);
-		return userRepository.findById(id);
+		try {
+			return userRepository.findById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public List<User> findAllUser() {
 		log.info("find all User");
-		return userRepository.findAll();
+		try {
+			return userRepository.findAll();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public void deleteByIdUser(Long id) {
 		log.info("delete by id User: {}", id);
-		userRepository.deleteById(id);
+		try {
+			userRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 
 	@Override
 	public User findByUserName(String userName) {
 		log.info("find by UserId at User");
-		return userRepository.findByUserName(userName);
+		try {
+			return userRepository.findByUserName(userName);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 }

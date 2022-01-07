@@ -21,7 +21,7 @@ public class ProductSizeControllerImpl implements ProductSizeController {
 	@PostMapping("/save")
 	public int saveProductSize(@RequestBody IProductSize iProductSize) {
 		try {
-			productSizeService.saveProductSize(iProductSize);
+			if(productSizeService.saveProductSize(iProductSize) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -33,7 +33,7 @@ public class ProductSizeControllerImpl implements ProductSizeController {
 	@PutMapping("/update")
 	public int updateProductSize(@RequestBody IProductSize iProductSize) {
 		try {
-			productSizeService.saveProductSize(iProductSize);
+			if(productSizeService.saveProductSize(iProductSize) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -44,13 +44,23 @@ public class ProductSizeControllerImpl implements ProductSizeController {
 	@Override
 	@GetMapping("/findAll")
 	public List<OProductSize> findAllProductSize() {
-		return productSizeService.findAllProductSize();
+		try {
+			return productSizeService.findAllProductSize();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	@GetMapping("/find/{id}")
 	public OProductSize findByIdProductSize(@PathVariable Long id) {
-		return productSizeService.findByIdProductSize(id);
+		try {
+			return productSizeService.findByIdProductSize(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
@@ -68,7 +78,12 @@ public class ProductSizeControllerImpl implements ProductSizeController {
 	@Override
 	@GetMapping("/findByProductId/{productId}")
 	public List<OProductSize> findByProductId(@PathVariable Long productId) {
-		return productSizeService.findByProductId(productId);
+		try {
+			return productSizeService.findByProductId(productId);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

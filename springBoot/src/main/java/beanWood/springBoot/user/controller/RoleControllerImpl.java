@@ -22,14 +22,24 @@ public class RoleControllerImpl implements RoleController {
 	@Override
 	@PostMapping("/save")
 	public ResponseEntity<Role> saveRole(@RequestBody Role role) {
-		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/role/save").toUriString());
-		return ResponseEntity.created(uri).body(roleService.saveRole(role));
+		try {
+			URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/role/save").toUriString());
+			return ResponseEntity.created(uri).body(roleService.saveRole(role));
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	@PostMapping("/saveRoleToUser")
 	public ResponseEntity<?> addRoleToUSer(@RequestBody RoleToUserForm roleToUserForm) {
-		roleService.saveRoleByUserName(roleToUserForm.getUserName(), roleToUserForm.getRoleName());
-		return ResponseEntity.ok().build();
+		try {
+			roleService.saveRoleByUserName(roleToUserForm.getUserName(), roleToUserForm.getRoleName());
+			return ResponseEntity.ok().build();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 }

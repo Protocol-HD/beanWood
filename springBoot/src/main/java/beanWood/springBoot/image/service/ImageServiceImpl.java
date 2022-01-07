@@ -18,24 +18,43 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Image saveImage(Image image) {
         log.info("save Image successfully: {}", image);
-        return imageRepository.save(image);
+        try {
+            return imageRepository.save(image);
+        } catch (Exception e) {
+            log.error("Error: {}", e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public Optional<Image> findByIdImage(Long id) {
         log.info("find by id Image: {}", id);
-        return imageRepository.findById(id);
+        try {
+            return imageRepository.findById(id);
+        } catch (Exception e) {
+            log.error("Error: {}", e.getMessage());
+            return Optional.empty();
+        }
     }
 
     @Override
     public List<Image> findAllImage() {
         log.info("find all Image");
-        return imageRepository.findAll();
+        try {
+            return imageRepository.findAll();
+        } catch (Exception e) {
+            log.error("Error: {}", e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public void deleteByIdImage(Long id) {
         log.info("delete by id Image: {}", id);
-        imageRepository.deleteById(id);
+        try {
+            imageRepository.deleteById(id);
+        } catch (Exception e) {
+            log.error("Error: {}", e.getMessage());
+        }
     }
 }

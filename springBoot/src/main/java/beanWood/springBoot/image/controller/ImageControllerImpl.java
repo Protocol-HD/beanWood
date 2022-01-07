@@ -21,7 +21,7 @@ public class ImageControllerImpl implements ImageController {
 	@PostMapping("/save")
 	public int saveImage(@RequestBody Image image) {
 		try {
-			imageService.saveImage(image);
+			if(imageService.saveImage(image) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -33,7 +33,7 @@ public class ImageControllerImpl implements ImageController {
 	@PutMapping("/update")
 	public int updateImage(@RequestBody Image image) {
 		try {
-			imageService.saveImage(image);
+			if(imageService.saveImage(image) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -44,13 +44,23 @@ public class ImageControllerImpl implements ImageController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Image> findByIdImage(@PathVariable Long id) {
-		return imageService.findByIdImage(id);
+		try {
+			return imageService.findByIdImage(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<Image> findAllImage() {
-		return imageService.findAllImage();
+		try {
+			return imageService.findAllImage();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

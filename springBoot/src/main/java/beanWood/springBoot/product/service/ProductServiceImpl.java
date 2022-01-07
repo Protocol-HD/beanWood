@@ -120,13 +120,23 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Optional<Product> findByIdProduct(Long id) {
 		log.info("find by id Product: {}", id);
-		return productRepository.findById(id);
+		try {
+			return productRepository.findById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public List<Product> findAllProduct() {
 		log.info("find all Product");
-		return productRepository.findAll();
+		try {
+			return productRepository.findAll();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 
@@ -160,24 +170,38 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void deleteByIdProduct(Long id) {
-		deleteProductOptionBeforeDeleteProductById(id);
-		deleteCartWishListBeforeDeleteProductById(id);
-		log.info("delete Product id: {}", id);
-		productRepository.deleteById(id);
+		try {
+			deleteProductOptionBeforeDeleteProductById(id);
+			deleteCartWishListBeforeDeleteProductById(id);
+			log.info("delete Product id: {}", id);
+			productRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 
 	@Override
 	public List<Product> findByCategoryId(Long categoryId) {
 		log.info("find Product by category id: {}", categoryId);
-		return productRepository.findByCategoryId(categoryId);
+		try {
+			return productRepository.findByCategoryId(categoryId);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public Product updateProduct(IProduct iProduct) {
-		log.info("update Product: {}", iProduct);
-		deleteProductOptionBeforeDeleteProductById(iProduct.getId());
-		log.info("all delete success, save Product start");
-		saveProduct(iProduct);
-		return null;
+		try {
+			log.info("update Product: {}", iProduct);
+			deleteProductOptionBeforeDeleteProductById(iProduct.getId());
+			log.info("all delete success, save Product start");
+			saveProduct(iProduct);
+			return null;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 }

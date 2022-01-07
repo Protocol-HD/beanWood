@@ -45,7 +45,7 @@ public class UserControllerImpl implements UserController {
 	@PutMapping("/update")
 	public int updateUser(@RequestBody IUser iUser) {
 		try {
-			userService.saveUser(iUser);
+			if(userService.saveUser(iUser) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -56,13 +56,23 @@ public class UserControllerImpl implements UserController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<User> findByIdUser(@PathVariable Long id) {
-		return userService.findByIdUser(id);
+		try {
+			return userService.findByIdUser(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<User> findAllUser() {
-		return userService.findAllUser();
+		try {
+			return userService.findAllUser();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
@@ -80,6 +90,11 @@ public class UserControllerImpl implements UserController {
 	@Override
 	@GetMapping("/findByUserName/{userName}")
 	public User findByUserName(@PathVariable String userName) {
-		return userService.findByUserName(userName);
+		try {
+			return userService.findByUserName(userName);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 }

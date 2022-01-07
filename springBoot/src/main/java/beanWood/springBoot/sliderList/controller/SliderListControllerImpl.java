@@ -22,7 +22,7 @@ public class SliderListControllerImpl implements SliderListController {
 	@PostMapping("/save")
 	public int saveSliderList(@RequestBody ISliderList iSliderList) {
 		try {
-			sliderListService.saveSliderList(iSliderList);
+			if(sliderListService.saveSliderList(iSliderList) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -34,7 +34,7 @@ public class SliderListControllerImpl implements SliderListController {
 	@PutMapping("/update")
 	public int updateSliderList(@RequestBody ISliderList iSliderList) {
 		try {
-			sliderListService.saveSliderList(iSliderList);
+			if(sliderListService.saveSliderList(iSliderList) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -45,13 +45,23 @@ public class SliderListControllerImpl implements SliderListController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<SliderList> findByIdSliderList(@PathVariable Long id) {
-		return sliderListService.findByIdSliderList(id);
+		try {
+			return sliderListService.findByIdSliderList(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<SliderList> findAllSliderList() {
-		return sliderListService.findAllSliderList();
+		try {
+			return sliderListService.findAllSliderList();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

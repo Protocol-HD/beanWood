@@ -55,13 +55,23 @@ public class UserControllerImpl implements UserController {
 	@Override
 	@GetMapping("/find/{id}")
 	public OUser findByIdUser(@PathVariable Long id) {
-		return userService.findByIdUser(id);
+		try {
+			return userService.findByIdUser(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<OUser> findAllUser() {
-		return userService.findAllUser();
+		try {
+			return userService.findAllUser();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
@@ -79,6 +89,11 @@ public class UserControllerImpl implements UserController {
 	@Override
 	@GetMapping("/findByUserName/{userName}")
 	public OUser findByUserName(@PathVariable String userName) {
-		return userService.findByUserName(userName);
+		try {
+			return userService.findByUserName(userName);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 }

@@ -57,7 +57,6 @@ public class BannerCardControllerImpl implements BannerCardController {
 	@GetMapping("/findAll")
 	public List<BannerCard> findAllBannerCard() {
 		try {
-			if (bannerCardService.findBannerCard() == null) return null;
 			return bannerCardService.findBannerCard();
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());

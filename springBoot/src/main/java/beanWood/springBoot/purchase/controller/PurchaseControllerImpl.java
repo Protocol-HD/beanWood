@@ -21,13 +21,23 @@ public class PurchaseControllerImpl implements PurchaseController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Purchase> findByIdPurchase(@PathVariable Long id) {
-		return purchaseService.findByIdPurchase(id);
+		try {
+			return purchaseService.findByIdPurchase(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<Purchase> findAllPurchase() {
-		return purchaseService.findAllPurchase();
+		try {
+			return purchaseService.findAllPurchase();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

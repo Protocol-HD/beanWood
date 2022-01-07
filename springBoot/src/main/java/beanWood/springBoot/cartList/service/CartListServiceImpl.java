@@ -21,17 +21,21 @@ public class CartListServiceImpl implements CartListService {
 	@Override
 	public CartList saveCartList(ICartList iCartList) {
 		log.info("save CartList: {}", iCartList.getId());
-		try {
-			return cartListRepository.save(
-					CartList.builder()
-							.id(iCartList.getId())
-							.quantity(iCartList.getQuantity())
-							.product(productRepository.findById(iCartList.getProductId()).get())
-							.build()
-			);
-		} catch (Exception e) {
-			log.error("Error: {}", e.getMessage());
-			return null;
+		if (cartListRepository.findByProductId(iCartList.getProductId()) == null) {
+			try {
+				return cartListRepository.save(
+						CartList.builder()
+								.id(iCartList.getId())
+								.quantity(iCartList.getQuantity())
+								.product(productRepository.findById(iCartList.getProductId()).get())
+								.build()
+				);
+			} catch (Exception e) {
+				log.error("Error: {}", e.getMessage());
+				return null;
+			}
+		} else {
+			
 		}
 	}
 

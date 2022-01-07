@@ -26,12 +26,12 @@ function App() {
 				<Header headerClass={headerClass} refresh={refresh} setRefresh={setRefresh} />
 				<TopScroll />
 				<Routes>
-					<Route path="/" element={<Home setHeaderClass={setHeaderClass} />} />
+					<Route path="/" element={<Home setHeaderClass={setHeaderClass} refresh={refresh} setRefresh={setRefresh} />} />
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/shop" element={<Shop setHeaderClass={setHeaderClass} />} />
 					<Route path="/cart" element={<Cart setHeaderClass={setHeaderClass} refresh={refresh} setRefresh={setRefresh} />} />
-					<Route path="/wish" element={<Wish setHeaderClass={setHeaderClass} />} />
+					<Route path="/wish" element={<Wish setHeaderClass={setHeaderClass} refresh={refresh} setRefresh={setRefresh} />} />
 					<Route path="/detail" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/addproductinfo/" element={<AddProductInfo />} />

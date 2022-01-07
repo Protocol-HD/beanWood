@@ -61,78 +61,65 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public User saveUser(IUser iUser) {
-<<<<<<< HEAD
 		if (userRepository.findByUserName(iUser.getUserName()) == null) {
-=======
-		log.info("save user: {}", iUser);
-		try {
->>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
-			iUser.setUserPassword(passwordEncoder.encode(iUser.getUserPassword()));
-			List<Role> roles = new ArrayList<>();
-			roles.add(roleRepository.findById(1L).get());
-			return userRepository.save(User.builder()
-					.userAddress(iUser.getUserAddress())
-					.userName(iUser.getUserName())
-					.name(iUser.getName())
-					.userNumber(iUser.getUserNumber())
-					.userPassword(iUser.getUserPassword())
-					.roles(roles)
-					.build());
-<<<<<<< HEAD
-		} else return null;
-=======
-		} catch (Exception e) {
-			log.error("Error: {}", e.getMessage());
-			return null;
+			log.info("save user: {}", iUser);
+			try {
+				iUser.setUserPassword(passwordEncoder.encode(iUser.getUserPassword()));
+				List<Role> roles = new ArrayList<>();
+				roles.add(roleRepository.findById(1L).get());
+				return userRepository.save(User.builder()
+						.userAddress(iUser.getUserAddress())
+						.userName(iUser.getUserName())
+						.name(iUser.getName())
+						.userNumber(iUser.getUserNumber())
+						.userPassword(iUser.getUserPassword())
+						.roles(roles)
+						.build());
+			} catch (Exception e) {
+				log.error("Error: {}", e.getMessage());
+				return null;
+			}
 		}
->>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
+		return null;
 	}
 
 	@Override
 	public OUser findByIdUser(Long id) {
 		log.info("find by id User: {}", id);
-<<<<<<< HEAD
-		User user = userRepository.findById(id).get();
-		return OUser.builder()
-				.id(user.getId())
-				.name(user.getName())
-				.userAddress(user.getUserAddress())
-				.userName(user.getUserName())
-				.userNumber(user.getUserNumber())
-				.build();
-=======
 		try {
-			return userRepository.findById(id);
+			User user = userRepository.findById(id).get();
+			return OUser.builder()
+					.id(user.getId())
+					.name(user.getName())
+					.userAddress(user.getUserAddress())
+					.userName(user.getUserName())
+					.userNumber(user.getUserNumber())
+					.build();
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
 			return null;
 		}
->>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 	}
 
 	@Override
 	public List<OUser> findAllUser() {
 		log.info("find all User");
-<<<<<<< HEAD
-		List<OUser> oUsers = new ArrayList<>();
-		userRepository.findAll().forEach(user -> {
-			oUsers.add(OUser.builder()
-					.id(user.getId())
-					.userNumber(user.getUserNumber())
-					.userName(user.getUserName())
-					.userAddress(user.getUserAddress())
-					.name(user.getName())
-					.build());
-		});
-		return oUsers;
-=======
 		try {
-			return userRepository.findAll();
+			List<OUser> oUsers = new ArrayList<>();
+			userRepository.findAll().forEach(user -> {
+				oUsers.add(OUser.builder()
+						.id(user.getId())
+						.userNumber(user.getUserNumber())
+						.userName(user.getUserName())
+						.userAddress(user.getUserAddress())
+						.name(user.getName())
+						.build());
+			});
+			return oUsers;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
 			return null;
 		}
->>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 	}
 
 	@Override
@@ -148,22 +135,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public OUser findByUserName(String userName) {
 		log.info("find by UserId at User");
-<<<<<<< HEAD
-		User user = userRepository.findByUserName(userName);
-		return OUser.builder()
-				.id(user.getId())
-				.name(user.getName())
-				.userAddress(user.getUserAddress())
-				.userName(user.getUserName())
-				.userNumber(user.getUserNumber())
-				.build();
-=======
 		try {
-			return userRepository.findByUserName(userName);
+			User user = userRepository.findByUserName(userName);
+			return OUser.builder()
+					.id(user.getId())
+					.name(user.getName())
+					.userAddress(user.getUserAddress())
+					.userName(user.getUserName())
+					.userNumber(user.getUserNumber())
+					.build();
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
 			return null;
 		}
->>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 	}
 }

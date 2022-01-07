@@ -15,20 +15,20 @@ function Login() {
 	const addSignup = (e) => {
 		e.preventDefault();
 
-		axios.post(loginUrl, {
-			userName: userName.current.value,
-			password: userPassword.current.value
-		}).then(Response => console.log(Response.data));
+		// axios.post(loginUrl, {
+		// 	userName: userName.current.value,
+		// 	password: userPassword.current.value
+		// }).then(Response => console.log(Response.data));
 
 
-		// axios.get(userUrl + userName.current.value).then(Response => {
-		// 	if (Response.data.userName === userName.current.value) {
-		// 		alert("로그인 성공");
-		// 		navigate("/");
-		// 	} else {
-		// 		alert("아이디를 확인해 주세요.")
-		// 	}
-		// })
+		axios.get(userUrl + userName.current.value).then(Response => {
+			if (Response.data.userName === userName.current.value) {
+				alert("로그인 성공");
+				navigate("/");
+			} else {
+				alert("아이디를 확인해 주세요.")
+			}
+		})
 	}
 
 	return (

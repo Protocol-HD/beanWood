@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import WishTableLine from './WishTableLine';
 
-function WishTable() {
+function WishTable({ refresh, setRefresh }) {
 	const findAllWishListUrl = "http://localhost:8080/wishList/findAll"
 	const [wish, setWish] = useState([]);
 	const [delCheck, setDelCheck] = useState(false);
@@ -12,7 +12,7 @@ function WishTable() {
 			.then(Response => {
 				setWish(Response.data);
 			})
-	}, [delCheck])
+	}, [delCheck, refresh])
 
 	return (
 		<div className="wishlist-section section-fluid-270 section-top-gap-100">
@@ -41,6 +41,7 @@ function WishTable() {
 														item={item}
 														delCheck={delCheck}
 														setDelCheck={setDelCheck}
+														refresh={refresh} setRefresh={setRefresh}
 													/>
 												))
 											}

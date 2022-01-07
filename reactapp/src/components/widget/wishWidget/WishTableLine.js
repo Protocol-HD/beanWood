@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function WishTableLine({ item, delCheck, setDelCheck }) {
+function WishTableLine({ item, delCheck, setDelCheck, refresh, setRefresh }) {
 	const findProductImageByProductId = "http://localhost:8080/productImage/findByProductId/";
 	const deleteWishListUrl = "http://localhost:8080/wishList/delete/";
 	const saveCartListUrl = "http://localhost:8080/cartList/save";
@@ -15,7 +15,10 @@ function WishTableLine({ item, delCheck, setDelCheck }) {
 
 	const handleDelete = () => {
 		if (window.confirm("Do you want to delete it from the wish list?")) {
-			axios.delete(deleteWishListUrl + item.id).then(setDelCheck(!delCheck))
+			axios.delete(deleteWishListUrl + item.id).then(() => {
+				setDelCheck(!delCheck);
+				setRefresh(!refresh);
+			})
 		} else {
 			window.alert("Cancel")
 		}

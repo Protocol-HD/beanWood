@@ -21,15 +21,21 @@ public class WishListServiceImpl implements WishListService {
 	@Override
 	public WishList saveWishList(IWishList iWishList) {
 		log.info("save WishList: {}", iWishList);
-		try {
-			return wishListRepository.save(
-					WishList.builder()
-							.id(iWishList.getId())
-							.product(productRepository.findById(iWishList.getProductId()).get())
-							.build()
-			);
-		} catch (Exception e) {
-			log.error("Error: {}", e.getMessage());
+		if (wishListRepository.findByProductId(iWishList.getProductId()).isEmpty()) {
+			log.info("not found start add item to wishList");
+			try {
+				return wishListRepository.save(
+						WishList.builder()
+								.id(iWishList.getId())
+								.product(productRepository.findById(iWishList.getProductId()).get())
+								.build()
+				);
+			} catch (Exception e) {
+				log.error("Error: {}", e.getMessage());
+				return null;
+			}
+		} else {
+			log.info("already exist item: {}", iWishList);
 			return null;
 		}
 	}

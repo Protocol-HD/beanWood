@@ -5,7 +5,7 @@ import ToolTipTagItems from './ToolTipTagItems';
 import styles from './ProductSingleItemStyle1.module.css';
 import axios from 'axios';
 
-function ProductSingleItemStyle1({ item, path, checkDir }) {
+function ProductSingleItemStyle1({ item, path, checkDir, refresh, setRefresh }) {
 	const saveCartListUrl = "http://localhost:8080/cartList/save";
 	const saveWishListUrl = "http://localhost:8080/wishList/save";
 	const findProductImageByProductIdUrl = "http://localhost:8080/productImage/findByProductId/";
@@ -16,13 +16,19 @@ function ProductSingleItemStyle1({ item, path, checkDir }) {
 		axios.post(saveCartListUrl, {
 			productId: item.id,
 			quantity: 1
-		}).then(Response => { if (Response.ok) alert("Success!") });
+		}).then(Response => {
+			if (Response.ok) alert("Success!");
+			setRefresh(!refresh);
+		});
 	}
 
 	const handlePostWish = () => {
 		axios.post(saveWishListUrl, {
 			productId: item.id
-		}).then(Response => { if (Response.ok) alert("Success!") });
+		}).then(Response => {
+			if (Response.ok) alert("Success!");
+			setRefresh(!refresh);
+		});
 	}
 
 	useEffect(() => {

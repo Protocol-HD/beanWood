@@ -4,7 +4,7 @@ import axios from 'axios';
 import CategoryTab from '../../ui/homeUi/productList/CategoryTab';
 import TabContent from '../../ui/homeUi/productList/TabContent';
 
-function ProductTap() {
+function ProductTap({ refresh, setRefresh }) {
 
 	const findAllProductUrl = "http://localhost:8080/product/findAll"
 	const findAllCategoryUrl = "http://localhost:8080/category/findAll"
@@ -61,7 +61,7 @@ function ProductTap() {
 
 									}
 								</ul>
-								<TabContent list={list} />
+								<TabContent list={list} refresh={refresh} setRefresh={setRefresh} />
 								<div className="d-flex justify-content-center">
 									<Link to="/shop" className="btn btn-md btn-default btn-section-bottom">View All Product</Link>
 								</div>

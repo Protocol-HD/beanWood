@@ -9,24 +9,24 @@ import CardSection from '../widget/homeWidget/CardSection';
 import ExclusiveCollection from '../widget/homeWidget/ExclusiveCollection';
 import SubscribeContents from '../widget/SubscribeContents';
 
-function Home({setHeaderClass}) {
+function Home({ setHeaderClass, refresh, setRefresh }) {
 
-    useEffect(() =>{
-        setHeaderClass(true)
-    },[setHeaderClass])
-    
-    return ( 
-        <>
-            <Slider />
-            <Shipping />
-            <BannerCard />
-            <CompanyLogo />
-            <ProductTap />
-            <CardSection />
-            <ExclusiveCollection />
-            <SubscribeContents/>
-        </>
-    );
+	useEffect(() => {
+		setHeaderClass(true)
+	}, [setHeaderClass])
+
+	return (
+		<>
+			<Slider />
+			<Shipping />
+			<BannerCard />
+			<CompanyLogo />
+			<ProductTap refresh={refresh} setRefresh={setRefresh} />
+			<CardSection />
+			<ExclusiveCollection />
+			<SubscribeContents />
+		</>
+	);
 }
 
 export default Home;

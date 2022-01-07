@@ -14,6 +14,7 @@ import Login from './components/page/Login';
 import AddProductInfo from './components/page/AddProductInfo';
 import AdminMenu from './components/page/AdminMenu';
 import SignUp from './components/page/SignUp';
+import Purchase from './components/page/Purchase';
 
 function App() {
 	const [headerClass, setHeaderClass] = useState(true)
@@ -34,6 +35,7 @@ function App() {
 					<Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/addproductinfo/" element={<AddProductInfo />} />
 					<Route path="/admin" element={<AdminMenu />} />
+					<Route path="/purchase" element={<Purchase />} />
 				</Routes>
 				<Footer />
 			</div>

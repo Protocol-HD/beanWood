@@ -22,7 +22,7 @@ public class ProductImageControllerImpl implements ProductImageController {
 	@PostMapping("/save")
 	public int saveProductImage(@RequestBody IProductImage iProductImage) {
 		try {
-			productImageService.saveProductImage(iProductImage);
+			if (productImageService.saveProductImage(iProductImage) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());

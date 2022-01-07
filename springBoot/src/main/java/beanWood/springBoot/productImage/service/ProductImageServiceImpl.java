@@ -41,16 +41,15 @@ public class ProductImageServiceImpl implements ProductImageService {
 	@Override
 	public OProductImage findByIdProductImage(Long id) {
 		log.info("find by id productImage : {}", id);
-		OProductImage oProductImage = new OProductImage();
 		try {
 			ProductImage productImage = productImageRepository.findById(id).get();
-			oProductImage = OProductImage.builder()
+			return OProductImage.builder()
 					.imageUrl(productImage.getImage().getImageUrl())
 					.build();
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
+			return null;
 		}
-		return oProductImage;
 	}
 
 	@Override

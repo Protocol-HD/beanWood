@@ -22,7 +22,7 @@ public class ProductControllerImpl implements ProductController {
 	@PostMapping("/save")
 	public int saveProduct(@RequestBody IProduct iProduct) {
 		try {
-			productService.saveProduct(iProduct);
+			if(productService.saveProduct(iProduct) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -35,7 +35,7 @@ public class ProductControllerImpl implements ProductController {
 	@PutMapping("/update")
 	public int updateProduct(@RequestBody IProduct iProduct) {
 		try {
-			productService.updateProduct(iProduct);
+			if(productService.updateProduct(iProduct) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -46,13 +46,23 @@ public class ProductControllerImpl implements ProductController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Product> findByIdProduct(@PathVariable Long id) {
-		return productService.findByIdProduct(id);
+		try {
+			return productService.findByIdProduct(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<Product> findAllProduct() {
-		return productService.findAllProduct();
+		try {
+			return productService.findAllProduct();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
@@ -70,6 +80,11 @@ public class ProductControllerImpl implements ProductController {
 	@Override
 	@GetMapping("/findByCategoryId/{categoryId}")
 	public List<Product> findByCategoryId(@PathVariable Long categoryId) {
-		return productService.findByCategoryId(categoryId);
+		try {
+			return productService.findByCategoryId(categoryId);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 }

@@ -21,29 +21,48 @@ public class WishListServiceImpl implements WishListService {
 	@Override
 	public WishList saveWishList(IWishList iWishList) {
 		log.info("save WishList: {}", iWishList);
-		return wishListRepository.save(
-				WishList.builder()
-						.id(iWishList.getId())
-						.product(productRepository.findById(iWishList.getProductId()).get())
-						.build()
-		);
+		try {
+			return wishListRepository.save(
+					WishList.builder()
+							.id(iWishList.getId())
+							.product(productRepository.findById(iWishList.getProductId()).get())
+							.build()
+			);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public Optional<WishList> findByIdWishList(Long id) {
-		log.info("fid by id WishList: {}", id);
-		return wishListRepository.findById(id);
+		log.info("find by id WishList: {}", id);
+		try {
+			return wishListRepository.findById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public List<WishList> findAllWishList() {
 		log.info("find all WishList");
-		return wishListRepository.findAll();
+		try {
+			return wishListRepository.findAll();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public void deleteByIdWishList(Long id) {
 		log.info("delete by id WishList: {}", id);
-		wishListRepository.deleteById(id);
+		try {
+			wishListRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

@@ -21,30 +21,49 @@ public class BrandServiceImpl implements BrandService {
 	@Override
 	public Brand saveBrand(IBrand iBrand) {
 		log.info("save Brand: {}", iBrand.getBrandName());
-		return brandRepository.save(
-				Brand.builder()
-						.id(iBrand.getId())
-						.brandName(iBrand.getBrandName())
-						.image(imageRepository.findById(iBrand.getImageId()).get())
-						.build()
-		);
+		try {
+			return brandRepository.save(
+					Brand.builder()
+							.id(iBrand.getId())
+							.brandName(iBrand.getBrandName())
+							.image(imageRepository.findById(iBrand.getImageId()).get())
+							.build()
+			);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public List<Brand> findAllBrand() {
 		log.info("find all Brand: {}");
-		return brandRepository.findAll();
+		try {
+			return brandRepository.findAll();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public Optional<Brand> findByIdBrand(Long id) {
 		log.info("find Brand by Id: {}", id);
-		return brandRepository.findById(id);
+		try {
+			return brandRepository.findById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public void deleteByIdBrand(Long id) {
 		log.info("delete Brand by Id: {}", id);
-		brandRepository.deleteById(id);
+		try {
+			brandRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

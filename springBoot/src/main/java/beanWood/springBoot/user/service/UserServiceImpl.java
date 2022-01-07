@@ -29,21 +29,27 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		User user = userRepository.findByUserName(userName);
+		log.info("load user by username: {}", userName);
+		try {
+			User user = userRepository.findByUserName(userName);
 
-		if (user == null) {
-			log.error("user not found");
-			throw new UsernameNotFoundException("user not found");
-		} else {
-			log.info("user founded: {}", userName);
+			if (user == null) {
+				log.error("user not found");
+				throw new UsernameNotFoundException("user not found");
+			} else {
+				log.info("user founded: {}", userName);
+			}
+
+			Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+			user.getRoles().forEach(role -> {
+				authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+			});
+
+			return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getUserPassword(), authorities);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
 		}
-
-		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		user.getRoles().forEach(role -> {
-			authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-		});
-
-		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getUserPassword(), authorities);
 	}
 
 //	@Override
@@ -55,7 +61,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public User saveUser(IUser iUser) {
+<<<<<<< HEAD
 		if (userRepository.findByUserName(iUser.getUserName()) == null) {
+=======
+		log.info("save user: {}", iUser);
+		try {
+>>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 			iUser.setUserPassword(passwordEncoder.encode(iUser.getUserPassword()));
 			List<Role> roles = new ArrayList<>();
 			roles.add(roleRepository.findById(1L).get());
@@ -67,12 +78,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 					.userPassword(iUser.getUserPassword())
 					.roles(roles)
 					.build());
+<<<<<<< HEAD
 		} else return null;
+=======
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
+>>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 	}
 
 	@Override
 	public OUser findByIdUser(Long id) {
 		log.info("find by id User: {}", id);
+<<<<<<< HEAD
 		User user = userRepository.findById(id).get();
 		return OUser.builder()
 				.id(user.getId())
@@ -81,11 +100,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 				.userName(user.getUserName())
 				.userNumber(user.getUserNumber())
 				.build();
+=======
+		try {
+			return userRepository.findById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
+>>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 	}
 
 	@Override
 	public List<OUser> findAllUser() {
 		log.info("find all User");
+<<<<<<< HEAD
 		List<OUser> oUsers = new ArrayList<>();
 		userRepository.findAll().forEach(user -> {
 			oUsers.add(OUser.builder()
@@ -97,17 +125,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 					.build());
 		});
 		return oUsers;
+=======
+		try {
+			return userRepository.findAll();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
+>>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 	}
 
 	@Override
 	public void deleteByIdUser(Long id) {
 		log.info("delete by id User: {}", id);
-		userRepository.deleteById(id);
+		try {
+			userRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 
 	@Override
 	public OUser findByUserName(String userName) {
 		log.info("find by UserId at User");
+<<<<<<< HEAD
 		User user = userRepository.findByUserName(userName);
 		return OUser.builder()
 				.id(user.getId())
@@ -116,5 +157,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 				.userName(user.getUserName())
 				.userNumber(user.getUserNumber())
 				.build();
+=======
+		try {
+			return userRepository.findByUserName(userName);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
+>>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 	}
 }

@@ -21,7 +21,7 @@ public class ProductColorControllerImpl implements ProductColorController {
 	@PostMapping("/save")
 	public int saveProductColor(@RequestBody IProductColor iProductColor) {
 		try {
-			productColorService.saveProductColor(iProductColor);
+			if(productColorService.saveProductColor(iProductColor) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -33,7 +33,7 @@ public class ProductColorControllerImpl implements ProductColorController {
 	@PutMapping("/update")
 	public int updateProductColor(@RequestBody IProductColor iProductColor) {
 		try {
-			productColorService.saveProductColor(iProductColor);
+			if(productColorService.saveProductColor(iProductColor) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -44,13 +44,23 @@ public class ProductColorControllerImpl implements ProductColorController {
 	@Override
 	@GetMapping("/findAll")
 	public List<OProductColor> findAllProductColor() {
-		return productColorService.findAllProductColor();
+		try {
+			return productColorService.findAllProductColor();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	@GetMapping("/find/{id}")
 	public OProductColor findByIdProductColor(@PathVariable Long id) {
-		return productColorService.findByIdProductColor(id);
+		try {
+			return productColorService.findByIdProductColor(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
@@ -69,7 +79,12 @@ public class ProductColorControllerImpl implements ProductColorController {
 	@Override
 	@GetMapping("/findByProductId/{productId}")
 	public List<OProductColor> findByProductId(@PathVariable Long productId) {
-		return productColorService.findByProductId(productId);
+		try {
+			return productColorService.findByProductId(productId);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

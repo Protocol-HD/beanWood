@@ -22,7 +22,7 @@ public class WishListControllerImpl implements WishListController {
 	@PostMapping("/save")
 	public int saveWishList(@RequestBody IWishList iWishList) {
 		try {
-			wishListService.saveWishList(iWishList);
+			if(wishListService.saveWishList(iWishList) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -34,7 +34,7 @@ public class WishListControllerImpl implements WishListController {
 	@PutMapping("/update")
 	public int updateWishList(@RequestBody IWishList iWishList) {
 		try {
-			wishListService.saveWishList(iWishList);
+			if(wishListService.saveWishList(iWishList) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -45,13 +45,23 @@ public class WishListControllerImpl implements WishListController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<WishList> findByIdWishList(@PathVariable Long id) {
-		return wishListService.findByIdWishList(id);
+		try {
+			return wishListService.findByIdWishList(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<WishList> findAllWishList() {
-		return wishListService.findAllWishList();
+		try {
+			return wishListService.findAllWishList();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

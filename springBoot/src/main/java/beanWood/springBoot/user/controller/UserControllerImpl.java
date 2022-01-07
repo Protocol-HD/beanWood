@@ -44,7 +44,7 @@ public class UserControllerImpl implements UserController {
 	@PutMapping("/update")
 	public int updateUser(@RequestBody IUser iUser) {
 		try {
-			userService.saveUser(iUser);
+			if(userService.saveUser(iUser) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -54,14 +54,34 @@ public class UserControllerImpl implements UserController {
 
 	@Override
 	@GetMapping("/find/{id}")
+<<<<<<< HEAD
 	public OUser findByIdUser(@PathVariable Long id) {
 		return userService.findByIdUser(id);
+=======
+	public Optional<User> findByIdUser(@PathVariable Long id) {
+		try {
+			return userService.findByIdUser(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
+>>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 	}
 
 	@Override
 	@GetMapping("/findAll")
+<<<<<<< HEAD
 	public List<OUser> findAllUser() {
 		return userService.findAllUser();
+=======
+	public List<User> findAllUser() {
+		try {
+			return userService.findAllUser();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
+>>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 	}
 
 	@Override
@@ -78,7 +98,17 @@ public class UserControllerImpl implements UserController {
 
 	@Override
 	@GetMapping("/findByUserName/{userName}")
+<<<<<<< HEAD
 	public OUser findByUserName(@PathVariable String userName) {
 		return userService.findByUserName(userName);
+=======
+	public User findByUserName(@PathVariable String userName) {
+		try {
+			return userService.findByUserName(userName);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
+>>>>>>> 385f4656df69e40e7353527a622eebc372aa558b
 	}
 }

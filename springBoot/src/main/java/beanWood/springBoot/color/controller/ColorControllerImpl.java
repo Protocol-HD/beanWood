@@ -21,7 +21,7 @@ public class ColorControllerImpl implements ColorController {
 	@PostMapping("/save")
 	public int saveColor(@RequestBody Color color) {
 		try {
-			colorService.saveColor(color);
+			if(colorService.saveColor(color) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -33,7 +33,7 @@ public class ColorControllerImpl implements ColorController {
 	@PutMapping("/update")
 	public int updateColor(@RequestBody Color color) {
 		try {
-			colorService.saveColor(color);
+			if(colorService.saveColor(color) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -44,13 +44,23 @@ public class ColorControllerImpl implements ColorController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Color> findByIdColor(@PathVariable Long id) {
-		return colorService.findByIdColor(id);
+		try {
+			return colorService.findByIdColor(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<Color> findAllColor() {
-		return colorService.findAllColor();
+		try {
+			return colorService.findAllColor();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

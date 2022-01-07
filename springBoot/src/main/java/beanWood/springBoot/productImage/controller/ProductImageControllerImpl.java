@@ -34,7 +34,7 @@ public class ProductImageControllerImpl implements ProductImageController {
 	@PutMapping("/update")
 	public int updateProductImage(@RequestBody IProductImage iProductImage) {
 		try {
-			productImageService.saveProductImage(iProductImage);
+			if(productImageService.saveProductImage(iProductImage) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -45,13 +45,23 @@ public class ProductImageControllerImpl implements ProductImageController {
 	@Override
 	@GetMapping("/find/{id}")
 	public OProductImage findByIdProductImage(@PathVariable Long id) {
-		return productImageService.findByIdProductImage(id);
+		try {
+			return productImageService.findByIdProductImage(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<OProductImage> findAllProductImage() {
-		return productImageService.findAllProductImage();
+		try {
+			return productImageService.findAllProductImage();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
@@ -69,7 +79,12 @@ public class ProductImageControllerImpl implements ProductImageController {
 	@Override
 	@GetMapping("/findByProductId/{productId}")
 	public List<OProductImage> findByProductId(@PathVariable Long productId) {
-		return productImageService.findByProductId(productId);
+		try {
+			return productImageService.findByProductId(productId);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

@@ -20,12 +20,21 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role saveRole(Role role) {
 		log.info("save role: {}", role);
-		return roleRepository.save(role);
+		try {
+			return roleRepository.save(role);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public void saveRoleByUserName(String userName, String roleName) {
 		log.info("save role by userId: {}", userName);
-		userRepository.findByUserName(userName).getRoles().add(roleRepository.findByRoleName(roleName));
+		try {
+			userRepository.findByUserName(userName).getRoles().add(roleRepository.findByRoleName(roleName));
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

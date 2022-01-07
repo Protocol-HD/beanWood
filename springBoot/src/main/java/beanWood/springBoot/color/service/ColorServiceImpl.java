@@ -18,24 +18,43 @@ public class ColorServiceImpl implements ColorService {
 	@Override
 	public Color saveColor(Color color) {
 		log.info("save Color successfully: {}", color);
-		return colorRepository.save(color);
+		try {
+			return colorRepository.save(color);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public Optional<Color> findByIdColor(Long id) {
 		log.info("find by id Color: {}", id);
-		return colorRepository.findById(id);
+		try {
+			return colorRepository.findById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public List<Color> findAllColor() {
 		log.info("find all Color");
-		return colorRepository.findAll();
+		try {
+			return colorRepository.findAll();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public void deleteByIdColor(Long id) {
 		log.info("delete by id Color: {}", id);
-		colorRepository.deleteById(id);
+		try {
+			colorRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

@@ -23,7 +23,8 @@ public class SliderListServiceImpl implements SliderListService {
 	@Override
 	public SliderList saveSliderList(ISliderList iSliderList) {
 		log.info("save SliderList: {}", iSliderList.getEventName());
-		return sliderListRepository.save(
+		try {
+			return sliderListRepository.save(
 				SliderList.builder()
 						.id(iSliderList.getId())
 						.eventName(iSliderList.getEventName())
@@ -31,23 +32,41 @@ public class SliderListServiceImpl implements SliderListService {
 						.image(imageRepository.findById(iSliderList.getImageId()).get())
 						.build()
 		);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public Optional<SliderList> findByIdSliderList(Long id) {
 		log.info("find by id SliderList: {}", id);
-		return sliderListRepository.findById(id);
+		try {
+			return sliderListRepository.findById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	public List<SliderList> findAllSliderList() {
 		log.info("find all SliderList");
-		return sliderListRepository.findAll();
+		try {
+			return sliderListRepository.findAll();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public void deleteByIdSliderList(Long id) {
 		log.info("delete by id SliderList: {}", id);
-		sliderListRepository.deleteById(id);
+		try {
+			sliderListRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+		}
 	}
 }

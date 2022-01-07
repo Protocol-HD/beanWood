@@ -24,7 +24,7 @@ public class CartListControllerImpl implements CartListController {
 	@PostMapping("/save")
 	public int saveCartList(@RequestBody ICartList iCartList) {
 		try {
-			cartListService.saveCartList(iCartList);
+			if(cartListService.saveCartList(iCartList) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -36,7 +36,7 @@ public class CartListControllerImpl implements CartListController {
 	@PutMapping("/update")
 	public int updateCartList(@RequestBody ICartList iCartList) {
 		try {
-			cartListService.saveCartList(iCartList);
+			if(cartListService.saveCartList(iCartList) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -47,13 +47,23 @@ public class CartListControllerImpl implements CartListController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<CartList> findByIdCartList(@PathVariable Long id) {
-		return cartListService.findByIdCartList(id);
+		try {
+			return cartListService.findByIdCartList(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<CartList> findAllCartList() {
-		return cartListService.findAllCartList();
+		try {
+			return cartListService.findAllCartList();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

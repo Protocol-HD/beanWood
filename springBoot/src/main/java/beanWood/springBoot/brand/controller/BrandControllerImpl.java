@@ -22,7 +22,7 @@ public class BrandControllerImpl implements BrandController {
 	@PostMapping("/save")
 	public int saveBrand(@RequestBody IBrand iBrand) {
 		try {
-			brandService.saveBrand(iBrand);
+			if(brandService.saveBrand(iBrand) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -34,7 +34,7 @@ public class BrandControllerImpl implements BrandController {
 	@PutMapping("/update")
 	public int updateBrand(@RequestBody IBrand iBrand) {
 		try {
-			brandService.saveBrand(iBrand);
+			if(brandService.saveBrand(iBrand) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -45,13 +45,23 @@ public class BrandControllerImpl implements BrandController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Brand> findByIdBrand(@PathVariable Long id) {
-		return brandService.findByIdBrand(id);
+		try {
+			return brandService.findByIdBrand(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<Brand> findAllBrand() {
-		return brandService.findAllBrand();
+		try {
+			return brandService.findAllBrand();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

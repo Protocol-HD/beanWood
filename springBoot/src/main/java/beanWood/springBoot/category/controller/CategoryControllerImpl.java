@@ -22,7 +22,7 @@ public class CategoryControllerImpl implements CategoryController {
 	@PostMapping("/save")
 	public int saveCategory(@RequestBody ICategory iCategory) {
 		try {
-			categoryService.saveCategory(iCategory);
+			if(categoryService.saveCategory(iCategory) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -34,7 +34,7 @@ public class CategoryControllerImpl implements CategoryController {
 	@PutMapping("/update")
 	public int updateCategory(@RequestBody ICategory iCategory) {
 		try {
-			categoryService.saveCategory(iCategory);
+			if(categoryService.saveCategory(iCategory) == null) return 2;
 			return 1;
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());
@@ -45,13 +45,23 @@ public class CategoryControllerImpl implements CategoryController {
 	@Override
 	@GetMapping("/find/{id}")
 	public Optional<Category> findByIdCategory(@PathVariable Long id) {
-		return categoryService.findByIdCategory(id);
+		try {
+			return categoryService.findByIdCategory(id);
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return Optional.empty();
+		}
 	}
 
 	@Override
 	@GetMapping("/findAll")
 	public List<Category> findAllCategory() {
-		return categoryService.findAllCategory();
+		try {
+			return categoryService.findAllCategory();
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override

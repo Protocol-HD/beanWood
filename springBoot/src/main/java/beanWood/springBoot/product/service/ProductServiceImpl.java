@@ -159,9 +159,17 @@ public class ProductServiceImpl implements ProductService {
 		log.info("delete CartList and WishList by Product id: {}", id);
 		try {
 			log.info("delete CartList start by id: {}", id);
-			cartListRepository.delete(cartListRepository.findByProductId(id));
+			if (cartListRepository.findByProductId(id) != null) {
+				cartListRepository.delete(cartListRepository.findByProductId(id));
+			} else {
+				log.info("not exist in cartList");
+			}
 			log.info("delete CartList success, delete WishList start by id: {}", id);
-			wishListRepository.delete(wishListRepository.findByProductId(id));
+			if (wishListRepository.findByProductId(id) != null) {
+				wishListRepository.delete(wishListRepository.findByProductId(id));
+			} else {
+				log.info("not exist in wishList");
+			}
 			log.info("delete WishList success");
 		} catch (Exception e) {
 			log.error("Error: {}", e.getMessage());

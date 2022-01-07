@@ -16,42 +16,41 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class PurchaseControllerImpl implements PurchaseController {
+	private final PurchaseService purchaseService;
 
-    private final PurchaseService purchaseService;
+	@Override
+	@GetMapping("/find/{id}")
+	public Optional<Purchase> findByIdPurchase(@PathVariable Long id) {
+		return purchaseService.findByIdPurchase(id);
+	}
 
-    @Override
-    @PostMapping("/save")
-    public int savePurchase(@RequestBody PurchaseDto purchaseDto) {
-        try {
-            purchaseService.savePurchase(purchaseDto);
-            return 1;
-        } catch (Exception e) {
-            log.error("Error: {}", e.getMessage());
-            return 2;
-        }
-    }
+	@Override
+	@GetMapping("/findAll")
+	public List<Purchase> findAllPurchase() {
+		return purchaseService.findAllPurchase();
+	}
 
-    @Override
-    @GetMapping("/find/{id}")
-    public Optional<Purchase> findByIdPurchase(@PathVariable Long id) {
-        return purchaseService.findByIdPurchase(id);
-    }
+	@Override
+	@DeleteMapping("/delete/{id}")
+	public int deleteByIdPurchase(@PathVariable Long id) {
+		try {
+			purchaseService.deleteByIdPurchase(id);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
+	}
 
-    @Override
-    @GetMapping("/findAll")
-    public List<Purchase> findAllPurchase() {
-        return purchaseService.findAllPurchase();
-    }
-
-    @Override
-    @DeleteMapping("/delete/{id}")
-    public int deleteByIdPurchase(@PathVariable Long id) {
-        try {
-            purchaseService.deleteByIdPurchase(id);
-            return 1;
-        } catch (Exception e) {
-            log.error("Error: {}", e.getMessage());
-            return 2;
-        }
-    }
+	@Override
+	@PostMapping("/purchase")
+	public int saveCartListToPurchase(@RequestBody PurchaseDto purchaseDto) {
+		try {
+			purchaseService.saveCartListToPurchase(purchaseDto);
+			return 1;
+		} catch (Exception e) {
+			log.error("Error: {}", e.getMessage());
+			return 2;
+		}
+	}
 }

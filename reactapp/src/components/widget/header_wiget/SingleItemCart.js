@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function SingleItemCart({ item, delCheck, setDelCheck }) {
+function SingleItemCart({ item, delCheck, setDelCheck, refresh, setRefresh }) {
 	const deleteCartListUrl = "http://localhost:8080/cartList/delete/";
 	const findProductImageByProductId = "http://localhost:8080/productImage/findByProductId/";
 	const [product, setProduct] = useState({});
@@ -10,7 +10,10 @@ function SingleItemCart({ item, delCheck, setDelCheck }) {
 	const handleDelete = () => {
 		if (window.confirm("Do you want to delete it from the cart?")) {
 			axios.delete(deleteCartListUrl + item.id)
-				.then(() => setDelCheck(!delCheck))
+				.then(() => {
+					setDelCheck(!delCheck);
+					setRefresh(!refresh);
+				})
 		} else {
 			window.alert("Cancel")
 		}
@@ -38,7 +41,7 @@ function SingleItemCart({ item, delCheck, setDelCheck }) {
 				</div>
 			</div>
 			<div className="item-delete text-right">
-				<Link to=""><img onClick={handleDelete} src="assets/images/icons/icon-trash.svg" alt="" /></Link>
+				<img onClick={handleDelete} src="assets/images/icons/icon-trash.svg" alt="" />
 			</div>
 		</li>
 	);

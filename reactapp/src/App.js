@@ -17,19 +17,20 @@ import SignUp from './components/page/SignUp';
 import Purchase from './components/page/Purchase';
 
 function App() {
-	const [headerClass, setHeaderClass] = useState(true)
+	const [headerClass, setHeaderClass] = useState(true);
+	const [refresh, setRefresh] = useState(true);
 
 	return (
 		<BrowserRouter>
 			<div className="App">
-				<Header headerClass={headerClass} />
+				<Header headerClass={headerClass} refresh={refresh} setRefresh={setRefresh} />
 				<TopScroll />
 				<Routes>
 					<Route path="/" element={<Home setHeaderClass={setHeaderClass} />} />
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/shop" element={<Shop setHeaderClass={setHeaderClass} />} />
-					<Route path="/cart" element={<Cart setHeaderClass={setHeaderClass} />} />
+					<Route path="/cart" element={<Cart setHeaderClass={setHeaderClass} refresh={refresh} setRefresh={setRefresh} />} />
 					<Route path="/wish" element={<Wish setHeaderClass={setHeaderClass} />} />
 					<Route path="/detail" element={<Detail setHeaderClass={setHeaderClass} />} />
 					<Route path="/shop/detail/:id" element={<Detail setHeaderClass={setHeaderClass} />} />

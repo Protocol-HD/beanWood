@@ -7,6 +7,7 @@ function Login() {
 	const navigate = useNavigate();
 
 	const userUrl = "http://localhost:8080/user/findByUserName/";
+	const loginUrl = "http://localhost:8080/user/login";
 	const userName = useRef();
 	const userPassword = useRef();
 
@@ -14,7 +15,10 @@ function Login() {
 	const addSignup = (e) => {
 		e.preventDefault();
 
-		
+		axios.post(loginUrl, {
+			userName: userName.current.value,
+			password: userPassword.current.value
+		}).then(Response => console.log(Response.data));
 
 
 		// axios.get(userUrl + userName.current.value).then(Response => {

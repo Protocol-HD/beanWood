@@ -1,10 +1,9 @@
 package beanWood.springBoot.user.controller;
 
-import beanWood.springBoot.user.model.IUser;
-import beanWood.springBoot.user.model.User;
+import beanWood.springBoot.user.dto.IUser;
+import beanWood.springBoot.user.dto.OUser;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserController {
 //	ResponseEntity<User> saveUser(User user);
@@ -13,11 +12,11 @@ public interface UserController {
 
 	int updateUser(IUser iUser);
 
-	Optional<User> findByIdUser(Long id);
+	OUser findByIdUser(Long id);
 
-	List<User> findAllUser();
+	List<OUser> findAllUser();
 
 	int deleteByIdUser(Long id);
 
-	User findByUserName(String userName);
+	OUser findByUserName(String userName);
 }

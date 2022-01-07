@@ -1,6 +1,5 @@
 package beanWood.springBoot.purchase.service;
 
-import beanWood.springBoot.cartList.model.CartList;
 import beanWood.springBoot.cartList.repository.CartListRepository;
 import beanWood.springBoot.product.repository.ProductRepository;
 import beanWood.springBoot.purchase.dto.PurchaseDto;
@@ -19,40 +18,40 @@ import java.util.Optional;
 @Slf4j
 public class PurchaseServiceImpl implements PurchaseService {
 
-    private final PurchaseRepository purchaseRepository;
-    private final CartListRepository cartListRepository;
-    private final UserRepository userRepository;
-    private final ProductRepository productRepository;
+	private final PurchaseRepository purchaseRepository;
+	private final CartListRepository cartListRepository;
+	private final UserRepository userRepository;
+	private final ProductRepository productRepository;
 
-    @Override
-    public Purchase savePurchase(PurchaseDto purchaseDto) {
-        log.info("save Purchase: {}", purchaseDto);
-        CartList cartList = cartListRepository.findById(purchaseDto.getCartListId()).get();
-        return purchaseRepository.save(
-                Purchase.builder()
-                        .id(purchaseDto.getId())
-                        .shipMemo(purchaseDto.getShipMemo())
-                        .quantity(cartList.getQuantity())
-                        .product(cartList.getProduct())
-                        .user(userRepository.findById(purchaseDto.getUserId()).get())
-                        .build());
-    }
+	@Override
+	public Optional<Purchase> findByIdPurchase(Long id) {
+		log.info("find Purchase By Id: {}", id);
+		return purchaseRepository.findById(id);
+	}
 
-    @Override
-    public Optional<Purchase> findByIdPurchase(Long id) {
-        log.info("find Purchase By Id: {}", id);
-        return purchaseRepository.findById(id);
-    }
+	@Override
+	public List<Purchase> findAllPurchase() {
+		log.info("find all Order");
+		return purchaseRepository.findAll();
+	}
 
-    @Override
-    public List<Purchase> findAllPurchase() {
-        log.info("find all Order");
-        return purchaseRepository.findAll();
-    }
+	@Override
+	public void deleteByIdPurchase(Long id) {
+		log.info("delete Order By Id: {}", id);
+		purchaseRepository.deleteById(id);
+	}
 
-    @Override
-    public void deleteByIdPurchase(Long id) {
-        log.info("delete Order By Id: {}", id);
-        purchaseRepository.deleteById(id);
-    }
+	@Override
+	public void saveCartListToPurchase(PurchaseDto purchaseDto) {
+		log.info("save CartList to Purchase: {}", purchaseDto);
+		purchaseDto.getCartLists().forEach(cartList -> {
+			log.info("save: {}", cartList);
+			purchaseRepository.save(Purchase.builder()
+					.product(cartList.getProduct())
+					.quantity(cartList.getQuantity())
+					.user(userRepository.findById(purchaseDto.getUserId()).get())
+					.shipMemo(null)
+					.build());
+		});
+	}
 }

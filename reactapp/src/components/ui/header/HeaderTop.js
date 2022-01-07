@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function HeaderTop({ headerClass, checkDir }) {
+function HeaderTop({ headerClass, checkDir, refresh }) {
 	const cartListUrl = "http://localhost:8080/cartList/findAll";
 	const wishListUrl = "http://localhost:8080/wishList/findAll";
 	const isTrue = headerClass
@@ -23,7 +23,7 @@ function HeaderTop({ headerClass, checkDir }) {
 		if (checkDir) {
 			setAddPath("../.")
 		}
-	}, [checkDir])
+	}, [checkDir, refresh])
 
 	return (
 		<header className={isTrue ? "header-section @@pos_absolute pos-relative light-bg sticky-header d-none d-lg-block section-fluid-270" : "header-section pos_absolute pos-relative dark-bg sticky-header d-none d-lg-block section-fluid-270"}>

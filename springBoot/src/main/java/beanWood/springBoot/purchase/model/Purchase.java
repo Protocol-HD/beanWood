@@ -1,6 +1,5 @@
 package beanWood.springBoot.purchase.model;
 
-import beanWood.springBoot.cartList.model.CartList;
 import beanWood.springBoot.product.model.Product;
 import beanWood.springBoot.user.model.User;
 import lombok.Builder;

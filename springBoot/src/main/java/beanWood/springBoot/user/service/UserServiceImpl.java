@@ -1,10 +1,11 @@
 package beanWood.springBoot.user.service;
 
-import beanWood.springBoot.user.model.IUser;
+import beanWood.springBoot.user.dto.IUser;
 import beanWood.springBoot.user.model.Role;
 import beanWood.springBoot.user.model.User;
 import beanWood.springBoot.user.repository.RoleRepository;
 import beanWood.springBoot.user.repository.UserRepository;
+import beanWood.springBoot.user.dto.OUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -55,29 +55,48 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public User saveUser(IUser iUser) {
-		iUser.setUserPassword(passwordEncoder.encode(iUser.getUserPassword()));
-		List<Role> roles = new ArrayList<>();
-		roles.add(roleRepository.findById(1L).get());
-		return userRepository.save(User.builder()
-				.userAddress(iUser.getUserAddress())
-				.userName(iUser.getUserName())
-				.name(iUser.getName())
-				.userNumber(iUser.getUserNumber())
-				.userPassword(iUser.getUserPassword())
-				.roles(roles)
-				.build());
+		if (userRepository.findByUserName(iUser.getUserName()) == null) {
+			iUser.setUserPassword(passwordEncoder.encode(iUser.getUserPassword()));
+			List<Role> roles = new ArrayList<>();
+			roles.add(roleRepository.findById(1L).get());
+			return userRepository.save(User.builder()
+					.userAddress(iUser.getUserAddress())
+					.userName(iUser.getUserName())
+					.name(iUser.getName())
+					.userNumber(iUser.getUserNumber())
+					.userPassword(iUser.getUserPassword())
+					.roles(roles)
+					.build());
+		} else return null;
 	}
 
 	@Override
-	public Optional<User> findByIdUser(Long id) {
+	public OUser findByIdUser(Long id) {
 		log.info("find by id User: {}", id);
-		return userRepository.findById(id);
+		User user = userRepository.findById(id).get();
+		return OUser.builder()
+				.id(user.getId())
+				.name(user.getName())
+				.userAddress(user.getUserAddress())
+				.userName(user.getUserName())
+				.userNumber(user.getUserNumber())
+				.build();
 	}
 
 	@Override
-	public List<User> findAllUser() {
+	public List<OUser> findAllUser() {
 		log.info("find all User");
-		return userRepository.findAll();
+		List<OUser> oUsers = new ArrayList<>();
+		userRepository.findAll().forEach(user -> {
+			oUsers.add(OUser.builder()
+					.id(user.getId())
+					.userNumber(user.getUserNumber())
+					.userName(user.getUserName())
+					.userAddress(user.getUserAddress())
+					.name(user.getName())
+					.build());
+		});
+		return oUsers;
 	}
 
 	@Override
@@ -87,8 +106,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public User findByUserName(String userName) {
+	public OUser findByUserName(String userName) {
 		log.info("find by UserId at User");
-		return userRepository.findByUserName(userName);
+		User user = userRepository.findByUserName(userName);
+		return OUser.builder()
+				.id(user.getId())
+				.name(user.getName())
+				.userAddress(user.getUserAddress())
+				.userName(user.getUserName())
+				.userNumber(user.getUserNumber())
+				.build();
 	}
 }

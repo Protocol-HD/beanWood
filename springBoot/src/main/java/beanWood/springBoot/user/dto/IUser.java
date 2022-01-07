@@ -1,4 +1,4 @@
-package beanWood.springBoot.user.model;
+package beanWood.springBoot.user.dto;
 
 import lombok.Data;
 

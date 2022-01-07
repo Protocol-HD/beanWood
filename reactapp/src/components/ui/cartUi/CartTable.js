@@ -3,14 +3,14 @@ import { useState } from 'react/cjs/react.development';
 import CartTableLine from './CartTableLine';
 import axios from 'axios';
 
-function CartTable({ setCheck, check }) {
+function CartTable({ setCheck, check, refresh, setRefresh }) {
 	const findAllCartListUrl = "http://localhost:8080/cartList/findAll";
 	const [cart, setCart] = useState([]);
 	const [delCheck, setDelCheck] = useState(false);
 
 	useEffect(() => {
 		axios.get(findAllCartListUrl).then(Response => { setCart(Response.data) });
-	}, [delCheck])
+	}, [delCheck, refresh])
 
 	return (
 		<div className="cart-table-wrapper">
@@ -41,6 +41,8 @@ function CartTable({ setCheck, check }) {
 													check={check}
 													delCheck={delCheck}
 													setDelCheck={setDelCheck}
+													refresh={refresh}
+													setRefresh={setRefresh}
 												/>
 											))
 										}

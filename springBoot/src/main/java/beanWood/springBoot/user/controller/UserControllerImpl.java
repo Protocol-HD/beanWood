@@ -1,7 +1,7 @@
 package beanWood.springBoot.user.controller;
 
-import beanWood.springBoot.user.model.IUser;
-import beanWood.springBoot.user.model.User;
+import beanWood.springBoot.user.dto.IUser;
+import beanWood.springBoot.user.dto.OUser;
 import beanWood.springBoot.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -55,13 +54,13 @@ public class UserControllerImpl implements UserController {
 
 	@Override
 	@GetMapping("/find/{id}")
-	public Optional<User> findByIdUser(@PathVariable Long id) {
+	public OUser findByIdUser(@PathVariable Long id) {
 		return userService.findByIdUser(id);
 	}
 
 	@Override
 	@GetMapping("/findAll")
-	public List<User> findAllUser() {
+	public List<OUser> findAllUser() {
 		return userService.findAllUser();
 	}
 
@@ -79,7 +78,7 @@ public class UserControllerImpl implements UserController {
 
 	@Override
 	@GetMapping("/findByUserName/{userName}")
-	public User findByUserName(@PathVariable String userName) {
+	public OUser findByUserName(@PathVariable String userName) {
 		return userService.findByUserName(userName);
 	}
 }

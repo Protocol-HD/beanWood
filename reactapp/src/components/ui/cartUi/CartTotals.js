@@ -42,7 +42,7 @@ function CartTotals() {
             <p className="cart_amount">${total + shipping}</p>
           </div>
           <div className="checkout_btn">
-            <Link to="index.html" className="btn btn-sm btn-radius btn-default">
+            <Link to="/purchase" className="btn btn-sm btn-radius btn-default">
               Proceed to Checkout
             </Link>
           </div>

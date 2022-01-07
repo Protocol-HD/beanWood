@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PurchaseService {
-    Purchase savePurchase(PurchaseDto purchaseDto);
+	Optional<Purchase> findByIdPurchase(Long id);
 
-    Optional<Purchase> findByIdPurchase(Long id);
+	List<Purchase> findAllPurchase();
 
-    List<Purchase> findAllPurchase();
+	void deleteByIdPurchase(Long id);
 
-    void deleteByIdPurchase(Long id);
+	void saveCartListToPurchase(PurchaseDto purchaseDto);
 }

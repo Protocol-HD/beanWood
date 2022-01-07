@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
 import axios from 'axios';
 
-function CartTableLine({ item, setCheck, check, delCheck, setDelCheck }) {
+function CartTableLine({ item, setCheck, check, delCheck, setDelCheck, refresh, setRefresh }) {
 	const updateCartListUrl = "http://localhost:8080/cartList/update";
 	const deleteCartListUrl = "http://localhost:8080/cartList/delete/";
 	const findProductByIdUrl = "http://localhost:8080/product/find/";
@@ -30,7 +30,10 @@ function CartTableLine({ item, setCheck, check, delCheck, setDelCheck }) {
 
 		if (window.confirm("Do you want to delete from the cart?")) {
 			axios.delete(deleteCartListUrl + item.id)
-				.then(() => setDelCheck(!delCheck))
+				.then(() => {
+					setDelCheck(!delCheck);
+					setRefresh(!refresh);
+				})
 		} else {
 			window.alert("Cacel")
 		}
